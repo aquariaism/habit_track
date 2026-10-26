@@ -2211,3 +2211,238 @@ body {
         margin: 0 auto;
     }
 }
+
+/* ── GAMES SUB-TABS + ZIP ── */
+.sub-seg {
+    display: flex;
+    gap: 4px;
+    margin: 4px 16px 14px;
+    padding: 4px;
+    background: var(--card);
+    border-radius: 22px;
+}
+
+.sub-seg button {
+    flex: 1;
+    height: 40px;
+    border: none;
+    border-radius: 18px;
+    background: transparent;
+    color: var(--sub);
+    font-family: inherit;
+    font-size: .86rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.sub-seg button.sel {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+}
+
+#gMind[hidden],
+#gZip[hidden] {
+    display: none;
+}
+
+.zip-timer {
+    font-variant-numeric: tabular-nums;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.zip-help {
+    font-size: .84rem;
+    color: var(--sub);
+    margin: 0 0 14px;
+    min-height: 1.3em;
+    line-height: 1.4;
+}
+
+.zip-board {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    grid-template-rows: repeat(var(--n), minmax(0, 1fr));
+    /* equal rows — content must not resize them */
+    width: min(100%, 420px);
+    aspect-ratio: 1;
+    margin: 0 auto;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+}
+
+.zc {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    min-height: 0;
+    overflow: visible;
+}
+
+.zc::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 12px;
+    background: var(--card2);
+    transition: background .15s;
+}
+
+.zc.on::before {
+    background: color-mix(in srgb, var(--primary) 24%, var(--card2));
+}
+
+.zc.head::before {
+    box-shadow: inset 0 0 0 2px var(--primary);
+}
+
+.zn {
+    position: relative;
+    z-index: 2;
+    width: 62%;
+    height: auto;
+    aspect-ratio: 1;
+    flex: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--text);
+    color: var(--bg);
+    font-size: clamp(.9rem, 4.2vw, 1.25rem);
+    font-weight: 700;
+    transition: background .15s, color .15s;
+}
+
+.zn.hit {
+    background: var(--primary);
+    color: var(--on-primary);
+}
+
+.zip-board svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.zip-board polyline {
+    stroke: var(--primary);
+    stroke-width: .42;
+    opacity: .75;
+}
+
+.zip-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.zip-actions button {
+    flex: 1;
+}
+
+.zip-actions button:disabled {
+    opacity: .4;
+    cursor: default;
+}
+
+.zip-name {
+    margin-top: 14px;
+}
+
+.zip-who {
+    margin: 14px 2px 0;
+}
+
+.zip-who a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.zip-lb {
+    margin: 0 16px;
+    background: var(--card);
+    border-radius: 28px;
+    padding: 8px;
+}
+
+.zip-lb-msg {
+    padding: 22px 16px;
+    text-align: center;
+    font-size: .86rem;
+    color: var(--sub);
+    line-height: 1.5;
+}
+
+.zip-lb-msg .chip-btn {
+    margin-top: 12px;
+}
+
+.lb-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 44px;
+    padding: 0 14px;
+    /* padding: 8px 14px; */
+    border-radius: 18px;
+}
+
+.lb-row.me {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+}
+
+.lb-rk {
+    width: 28px;
+    text-align: center;
+    font-weight: 700;
+    font-size: .95rem;
+}
+
+.lb-nm {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: .92rem;
+}
+
+.lb-nm em {
+    font-style: normal;
+    font-size: .62rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--primary);
+    color: var(--on-primary);
+    margin-left: 6px;
+}
+
+.lb-ms {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    font-size: .92rem;
+}
+
+.zip-lb-foot {
+    text-align: center;
+    padding: 4px 0 2px;
+}
+
+.zip-lb-foot .chip-btn {
+    margin-top: 4px;
+     padding: 8px 20px; 
+}

@@ -1013,7 +1013,7 @@ function getPuzzle(ds) {
 const gameStreak = () => (game.lastWon === todayStr || game.lastWon === fmt(addDays(today, -1))) ? game.streak : 0;
 
 function renderGame() {
-  const root = document.getElementById('view-games'), pz = getPuzzle(todayStr);
+  const root = document.getElementById('gMind'), pz = getPuzzle(todayStr);
   const rec = game.days[todayStr] || { t: 0, s: false, o: false, g: [], p: 0 };
   const st = gameStreak();
   const miss = rec.t > 0 && !rec.o;
@@ -1121,11 +1121,337 @@ document.getElementById('view-games').addEventListener('keydown', e => {
   if (e.key === 'Enter' && e.target.id === 'gIn') submitGuess(e.target.value);
 });
 
+
+// ══ ZIP — daily path puzzle + online leaderboard ═══════════════════════════════
+// Draw ONE line that starts at 1, visits the numbers in order, and fills every square.
+const ZIP_CONFIG = {
+  supabaseUrl: 'https://pitlhetodizqnvtucfsk.supabase.co',   // e.g. 'https://abcdxyz.supabase.co'
+  supabaseAnonKey: 'sb_publishable_KvhzU0SEhBEf8md0x_90gQ_NVmlhgGk',   // the PUBLIC anon / publishable key — safe to keep 
+  size: 6,               // 6 → 6×6 board
+  checkpoints: 9,        // how many numbers appear on the board
+  tzOffsetMin: 330       // clock that decides "today" for everyone: 330 = India (UTC+5:30)
+};
+const zipOnlineReady = () => !!(ZIP_CONFIG.supabaseUrl && ZIP_CONFIG.supabaseAnonKey);
+
+const zipFresh = (deviceId) => ({ deviceId: deviceId || zipNewId(), name: '', days: {}, streak: 0, best: 0, lastWon: null });
+function zipNewId() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : (r & 3 | 8)).toString(16); });
+}
+let zip = Object.assign(zipFresh(''), load('ht5_zip', {}));
+if (typeof zip.days !== 'object' || !zip.days) zip.days = {};
+Object.keys(zip.days).forEach(d => { const r = zip.days[d]; if (!r || !Number.isFinite(r.ms)) delete zip.days[d]; });
+if (typeof zip.name !== 'string') zip.name = '';
+['streak', 'best'].forEach(k => { if (!Number.isFinite(zip[k])) zip[k] = 0; });
+if (!zip.deviceId) zip.deviceId = zipNewId();
+const saveZip = () => store('ht5_zip', zip);
+saveZip();
+
+// ── dates (one shared clock for everyone) ─────────────────────────────────────
+const zipDay = () => new Date(Date.now() + ZIP_CONFIG.tzOffsetMin * 60000).toISOString().slice(0, 10);
+const dayShift = (ds, n) => { const [y, m, d] = ds.split('-').map(Number); return new Date(Date.UTC(y, m - 1, d + n)).toISOString().slice(0, 10); };
+const zFmt = ms => `${Math.floor(ms / 60000)}:${p(Math.floor(ms / 1000) % 60)}.${Math.floor(ms % 1000 / 100)}`;
+
+// ── puzzle generator: random Hamiltonian path ("backbite"), same for everyone on a given day ──
+function zipPuzzle(ds) {
+  const N = ZIP_CONFIG.size, T = N * N, K = ZIP_CONFIG.checkpoints;
+  const rnd = mulberry32(dayNumOf(ds) * 104729 + 7);
+  let path = [];
+  for (let r = 0; r < N; r++) for (let c = 0; c < N; c++) path.push(r * N + (r % 2 ? N - 1 - c : c));   // start from a snake
+  const nbrs = i => {
+    const r = Math.floor(i / N), c = i % N, o = [];
+    if (r > 0) o.push(i - N); if (r < N - 1) o.push(i + N); if (c > 0) o.push(i - 1); if (c < N - 1) o.push(i + 1); return o;
+  };
+  for (let it = 0; it < 1500; it++) {
+    if (it % 2) path.reverse();
+    const end = path[T - 1], prev = path[T - 2], opts = nbrs(end).filter(x => x !== prev);
+    const k = path.indexOf(opts[Math.floor(rnd() * opts.length)]);
+    path = path.slice(0, k + 1).concat(path.slice(k + 1).reverse());
+    if (it % 2) path.reverse();
+  }
+  const idx = [0];
+  for (let i = 1; i < K - 1; i++) {
+    const base = Math.round(i * (T - 1) / (K - 1)) + Math.floor(rnd() * 5) - 2;
+    idx.push(Math.max(idx[i - 1] + 2, Math.min(base, T - 1 - 2 * (K - 1 - i))));
+  }
+  idx.push(T - 1);
+  const nums = {}; idx.forEach((pi, i) => { nums[path[pi]] = i + 1; });
+  return { N, T, nums, max: K, sol: path };
+}
+
+// ── game state ────────────────────────────────────────────────────────────────
+let Z = { day: null, pz: null, path: [], t0: 0, ms: 0, running: false, done: false, practice: false, dragging: false, editName: false, lb: { state: 'idle', rows: [] } };
+function zipInit() {
+  const d = zipDay();
+  if (Z.day === d && Z.pz) return;
+  Z.day = d; Z.pz = zipPuzzle(d); Z.path = []; Z.t0 = 0; Z.ms = 0; Z.running = false; Z.done = false; Z.practice = false; Z.dragging = false;
+  Z.lb = { state: 'idle', rows: [] };
+  const r = zip.days[d];
+  if (r) { Z.done = true; Z.ms = r.ms; Z.path = [...Z.pz.sol]; }
+}
+const zHead = () => Z.path[Z.path.length - 1];
+const zNeeded = () => Z.path.filter(c => Z.pz.nums[c]).length + 1;
+const zAdj = (a, b) => { const N = Z.pz.N; return Math.abs(Math.floor(a / N) - Math.floor(b / N)) + Math.abs(a % N - b % N) === 1; };
+
+function zCanEnter(c) {
+  if (Z.path.includes(c) || !zAdj(zHead(), c)) return false;
+  const v = Z.pz.nums[c];
+  if (v) { if (v !== zNeeded()) return false; if (v === Z.pz.max && Z.path.length !== Z.pz.T - 1) return false; }
+  return true;
+}
+function zStep(c) {
+  const L = Z.path.length;
+  if (L >= 2 && c === Z.path[L - 2]) { Z.path.pop(); return true; }   // dragging backwards erases
+  if (zCanEnter(c)) { Z.path.push(c); return true; }
+  return false;
+}
+function zMoveTo(target) {            // walks cell-by-cell so fast swipes don't skip squares
+  const N = Z.pz.N;
+  for (let guard = 0; guard < N && zHead() !== target; guard++) {
+    const h = zHead(), hr = Math.floor(h / N), hc = h % N, tr = Math.floor(target / N), tc = target % N;
+    let next;
+    if (hr === tr) next = h + (tc > hc ? 1 : -1);
+    else if (hc === tc) next = h + (tr > hr ? N : -N);
+    else break;
+    if (!zStep(next)) break;
+  }
+}
+function zDown(c) {
+  if (Z.done) return;
+  if (!Z.path.length) { if (Z.pz.nums[c] === 1) { Z.path = [c]; Z.t0 = performance.now(); Z.running = true; } return; }
+  const i = Z.path.indexOf(c);
+  if (i >= 0) Z.path.length = i + 1;   // tap an earlier square to rewind to it
+}
+const zWon = () => Z.path.length === Z.pz.T && Z.pz.nums[zHead()] === Z.pz.max;
+
+function zFinish() {
+  Z.running = false; Z.done = true; Z.dragging = false;
+  Z.ms = Math.round(performance.now() - Z.t0);
+  if (!Z.practice && !zip.days[Z.day]) {
+    zip.days[Z.day] = { ms: Z.ms, sent: false };
+    zip.streak = zip.lastWon === dayShift(Z.day, -1) ? zip.streak + 1 : 1;
+    zip.lastWon = Z.day; zip.best = Math.max(zip.best, zip.streak);
+    game.points += 30; saveGame(); saveZip();
+    showToast('Zip solved! +30 points');
+    zipSubmitPending();
+  }
+  if (navigator.vibrate) navigator.vibrate(40);
+  renderZip();
+}
+
+// ── online leaderboard (Supabase REST) ────────────────────────────────────────
+function zHeaders(extra) {
+  const k = ZIP_CONFIG.supabaseAnonKey, h = { apikey: k, 'Content-Type': 'application/json' };
+  if (k.startsWith('eyJ')) h.Authorization = 'Bearer ' + k;     // legacy JWT keys; new "publishable" keys go in apikey only
+  return Object.assign(h, extra);
+}
+let zipSending = false;
+async function zipSubmitPending() {
+  if (zipSending || !zipOnlineReady() || !zip.name || !navigator.onLine) return;
+  zipSending = true;
+  try {
+    for (const [day, r] of Object.entries(zip.days)) {
+      if (r.sent) continue;
+      if (day < dayShift(zipDay(), -1)) { r.sent = true; continue; }          // too old to be accepted
+      try {
+        const res = await fetch(`${ZIP_CONFIG.supabaseUrl}/rest/v1/zip_scores`, {
+          method: 'POST', headers: zHeaders({ Prefer: 'return=minimal' }),
+          body: JSON.stringify({ day, device_id: zip.deviceId, name: zip.name, ms: r.ms })
+        });
+        if (res.ok || (res.status >= 400 && res.status < 500)) r.sent = true;   // 409 = already there; other 4xx = rejected, don't retry forever
+      } catch (e) { break; }                                                    // offline — try again later
+    }
+    saveZip();
+  } finally { zipSending = false; }
+  if (curTab === 'games' && gameSub === 'zip') { renderZipExtras(); zipLoadBoard(); }
+}
+async function zipLoadBoard() {
+  if (!zipOnlineReady()) { Z.lb.state = 'off'; renderZipLb(); return; }
+  Z.lb.state = 'loading'; renderZipLb();
+  try {
+    const res = await fetch(`${ZIP_CONFIG.supabaseUrl}/rest/v1/zip_scores?day=eq.${Z.day}&select=name,ms&order=ms.asc,created_at.asc&limit=25`,
+      { headers: zHeaders(), cache: 'no-store' });
+    if (!res.ok) throw new Error(res.status);
+    Z.lb.rows = await res.json(); Z.lb.state = 'ok';
+  } catch (e) { Z.lb.state = navigator.onLine ? 'error' : 'offline'; }
+  renderZipLb(); renderZipHero();
+}
+window.addEventListener('online', () => zipSubmitPending());
+
+// ── rendering ─────────────────────────────────────────────────────────────────
+function zipRank() {
+  const mine = zip.days[Z.day]; if (!mine || Z.lb.state !== 'ok') return null;
+  const i = Z.lb.rows.findIndex(r => r.name === zip.name && r.ms === mine.ms);
+  return i >= 0 ? i + 1 : null;
+}
+function renderZipHero() {
+  const el = document.getElementById('zipHero'); if (!el) return;
+  const mine = zip.days[Z.day], rk = zipRank();
+  const st = (zip.lastWon === Z.day || zip.lastWon === dayShift(Z.day, -1)) ? zip.streak : 0;
+  el.innerHTML = `
+    <div class="gh-stat"><b>⚡ ${mine ? zFmt(mine.ms) : '—'}</b><span>Today</span></div>
+    <div class="gh-stat"><b>🔥 ${st}</b><span>Zip streak</span></div>
+    <div class="gh-stat"><b>🏅 ${rk ? '#' + rk : '—'}</b><span>Rank</span></div>`;
+}
+function renderZip() {
+  zipInit();
+  const root = document.getElementById('gZip'), pz = Z.pz, N = pz.N;
+  const cells = Array.from({ length: pz.T }, (_, i) => `<div class="zc" data-i="${i}">${pz.nums[i] ? `<span class="zn">${pz.nums[i]}</span>` : ''}</div>`).join('');
+  root.innerHTML = `
+    <div class="game-hero" id="zipHero"></div>
+    <div class="game-card zip-card${Z.done ? ' solved' : ''}">
+      <div class="gc-top"><span class="gc-chip">Zip · ${N}×${N}${Z.practice ? ' · practice' : ''}</span><span class="zip-timer" id="zipTimer">${zFmt(Z.done ? Z.ms : 0)}</span></div>
+      <p class="zip-help" id="zipHelp"></p>
+      <div class="zip-board" id="zipBoard" style="--n:${N}">${cells}<svg viewBox="0 0 ${N} ${N}" aria-hidden="true"><polyline points="" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="zip-actions">
+        <button class="btn-cancel" data-z="restart" ${Z.done ? 'disabled' : ''}>Restart</button>
+        <button class="btn-cancel" data-z="undo" ${Z.done ? 'disabled' : ''}>Undo step</button>
+      </div>
+      <div id="zipExtras"></div>
+    </div>
+    <div class="sec-lbl hist-lbl">Today’s leaderboard</div>
+    <div class="zip-lb" id="zipLb"></div>`;
+  zDraw(); renderZipHero(); renderZipExtras(); renderZipLb();
+  if (zipOnlineReady() && Z.lb.state === 'idle') { zipSubmitPending(); zipLoadBoard(); }
+}
+function zDraw() {
+  const board = document.getElementById('zipBoard'); if (!board) return;
+  const N = Z.pz.N, inPath = new Set(Z.path), h = zHead();
+  board.querySelectorAll('.zc').forEach(el => {
+    const i = +el.dataset.i;
+    el.classList.toggle('on', inPath.has(i));
+    el.classList.toggle('head', i === h && !Z.done);
+    el.querySelector('.zn')?.classList.toggle('hit', inPath.has(i));
+  });
+  board.querySelector('polyline').setAttribute('points', Z.path.map(i => `${i % N + .5},${Math.floor(i / N) + .5}`).join(' '));
+  const help = document.getElementById('zipHelp');
+  if (help) help.textContent = Z.done ? 'Solved — every square filled in order.'
+    : !Z.path.length ? 'Press on 1, then drag through the numbers in order and fill every square.'
+      : `Next: ${zNeeded()} · ${Z.pz.T - Z.path.length} squares left`;
+}
+function renderZipExtras() {
+  const el = document.getElementById('zipExtras'); if (!el) return;
+  const mine = zip.days[Z.day];
+  let h = '';
+  if (Z.done) {
+    h += `<div class="gc-result win"><b>${Z.practice ? 'Practice run' : 'Solved'} in ${zFmt(Z.ms)}</b><span>${Z.practice ? 'Practice runs don’t go on the leaderboard' : (mine && mine.ms === Z.ms ? '+30 discipline points' : 'Your first run today counts: ' + zFmt(mine?.ms || Z.ms))}</span></div>
+          <div class="zip-actions"><button class="btn-save" data-z="practice">Practice again</button></div>
+          <div class="gc-next">New puzzle in <b id="zipCount">--:--:--</b></div>`;
+  }
+  if (zipOnlineReady()) {
+    if ((!zip.name && mine) || Z.editName) {
+      h += `<div class="zip-name"><p class="gc-sub">${zip.name ? 'Change your display name' : 'Pick a name for the leaderboard'}</p>
+        <div class="game-form"><input class="modal-input" id="zipNameIn" maxlength="16" autocomplete="off" placeholder="2–16 letters or numbers" value="${esc(zip.name)}"><button class="btn-save" data-z="name">Save</button></div>
+        <div class="modal-err" id="zipNameErr"></div></div>`;
+    } else if (zip.name) {
+      h += `<p class="gc-sub zip-who">Playing as <b>${esc(zip.name)}</b> · <a href="#" data-z="rename">change</a></p>`;
+    }
+    if (mine && !mine.sent) h += `<p class="gc-sub">${zip.name ? 'Score saved on this phone — it uploads as soon as you’re online.' : 'Score saved on this phone — add a name to post it.'}</p>`;
+  }
+  el.innerHTML = h;
+  zipTick();
+}
+function renderZipLb() {
+  const el = document.getElementById('zipLb'); if (!el) return;
+  const s = Z.lb.state, mine = zip.days[Z.day];
+  let h;
+  if (!zipOnlineReady()) h = `<div class="zip-lb-msg">The online leaderboard isn’t switched on yet.</div>`;
+  else if (s === 'idle' || s === 'loading') h = `<div class="zip-lb-msg">Loading scores…</div>`;
+  else if (s === 'offline') h = `<div class="zip-lb-msg">You’re offline — the leaderboard needs internet.<br><button class="chip-btn" data-z="refresh">Try again</button></div>`;
+  else if (s === 'error') h = `<div class="zip-lb-msg">Couldn’t load scores right now.<br><button class="chip-btn" data-z="refresh">Try again</button></div>`;
+  else if (!Z.lb.rows.length) h = `<div class="zip-lb-msg">No scores yet today — be the first!</div>`;
+  else h = Z.lb.rows.map((r, i) => {
+    const me = mine && r.name === zip.name && r.ms === mine.ms;
+    return `<div class="lb-row${me ? ' me' : ''}"><span class="lb-rk">${['🥇', '🥈', '🥉'][i] || i + 1}</span><span class="lb-nm">${esc(r.name)}${me ? ' <em>you</em>' : ''}</span><span class="lb-ms">${zFmt(r.ms)}</span></div>`;
+  }).join('') + `<div class="zip-lb-foot"><button class="chip-btn" data-z="refresh">Refresh</button></div>`;
+  el.innerHTML = h;
+}
+
+// countdown to the next puzzle (uses the shared clock, not the phone's midnight)
+function zipTick() {
+  const now = Date.now(), off = ZIP_CONFIG.tzOffsetMin * 60000;
+  if (Z.day && zipDay() !== Z.day && curTab === 'games' && gameSub === 'zip' && !Z.running) { renderZip(); return; }
+  const el = document.getElementById('zipCount'); if (!el) return;
+  const s = Math.max(0, Math.floor(((Math.floor((now + off) / 864e5) + 1) * 864e5 - off - now) / 1000));
+  el.textContent = `${p(Math.floor(s / 3600))}:${p(Math.floor(s % 3600 / 60))}:${p(s % 60)}`;
+}
+setInterval(zipTick, 1000);
+
+// timer
+setInterval(() => {
+  if (!Z.running) return;
+  const t = document.getElementById('zipTimer'); if (t) t.textContent = zFmt(performance.now() - Z.t0);
+}, 100);
+
+// ── input ─────────────────────────────────────────────────────────────────────
+function zCellAt(board, e) {
+  const r = board.getBoundingClientRect(), N = Z.pz.N;
+  const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+  if (x < 0 || y < 0 || x >= 1 || y >= 1) return -1;
+  return Math.floor(y * N) * N + Math.floor(x * N);
+}
+function zAfter() { zDraw(); if (!Z.done && zWon()) zFinish(); }
+function zipBind() {
+  const g = document.getElementById('gZip');
+  g.addEventListener('pointerdown', e => {
+    const b = e.target.closest('#zipBoard'); if (!b || Z.done) return;
+    e.preventDefault(); b.setPointerCapture && b.setPointerCapture(e.pointerId);
+    const c = zCellAt(b, e); if (c < 0) return;
+    Z.dragging = true; zDown(c); zAfter();
+  });
+  g.addEventListener('pointermove', e => {
+    if (!Z.dragging || Z.done || !Z.path.length) return;
+    const b = document.getElementById('zipBoard'); if (!b) return;
+    const c = zCellAt(b, e); if (c < 0) return;
+    zMoveTo(c); zAfter();
+  });
+  const stop = () => { Z.dragging = false; };
+  g.addEventListener('pointerup', stop); g.addEventListener('pointercancel', stop);
+
+  g.addEventListener('click', e => {
+    const b = e.target.closest('[data-z]'); if (!b) return;
+    e.preventDefault();
+    switch (b.dataset.z) {
+      case 'restart': Z.path = []; Z.running = false; Z.t0 = 0; zDraw(); document.getElementById('zipTimer').textContent = zFmt(0); break;
+      case 'undo': if (Z.path.length > 1) { Z.path.pop(); zDraw(); } break;
+      case 'practice': Z.practice = true; Z.done = false; Z.path = []; Z.ms = 0; Z.running = false; renderZip(); break;
+      case 'refresh': zipLoadBoard(); break;
+      case 'rename': Z.editName = true; renderZipExtras(); document.getElementById('zipNameIn')?.focus(); break;
+      case 'name': {
+        const v = document.getElementById('zipNameIn').value.trim(), err = document.getElementById('zipNameErr');
+        if (!/^[\p{L}\p{N} _.-]{2,16}$/u.test(v)) { err.textContent = 'Use 2–16 letters, numbers, spaces, _ . or -'; return; }
+        zip.name = v; saveZip(); Z.editName = false; renderZipExtras(); zipSubmitPending(); break;
+      }
+    }
+  });
+  g.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'zipNameIn') g.querySelector('[data-z=name]').click(); });
+}
+
+// ── Games tab: Mind puzzle | Zip ──────────────────────────────────────────────
+let gameSub = localStorage.getItem('ht5_gsub') === 'zip' ? 'zip' : 'mind';
+function renderGames() {
+  const root = document.getElementById('view-games');
+  if (!document.getElementById('gMind')) {
+    root.innerHTML = `<div class="sub-seg" id="gSeg"><button data-sub="mind">🧩 Mind puzzle</button><button data-sub="zip">⚡ Zip</button></div><div id="gMind"></div><div id="gZip"></div>`;
+    document.getElementById('gSeg').addEventListener('click', e => {
+      const b = e.target.closest('[data-sub]'); if (!b) return;
+      gameSub = b.dataset.sub; try { localStorage.setItem('ht5_gsub', gameSub); } catch (err) { }
+      renderGames();
+    });
+    zipBind();
+  }
+  document.querySelectorAll('#gSeg button').forEach(b => b.classList.toggle('sel', b.dataset.sub === gameSub));
+  document.getElementById('gMind').hidden = gameSub !== 'mind';
+  document.getElementById('gZip').hidden = gameSub !== 'zip';
+  if (gameSub === 'mind') renderGame(); else renderZip();
+}
+
+
 // ══ TABS ══════════════════════════════════════════════════════════════════════
-const TAB_TITLES = { habits: 'Habit Tracker', routine: 'Daily Routine', attendance: 'Attendance', planner: 'Weekend Planner', games: 'Mind Game' };
+const TAB_TITLES = { habits: 'Habit Tracker', routine: 'Daily Routine', attendance: 'Attendance', planner: 'Weekend Planner', games: 'Games' };
 let curTab = 'habits';
 function renderTab(n) {
-  ({ habits: renderHabits, routine: () => RT.render(), attendance: renderAttendance, planner: () => WK.render(), games: renderGame })[n]();
+  ({ habits: renderHabits, routine: () => RT.render(), attendance: renderAttendance, planner: () => WK.render(), games: renderGames })[n]();
 }
 function showTab(name) {
   if (!TAB_TITLES[name]) name = 'habits';
@@ -1174,6 +1500,7 @@ document.getElementById('exportBtn').addEventListener('click', () => {
     weekend: WK.slots,
     attendance: att,
     game,
+    zip: { ...zip, deviceId: undefined },
     prefs
   };
   const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
@@ -1212,7 +1539,7 @@ document.getElementById('importFile').addEventListener('change', e => {
       const data = JSON.parse(ev.target.result);
       const incoming = Array.isArray(data) ? data : data.habits;
       if (incoming !== undefined && !Array.isArray(incoming)) throw new Error('Invalid format');
-      if (incoming === undefined && !data.routine && !data.weekend && !data.attendance && !data.game) throw new Error('Invalid format');
+      if (incoming === undefined && !data.routine && !data.weekend && !data.attendance && !data.game && !data.zip) throw new Error('Invalid format');
 
       let added = 0, updated = 0;
       (incoming || []).forEach(ih => {
@@ -1245,9 +1572,19 @@ document.getElementById('importFile').addEventListener('change', e => {
           game.days = { ...(ig.days || {}), ...game.days };
           if (ig.lastWon && (!game.lastWon || ig.lastWon > game.lastWon)) { game.lastWon = ig.lastWon; game.streak = ig.streak || 0; }
         }
+        const iz = data.zip;
+        if (iz && typeof iz === 'object' && iz.days && typeof iz.days === 'object') {
+          Object.entries(iz.days).forEach(([d, r]) => {
+            if (r && Number.isFinite(r.ms) && (!zip.days[d] || r.ms < zip.days[d].ms)) { zip.days[d] = { ms: r.ms, sent: !!r.sent }; added++; }
+          });
+          if (!zip.name && typeof iz.name === 'string' && /^[\p{L}\p{N} _.-]{2,16}$/u.test(iz.name)) zip.name = iz.name;
+          if (iz.lastWon && (!zip.lastWon || iz.lastWon > zip.lastWon)) { zip.lastWon = iz.lastWon; zip.streak = iz.streak || 0; }
+          zip.best = Math.max(zip.best, iz.best || 0);
+          Z.day = null;
+        }
       }
 
-      save(); RT.persist(); WK.persist(); saveAtt(); saveGame();
+      save(); RT.persist(); WK.persist(); saveAtt(); saveGame(); saveZip();
       renderTab(curTab);
       closeSettings();
       showToast(`Import complete — ${added} added, ${updated} updated`);
@@ -1270,7 +1607,8 @@ document.getElementById('clearDataBtn').addEventListener('click', () => {
       habits = []; RT.slots = []; WK.slots = [];
       att = { threshold: 75, subjects: [] };
       game = { points: 0, best: 0, streak: 0, lastWon: null, days: {} };
-      save(); RT.persist(); WK.persist(); saveAtt(); saveGame();
+      zip = zipFresh(zip.deviceId); Z.day = null;
+      save(); RT.persist(); WK.persist(); saveAtt(); saveGame(); saveZip();
       renderTab(curTab);
       showToast('All data cleared');
     }

@@ -3,8 +3,8 @@
 // when online, cache-first for static assets (icons, fonts).
 // Bump CACHE_NAME whenever you want old caches wiped.
 
-const CACHE_NAME = 'habit-tracker-v2';
-const RUNTIME_CACHE = 'habit-tracker-runtime-v2';
+const CACHE_NAME = 'habit-tracker-v3';
+const RUNTIME_CACHE = 'habit-tracker-runtime-v3';
 
 const PRECACHE_URLS = [
   './index.html',
@@ -44,12 +44,14 @@ self.addEventListener('fetch', event => {
 
   if (request.method !== 'GET') return;
   if (url.protocol !== 'http:' && url.protocol !== 'https:') return;
+  // Leaderboard / API calls must always hit the network — only cache our own files and Google Fonts
+  if (url.origin !== self.location.origin && !/(^|\.)fonts\.(googleapis|gstatic)\.com$/.test(url.hostname)) return;
 
   const isShell =
     url.origin === self.location.origin &&
     (request.mode === 'navigate' ||
-     /\/(index\.html|style\.css|script\.js)$/.test(url.pathname) ||
-     url.pathname.endsWith('/'));
+      /\/(index\.html|style\.css|script\.js)$/.test(url.pathname) ||
+      url.pathname.endsWith('/'));
 
   event.respondWith(isShell ? networkFirst(request) : cacheFirst(request));
 });
