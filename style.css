@@ -1,8 +1,3 @@
-/* ─────────────────────────────────────────────────────────────────────────────
-   Habit Tracker — Pixel (Material You) × Samsung One UI
-   Tonal surfaces, big rounded cards, pill buttons, large title, light + dark.
-   ───────────────────────────────────────────────────────────────────────────── */
-
 *,
 *::before,
 *::after {
@@ -1261,11 +1256,8 @@ body {
     flex-shrink: 0;
 }
 
-/* ═════════════════════════════════════════════════════════════════════════════
-   v5 — Tabs · Routine · Attendance · Weekend Planner · Mind Game
-   ═════════════════════════════════════════════════════════════════════════════ */
+/* v5 — Tabs · Routine · Attendance · Weekend Planner · Mind Game */
 
-/* ── VIEWS ── */
 .view {
     display: none;
 }

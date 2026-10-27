@@ -1,11 +1,10 @@
-// ── CONSTANTS ──────────────────────────────────────────────────────────────────
 const EMOJIS = ['❤️', '🏃', '📚', '💧', '🧘', '✍️', '🎸', '🥗', '💪', '🌿', '🎨', '🧹', '💊', '🌅', '🎯', '🛌', '🧠', '🚴', '🏋️', '🎵'];
 const COLORS = ['#f43f5e', '#ef4444', '#f97316', '#f59e0b', '#eab308', '#84cc16', '#22c55e', '#14b8a6', '#06b6d4', '#3b82f6', '#6366f1', '#a855f7', '#8b5cf6', '#ec4899'];
 const CNAMES = ['Rose', 'Red', 'Orange', 'Amber', 'Yellow', 'Lime', 'Green', 'Teal', 'Cyan', 'Blue', 'Indigo', 'Purple', 'Violet', 'Pink'];
 const DAY_S = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MON_S = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-// ── STATE ──────────────────────────────────────────────────────────────────────
+
 let habits = JSON.parse(localStorage.getItem('ht3_habits') || '[]');
 let editId = null;
 let deleteId = null;
@@ -28,7 +27,7 @@ function hexA(hex, a) {
   return `rgba(${r},${g},${b},${a})`;
 }
 
-// ── THEME (System / Light / Dark) ──────────────────────────────────────────────
+// ── THEME (System / Light / Dark)
 let themePref = localStorage.getItem('ht3_theme') || 'system';
 const darkMQ = window.matchMedia('(prefers-color-scheme: dark)');
 function applyTheme() {
@@ -48,14 +47,14 @@ document.querySelectorAll('.seg-btn').forEach(b => {
 });
 applyTheme();
 
-// ── HEADER DATE ────────────────────────────────────────────────────────────────
+// ── HEADER DATE 
 function renderHeaderDate() {
   document.getElementById('hDate').textContent =
     `${DAY_S[today.getDay()]}, ${MON_S[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
 }
 renderHeaderDate();
 
-// ── TODAY BANNER (gap #4) ─────────────────────────────────────────────────────
+// ── TODAY BANNER (gap #4) 
 function updateBanner() {
   const total = habits.length;
   const done = habits.filter(h => h.log?.[todayStr]).length;
@@ -69,7 +68,7 @@ function updateBanner() {
   document.getElementById('tbPct').style.color = pct === 100 ? '#34d399' : 'var(--text)';
 }
 
-// ── WEEK STRIP ─────────────────────────────────────────────────────────────────
+// ── WEEK STRIP 
 function renderWeek() {
   const el = document.getElementById('weekStrip');
   el.innerHTML = '';
@@ -90,7 +89,7 @@ function renderWeek() {
   }
 }
 
-// ── STATS for one habit (gap #2) ───────────────────────────────────────────────
+// ── STATS for one habit (gap #2) 
 function getStats(habit) {
   // Current month: days 1 → today
   const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -300,7 +299,7 @@ function updateStatsBoxes(habit, container) {
   if (boxes[2]) boxes[2].querySelector('.stat-val').textContent = best;
 }
 
-// ── RENDER HABITS ─────────────────────────────────────────────────────────────
+// ── RENDER HABITS 
 function renderHabits() {
   const list = document.getElementById('habitsList');
   list.innerHTML = '';
@@ -320,7 +319,7 @@ function renderHabits() {
     card.dataset.id = habit.id;
     card.dataset.idx = idx;
 
-    // ── DRAG & DROP (gap #3) ──────────────────────────────────────────────────
+    // ── DRAG & DROP (gap #3)
     card.setAttribute('draggable', 'true');
 
     card.addEventListener('dragstart', e => {
@@ -357,10 +356,12 @@ function renderHabits() {
     card.addEventListener('touchmove', e => {
       if (touchOrigIdx === null) return;
       e.preventDefault();
+
       const y = e.touches[0].clientY;
       const cards = [...document.querySelectorAll('.habit-card')];
       cards.forEach(c => c.classList.remove('drag-over'));
       const target = document.elementFromPoint(e.touches[0].clientX, y)?.closest('.habit-card');
+
       if (target && target !== card) target.classList.add('drag-over');
     }, { passive: false });
     card.addEventListener('touchend', e => {
@@ -416,7 +417,7 @@ function renderHabits() {
     const tw = document.createElement('div'); tw.className = 'tracker-wrap';
     tw.appendChild(buildTracker(habit));
 
-    // ── STATS ROW (gap #2) ────────────────────────────────────────────────────
+    // ── STATS ROW (gap #2) 
     const sr = document.createElement('div'); sr.className = 'stats-row';
 
     function makeBox(val, lbl, barPct) {
@@ -1125,11 +1126,11 @@ document.getElementById('view-games').addEventListener('keydown', e => {
 // ══ ZIP — daily path puzzle + online leaderboard ═══════════════════════════════
 // Draw ONE line that starts at 1, visits the numbers in order, and fills every square.
 const ZIP_CONFIG = {
-  supabaseUrl: 'https://pitlhetodizqnvtucfsk.supabase.co',   // e.g. 'https://abcdxyz.supabase.co'   (leave empty = leaderboard off)
-  supabaseAnonKey: 'sb_publishable_KvhzU0SEhBEf8md0x_90gQ_NVmlhgGk',   // the PUBLIC anon / publishable key — safe to keep in this file
-  size: 6,               // 6 → 6×6 board
-  checkpoints: 7,        // how many numbers appear on the board
-  tzOffsetMin: 330       // clock that decides "today" for everyone: 330 = India (UTC+5:30)
+  supabaseUrl: 'https://pitlhetodizqnvtucfsk.supabase.co', 
+  supabaseAnonKey: 'sb_publishable_KvhzU0SEhBEf8md0x_90gQ_NVmlhgGk',
+  size: 6,              
+  checkpoints: 7,       
+  tzOffsetMin: 330 
 };
 const zipOnlineReady = () => !!(ZIP_CONFIG.supabaseUrl && ZIP_CONFIG.supabaseAnonKey);
 
@@ -1258,7 +1259,7 @@ function zFinish() {
   }, 800);
 }
 
-// ── online leaderboard (Supabase REST) ────────────────────────────────────────
+// ── online leaderboard (Supabase REST) the same may do for the other qns part also
 function zHeaders(extra) {
   const k = ZIP_CONFIG.supabaseAnonKey, h = { apikey: k, 'Content-Type': 'application/json' };
   if (k.startsWith('eyJ')) h.Authorization = 'Bearer ' + k;     // legacy JWT keys; new "publishable" keys go in apikey only
@@ -1680,7 +1681,7 @@ if ('serviceWorker' in navigator) {
 window.addEventListener('offline', () => { document.getElementById('offlineBar').style.display = 'block'; });
 window.addEventListener('online', () => { document.getElementById('offlineBar').style.display = 'none'; });
 
-// ── BACK BUTTON CLOSES SHEETS / SETTINGS (instead of leaving the app) ───────────
+// ── BACK BUTTON CLOSES SHEETS / SETTINGS (instead of leaving the app)
 // Every open layer owns one history entry. The phone's back button/gesture pops that entry,
 // which closes the topmost layer. Closing a layer by hand (Cancel, tap outside) removes its entry.
 (function () {
@@ -1725,8 +1726,7 @@ window.addEventListener('online', () => { document.getElementById('offlineBar').
 renderEmojiPicker();
 renderColorPicker();
 
-// Land on the Weekend Planner the first time the app opens on a Saturday/Sunday;
-// otherwise restore the last tab the person used.
+// Land on the Weekend Planner the first time the app opens on a Saturday/Sunday, otherwise restore the last tab the person used.
 (function () {
   let start = localStorage.getItem('ht3_tab') || 'habits';
   if (prefs.autoWeekend && isWeekend(today) && localStorage.getItem('ht3_wkAuto') !== todayStr) {
