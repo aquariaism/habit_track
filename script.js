@@ -1125,10 +1125,10 @@ document.getElementById('view-games').addEventListener('keydown', e => {
 // ══ ZIP — daily path puzzle + online leaderboard ═══════════════════════════════
 // Draw ONE line that starts at 1, visits the numbers in order, and fills every square.
 const ZIP_CONFIG = {
-  supabaseUrl: 'https://pitlhetodizqnvtucfsk.supabase.co',   // e.g. 'https://abcdxyz.supabase.co'
-  supabaseAnonKey: 'sb_publishable_KvhzU0SEhBEf8md0x_90gQ_NVmlhgGk',   // the PUBLIC anon / publishable key — safe to keep 
+  supabaseUrl: 'https://pitlhetodizqnvtucfsk.supabase.co',   // e.g. 'https://abcdxyz.supabase.co'   (leave empty = leaderboard off)
+  supabaseAnonKey: 'sb_publishable_KvhzU0SEhBEf8md0x_90gQ_NVmlhgGk',   // the PUBLIC anon / publishable key — safe to keep in this file
   size: 6,               // 6 → 6×6 board
-  checkpoints: 9,        // how many numbers appear on the board
+  checkpoints: 7,        // how many numbers appear on the board
   tzOffsetMin: 330       // clock that decides "today" for everyone: 330 = India (UTC+5:30)
 };
 const zipOnlineReady = () => !!(ZIP_CONFIG.supabaseUrl && ZIP_CONFIG.supabaseAnonKey);
@@ -1180,14 +1180,13 @@ function zipPuzzle(ds) {
 }
 
 // ── game state ────────────────────────────────────────────────────────────────
-let Z = { day: null, pz: null, path: [], t0: 0, ms: 0, running: false, done: false, practice: false, dragging: false, editName: false, lb: { state: 'idle', rows: [] } };
+let Z = { day: null, pz: null, path: [], t0: 0, ms: 0, running: false, playing: false, finished: false, practice: false, dragging: false, editName: false, last: null, finishTimer: null, lb: { state: 'idle', rows: [] } };
 function zipInit() {
   const d = zipDay();
   if (Z.day === d && Z.pz) return;
-  Z.day = d; Z.pz = zipPuzzle(d); Z.path = []; Z.t0 = 0; Z.ms = 0; Z.running = false; Z.done = false; Z.practice = false; Z.dragging = false;
+  Z.day = d; Z.pz = zipPuzzle(d); Z.path = []; Z.t0 = 0; Z.ms = 0;
+  Z.running = false; Z.playing = false; Z.finished = false; Z.practice = false; Z.dragging = false; Z.last = null;
   Z.lb = { state: 'idle', rows: [] };
-  const r = zip.days[d];
-  if (r) { Z.done = true; Z.ms = r.ms; Z.path = [...Z.pz.sol]; }
 }
 const zHead = () => Z.path[Z.path.length - 1];
 const zNeeded = () => Z.path.filter(c => Z.pz.nums[c]).length + 1;
@@ -1217,26 +1216,46 @@ function zMoveTo(target) {            // walks cell-by-cell so fast swipes don't
   }
 }
 function zDown(c) {
-  if (Z.done) return;
-  if (!Z.path.length) { if (Z.pz.nums[c] === 1) { Z.path = [c]; Z.t0 = performance.now(); Z.running = true; } return; }
+  if (Z.finished) return;
+  if (!Z.path.length) { if (Z.pz.nums[c] === 1) Z.path = [c]; return; }   // the line can only start on 1
   const i = Z.path.indexOf(c);
-  if (i >= 0) Z.path.length = i + 1;   // tap an earlier square to rewind to it
+  if (i >= 0) Z.path.length = i + 1;                                       // press an earlier square to rewind to it
 }
 const zWon = () => Z.path.length === Z.pz.T && Z.pz.nums[zHead()] === Z.pz.max;
 
+// ── play screen: open → timer runs → solved → timer stops, score saved, screen closes ──
+function zipPlay(practice) {
+  zipInit();
+  Z.practice = !!practice; Z.path = []; Z.finished = false; Z.dragging = false; Z.ms = 0;
+  Z.t0 = performance.now(); Z.running = true; Z.playing = true;     // the clock starts the moment Play is pressed
+  renderZipPlay();
+  document.getElementById('zipOverlay').classList.add('open');
+  document.documentElement.classList.add('no-scroll');
+}
+function zipClose() {
+  clearTimeout(Z.finishTimer);
+  Z.running = false; Z.playing = false; Z.dragging = false;
+  document.getElementById('zipOverlay').classList.remove('open');
+  document.documentElement.classList.remove('no-scroll');
+}
 function zFinish() {
-  Z.running = false; Z.done = true; Z.dragging = false;
+  Z.running = false; Z.finished = true; Z.dragging = false;
   Z.ms = Math.round(performance.now() - Z.t0);
-  if (!Z.practice && !zip.days[Z.day]) {
+  const first = !Z.practice && !zip.days[Z.day];
+  if (first) {
     zip.days[Z.day] = { ms: Z.ms, sent: false };
     zip.streak = zip.lastWon === dayShift(Z.day, -1) ? zip.streak + 1 : 1;
     zip.lastWon = Z.day; zip.best = Math.max(zip.best, zip.streak);
     game.points += 30; saveGame(); saveZip();
-    showToast('Zip solved! +30 points');
-    zipSubmitPending();
-  }
+    showToast(`Solved in ${zFmt(Z.ms)} · +30 points`);
+  } else showToast(Z.practice ? `Practice run: ${zFmt(Z.ms)}` : `Solved in ${zFmt(Z.ms)}`, 'info');
+  Z.last = { ms: Z.ms, practice: Z.practice, counted: first };
   if (navigator.vibrate) navigator.vibrate(40);
-  renderZip();
+  zDraw();
+  Z.finishTimer = setTimeout(() => {                                  // brief pause so the finished line is visible
+    zipClose(); renderZip();
+    if (first) zipSubmitPending();
+  }, 800);
 }
 
 // ── online leaderboard (Supabase REST) ────────────────────────────────────────
@@ -1293,51 +1312,32 @@ function renderZipHero() {
     <div class="gh-stat"><b>🔥 ${st}</b><span>Zip streak</span></div>
     <div class="gh-stat"><b>🏅 ${rk ? '#' + rk : '—'}</b><span>Rank</span></div>`;
 }
+
+// Zip tab: stats, Play button, leaderboard
 function renderZip() {
   zipInit();
-  const root = document.getElementById('gZip'), pz = Z.pz, N = pz.N;
-  const cells = Array.from({ length: pz.T }, (_, i) => `<div class="zc" data-i="${i}">${pz.nums[i] ? `<span class="zn">${pz.nums[i]}</span>` : ''}</div>`).join('');
+  const root = document.getElementById('gZip'), N = Z.pz.N, mine = zip.days[Z.day];
   root.innerHTML = `
     <div class="game-hero" id="zipHero"></div>
-    <div class="game-card zip-card${Z.done ? ' solved' : ''}">
-      <div class="gc-top"><span class="gc-chip">Zip · ${N}×${N}${Z.practice ? ' · practice' : ''}</span><span class="zip-timer" id="zipTimer">${zFmt(Z.done ? Z.ms : 0)}</span></div>
-      <p class="zip-help" id="zipHelp"></p>
-      <div class="zip-board" id="zipBoard" style="--n:${N}">${cells}<svg viewBox="0 0 ${N} ${N}" aria-hidden="true"><polyline points="" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <div class="zip-actions">
-        <button class="btn-cancel" data-z="restart" ${Z.done ? 'disabled' : ''}>Restart</button>
-        <button class="btn-cancel" data-z="undo" ${Z.done ? 'disabled' : ''}>Undo step</button>
-      </div>
+    <div class="game-card zip-card${mine ? ' solved' : ''}">
+      <div class="gc-top"><span class="gc-chip">Zip · ${N}×${N}</span><span class="gc-chip">${mine ? '✓ Solved today' : 'Daily puzzle'}</span></div>
+      <p class="gc-q">${mine ? 'Nice work today!' : 'Connect the numbers in order'}</p>
+      <p class="gc-sub">Draw one line from 1 through every number, filling every square. The timer starts when you press Play and stops the moment you finish.</p>
+      <div class="zip-actions"><button class="btn-save zip-play" data-z="${mine ? 'practice' : 'play'}">${mine ? 'Practice (not scored)' : '▶  Play'}</button></div>
       <div id="zipExtras"></div>
     </div>
     <div class="sec-lbl hist-lbl">Today’s leaderboard</div>
     <div class="zip-lb" id="zipLb"></div>`;
-  zDraw(); renderZipHero(); renderZipExtras(); renderZipLb();
+  renderZipHero(); renderZipExtras(); renderZipLb();
   if (zipOnlineReady() && Z.lb.state === 'idle') { zipSubmitPending(); zipLoadBoard(); }
-}
-function zDraw() {
-  const board = document.getElementById('zipBoard'); if (!board) return;
-  const N = Z.pz.N, inPath = new Set(Z.path), h = zHead();
-  board.querySelectorAll('.zc').forEach(el => {
-    const i = +el.dataset.i;
-    el.classList.toggle('on', inPath.has(i));
-    el.classList.toggle('head', i === h && !Z.done);
-    el.querySelector('.zn')?.classList.toggle('hit', inPath.has(i));
-  });
-  board.querySelector('polyline').setAttribute('points', Z.path.map(i => `${i % N + .5},${Math.floor(i / N) + .5}`).join(' '));
-  const help = document.getElementById('zipHelp');
-  if (help) help.textContent = Z.done ? 'Solved — every square filled in order.'
-    : !Z.path.length ? 'Press on 1, then drag through the numbers in order and fill every square.'
-      : `Next: ${zNeeded()} · ${Z.pz.T - Z.path.length} squares left`;
 }
 function renderZipExtras() {
   const el = document.getElementById('zipExtras'); if (!el) return;
   const mine = zip.days[Z.day];
   let h = '';
-  if (Z.done) {
-    h += `<div class="gc-result win"><b>${Z.practice ? 'Practice run' : 'Solved'} in ${zFmt(Z.ms)}</b><span>${Z.practice ? 'Practice runs don’t go on the leaderboard' : (mine && mine.ms === Z.ms ? '+30 discipline points' : 'Your first run today counts: ' + zFmt(mine?.ms || Z.ms))}</span></div>
-          <div class="zip-actions"><button class="btn-save" data-z="practice">Practice again</button></div>
-          <div class="gc-next">New puzzle in <b id="zipCount">--:--:--</b></div>`;
-  }
+  if (mine) h += `<div class="gc-result win"><b>Solved in ${zFmt(mine.ms)}</b><span>Your time for today is locked in</span></div>
+                 <div class="gc-next">New puzzle in <b id="zipCount">--:--:--</b></div>`;
+  if (Z.last && Z.last.practice) h += `<p class="gc-sub">Last practice run: ${zFmt(Z.last.ms)}</p>`;
   if (zipOnlineReady()) {
     if ((!zip.name && mine) || Z.editName) {
       h += `<div class="zip-name"><p class="gc-sub">${zip.name ? 'Change your display name' : 'Pick a name for the leaderboard'}</p>
@@ -1362,22 +1362,57 @@ function renderZipLb() {
   else if (!Z.lb.rows.length) h = `<div class="zip-lb-msg">No scores yet today — be the first!</div>`;
   else h = Z.lb.rows.map((r, i) => {
     const me = mine && r.name === zip.name && r.ms === mine.ms;
-    return `<div class="lb-row${me ? ' me' : ''}"><span class="lb-rk">${['🥇', '🥈', '🥉'][i] || i + 1}</span><span class="lb-nm">${esc(r.name)}${me ? ' <em>you</em>' : ''}</span><span class="lb-ms">${zFmt(r.ms)}</span></div>`;
+    return `<div class="lb-row${me ? ' me' : ''}"><span class="lb-rk">${['🥇', '🥈', '🥉'][i] || i + 1}</span><span class="lb-nm"><span class="lb-name">${esc(r.name)}</span>${me ? '<em>you</em>' : ''}</span><span class="lb-ms">${zFmt(r.ms)}</span></div>`;
   }).join('') + `<div class="zip-lb-foot"><button class="chip-btn" data-z="refresh">Refresh</button></div>`;
   el.innerHTML = h;
+}
+
+// Full-screen play screen
+function renderZipPlay() {
+  const ov = document.getElementById('zipOverlay'), pz = Z.pz, N = pz.N;
+  const cells = Array.from({ length: pz.T }, (_, i) => `<div class="zc" data-i="${i}">${pz.nums[i] ? `<span class="zn">${pz.nums[i]}</span>` : ''}</div>`).join('');
+  ov.innerHTML = `
+    <div class="zp-top">
+      <button class="zp-close" data-z="close" aria-label="Quit this run"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      <span class="gc-chip">Zip · ${N}×${N}${Z.practice ? ' · practice' : ''}</span>
+      <span class="zip-timer" id="zipTimer">0:00.0</span>
+    </div>
+    <p class="zip-help" id="zipHelp"></p>
+    <div class="zp-stage"><div class="zip-board" id="zipBoard" style="--n:${N}">${cells}<svg viewBox="0 0 ${N} ${N}" aria-hidden="true"><polyline points="" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+    <div class="zip-actions">
+      <button class="btn-cancel" data-z="restart">Restart line</button>
+      <button class="btn-cancel" data-z="undo">Undo step</button>
+    </div>`;
+  zDraw();
+}
+function zDraw() {
+  const board = document.getElementById('zipBoard'); if (!board) return;
+  const N = Z.pz.N, inPath = new Set(Z.path), h = zHead();
+  board.querySelectorAll('.zc').forEach(el => {
+    const i = +el.dataset.i;
+    el.classList.toggle('on', inPath.has(i));
+    el.classList.toggle('head', i === h && !Z.finished);
+    el.querySelector('.zn')?.classList.toggle('hit', inPath.has(i));
+  });
+  board.querySelector('polyline').setAttribute('points', Z.path.map(i => `${i % N + .5},${Math.floor(i / N) + .5}`).join(' '));
+  const help = document.getElementById('zipHelp');
+  if (help) help.textContent = Z.finished ? `✓ Solved in ${zFmt(Z.ms)}`
+    : !Z.path.length ? 'Press on 1, then drag through the numbers in order. Fill every square.'
+      : `Next: ${zNeeded()} · ${Z.pz.T - Z.path.length} squares left`;
+  const t = document.getElementById('zipTimer'); if (t && Z.finished) t.textContent = zFmt(Z.ms);
 }
 
 // countdown to the next puzzle (uses the shared clock, not the phone's midnight)
 function zipTick() {
   const now = Date.now(), off = ZIP_CONFIG.tzOffsetMin * 60000;
-  if (Z.day && zipDay() !== Z.day && curTab === 'games' && gameSub === 'zip' && !Z.running) { renderZip(); return; }
+  if (Z.day && zipDay() !== Z.day && curTab === 'games' && gameSub === 'zip' && !Z.playing) { renderZip(); return; }
   const el = document.getElementById('zipCount'); if (!el) return;
   const s = Math.max(0, Math.floor(((Math.floor((now + off) / 864e5) + 1) * 864e5 - off - now) / 1000));
   el.textContent = `${p(Math.floor(s / 3600))}:${p(Math.floor(s % 3600 / 60))}:${p(s % 60)}`;
 }
 setInterval(zipTick, 1000);
 
-// timer
+// live timer
 setInterval(() => {
   if (!Z.running) return;
   const t = document.getElementById('zipTimer'); if (t) t.textContent = zFmt(performance.now() - Z.t0);
@@ -1387,34 +1422,46 @@ setInterval(() => {
 function zCellAt(board, e) {
   const r = board.getBoundingClientRect(), N = Z.pz.N;
   const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-  if (x < 0 || y < 0 || x >= 1 || y >= 1) return -1;
+  if (!(x >= 0 && y >= 0 && x < 1 && y < 1)) return -1;
   return Math.floor(y * N) * N + Math.floor(x * N);
 }
-function zAfter() { zDraw(); if (!Z.done && zWon()) zFinish(); }
-function zipBind() {
-  const g = document.getElementById('gZip');
-  g.addEventListener('pointerdown', e => {
-    const b = e.target.closest('#zipBoard'); if (!b || Z.done) return;
-    e.preventDefault(); b.setPointerCapture && b.setPointerCapture(e.pointerId);
+function zAfter() { zDraw(); if (!Z.finished && zWon()) zFinish(); }
+
+// play screen: draw with finger / mouse (the screen can't scroll, so touches are never "stolen")
+function zipBindPlay() {
+  const ov = document.getElementById('zipOverlay');
+  ov.addEventListener('pointerdown', e => {
+    const b = e.target.closest('#zipBoard'); if (!b || Z.finished) return;
     const c = zCellAt(b, e); if (c < 0) return;
+    e.preventDefault(); b.setPointerCapture && b.setPointerCapture(e.pointerId);
     Z.dragging = true; zDown(c); zAfter();
   });
-  g.addEventListener('pointermove', e => {
-    if (!Z.dragging || Z.done || !Z.path.length) return;
+  ov.addEventListener('pointermove', e => {
+    if (!Z.dragging || Z.finished || !Z.path.length) return;
     const b = document.getElementById('zipBoard'); if (!b) return;
     const c = zCellAt(b, e); if (c < 0) return;
     zMoveTo(c); zAfter();
   });
   const stop = () => { Z.dragging = false; };
-  g.addEventListener('pointerup', stop); g.addEventListener('pointercancel', stop);
+  ov.addEventListener('pointerup', stop); ov.addEventListener('pointercancel', stop);
+  ov.addEventListener('click', e => {
+    const b = e.target.closest('[data-z]'); if (!b) return;
+    if (b.dataset.z === 'close') zipClose();
+    else if (b.dataset.z === 'restart' && !Z.finished) { Z.path = []; zDraw(); }     // the clock keeps running
+    else if (b.dataset.z === 'undo' && !Z.finished && Z.path.length > 1) { Z.path.pop(); zDraw(); }
+  });
+}
+zipBindPlay();
 
+// Zip tab buttons
+function zipBind() {
+  const g = document.getElementById('gZip');
   g.addEventListener('click', e => {
     const b = e.target.closest('[data-z]'); if (!b) return;
     e.preventDefault();
     switch (b.dataset.z) {
-      case 'restart': Z.path = []; Z.running = false; Z.t0 = 0; zDraw(); document.getElementById('zipTimer').textContent = zFmt(0); break;
-      case 'undo': if (Z.path.length > 1) { Z.path.pop(); zDraw(); } break;
-      case 'practice': Z.practice = true; Z.done = false; Z.path = []; Z.ms = 0; Z.running = false; renderZip(); break;
+      case 'play': zipPlay(false); break;
+      case 'practice': zipPlay(true); break;
       case 'refresh': zipLoadBoard(); break;
       case 'rename': Z.editName = true; renderZipExtras(); document.getElementById('zipNameIn')?.focus(); break;
       case 'name': {
@@ -1638,6 +1685,7 @@ window.addEventListener('online', () => { document.getElementById('offlineBar').
 // which closes the topmost layer. Closing a layer by hand (Cancel, tap outside) removes its entry.
 (function () {
   const layers = [   // topmost first
+    ['zipOverlay', () => zipClose()],
     ['confirmOverlay', () => document.getElementById('confirmNo').click()],
     ['slotOverlay', () => closeSlot()],
     ['subjOverlay', () => closeSubj()],
