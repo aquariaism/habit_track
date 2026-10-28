@@ -1,3 +1,8 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Habit Tracker — Pixel (Material You) × Samsung One UI
+   Tonal surfaces, big rounded cards, pill buttons, large title, light + dark.
+   ───────────────────────────────────────────────────────────────────────────── */
+
 *,
 *::before,
 *::after {
@@ -1256,17 +1261,57 @@ body {
     flex-shrink: 0;
 }
 
-/* v5 — Tabs · Routine · Attendance · Weekend Planner · Mind Game */
+/* ═════════════════════════════════════════════════════════════════════════════
+   v5 — Tabs · Routine · Attendance · Weekend Planner · Mind Game
+   ═════════════════════════════════════════════════════════════════════════════ */
 
+/* ── VIEWS ── */
 .view {
     display: none;
 }
 
 .view.active {
     display: block;
-    animation: viewIn .34s cubic-bezier(.16, 1, .3, 1);
 }
 
+.view.entering {
+    animation: tabIn .34s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+.view.leaving {
+    animation: tabOut .12s ease-in both;
+    pointer-events: none;
+}
+
+@keyframes tabIn {
+    from {
+        opacity: 0;
+        transform: translateX(calc(var(--dir, 1) * 40px));
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes tabOut {
+    from {
+        opacity: 1;
+        transform: none;
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(calc(var(--dir, 1) * -32px));
+    }
+}
+
+body {
+    overflow-x: clip;
+}
+
+/* no sideways scrollbar flash while a tab slides */
 @keyframes viewIn {
     from {
         opacity: 0;

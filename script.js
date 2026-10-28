@@ -1,10 +1,11 @@
+// ── CONSTANTS ──────────────────────────────────────────────────────────────────
 const EMOJIS = ['❤️', '🏃', '📚', '💧', '🧘', '✍️', '🎸', '🥗', '💪', '🌿', '🎨', '🧹', '💊', '🌅', '🎯', '🛌', '🧠', '🚴', '🏋️', '🎵'];
 const COLORS = ['#f43f5e', '#ef4444', '#f97316', '#f59e0b', '#eab308', '#84cc16', '#22c55e', '#14b8a6', '#06b6d4', '#3b82f6', '#6366f1', '#a855f7', '#8b5cf6', '#ec4899'];
 const CNAMES = ['Rose', 'Red', 'Orange', 'Amber', 'Yellow', 'Lime', 'Green', 'Teal', 'Cyan', 'Blue', 'Indigo', 'Purple', 'Violet', 'Pink'];
 const DAY_S = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const MON_S = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-
+// ── STATE ──────────────────────────────────────────────────────────────────────
 let habits = JSON.parse(localStorage.getItem('ht3_habits') || '[]');
 let editId = null;
 let deleteId = null;
@@ -27,7 +28,7 @@ function hexA(hex, a) {
   return `rgba(${r},${g},${b},${a})`;
 }
 
-// ── THEME (System / Light / Dark)
+// ── THEME (System / Light / Dark) ──────────────────────────────────────────────
 let themePref = localStorage.getItem('ht3_theme') || 'system';
 const darkMQ = window.matchMedia('(prefers-color-scheme: dark)');
 function applyTheme() {
@@ -47,14 +48,14 @@ document.querySelectorAll('.seg-btn').forEach(b => {
 });
 applyTheme();
 
-// ── HEADER DATE 
+// ── HEADER DATE ────────────────────────────────────────────────────────────────
 function renderHeaderDate() {
   document.getElementById('hDate').textContent =
     `${DAY_S[today.getDay()]}, ${MON_S[today.getMonth()]} ${today.getDate()}, ${today.getFullYear()}`;
 }
 renderHeaderDate();
 
-// ── TODAY BANNER (gap #4) 
+// ── TODAY BANNER (gap #4) ─────────────────────────────────────────────────────
 function updateBanner() {
   const total = habits.length;
   const done = habits.filter(h => h.log?.[todayStr]).length;
@@ -68,7 +69,7 @@ function updateBanner() {
   document.getElementById('tbPct').style.color = pct === 100 ? '#34d399' : 'var(--text)';
 }
 
-// ── WEEK STRIP 
+// ── WEEK STRIP ─────────────────────────────────────────────────────────────────
 function renderWeek() {
   const el = document.getElementById('weekStrip');
   el.innerHTML = '';
@@ -89,7 +90,7 @@ function renderWeek() {
   }
 }
 
-// ── STATS for one habit (gap #2) 
+// ── STATS for one habit (gap #2) ───────────────────────────────────────────────
 function getStats(habit) {
   // Current month: days 1 → today
   const monthStart = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -237,7 +238,7 @@ function toggleDay(habitId, ds, cellEl, color) {
   cellEl = cardEl?.querySelector(`.t-cell[data-ds="${ds}"]`) || cellEl || document.createElement('div');
 
   if (h.log[ds]) {
-    delete h.log[ds];
+    delete h.log[ds]; buzz(HAPTIC.undo);
     // revert cell
     cellEl.style.background = '';
     cellEl.style.boxShadow = '';
@@ -250,7 +251,7 @@ function toggleDay(habitId, ds, cellEl, color) {
       cellEl.style.border = '';
     }
   } else {
-    h.log[ds] = true;
+    h.log[ds] = true; buzz(HAPTIC.check);
     cellEl.style.background = color;
     cellEl.style.boxShadow = `0 0 4px ${color}66`;
     cellEl.style.border = '';
@@ -299,7 +300,7 @@ function updateStatsBoxes(habit, container) {
   if (boxes[2]) boxes[2].querySelector('.stat-val').textContent = best;
 }
 
-// ── RENDER HABITS 
+// ── RENDER HABITS ─────────────────────────────────────────────────────────────
 function renderHabits() {
   const list = document.getElementById('habitsList');
   list.innerHTML = '';
@@ -319,7 +320,7 @@ function renderHabits() {
     card.dataset.id = habit.id;
     card.dataset.idx = idx;
 
-    // ── DRAG & DROP (gap #3)
+    // ── DRAG & DROP (gap #3) ──────────────────────────────────────────────────
     card.setAttribute('draggable', 'true');
 
     card.addEventListener('dragstart', e => {
@@ -356,12 +357,10 @@ function renderHabits() {
     card.addEventListener('touchmove', e => {
       if (touchOrigIdx === null) return;
       e.preventDefault();
-
       const y = e.touches[0].clientY;
       const cards = [...document.querySelectorAll('.habit-card')];
       cards.forEach(c => c.classList.remove('drag-over'));
       const target = document.elementFromPoint(e.touches[0].clientX, y)?.closest('.habit-card');
-
       if (target && target !== card) target.classList.add('drag-over');
     }, { passive: false });
     card.addEventListener('touchend', e => {
@@ -417,7 +416,7 @@ function renderHabits() {
     const tw = document.createElement('div'); tw.className = 'tracker-wrap';
     tw.appendChild(buildTracker(habit));
 
-    // ── STATS ROW (gap #2) 
+    // ── STATS ROW (gap #2) ────────────────────────────────────────────────────
     const sr = document.createElement('div'); sr.className = 'stats-row';
 
     function makeBox(val, lbl, barPct) {
@@ -445,7 +444,7 @@ function toggleHabit(id) {
   const h = habits.find(h => h.id === id);
   if (!h) return;
   if (!h.log) h.log = {};
-  if (h.log[todayStr]) delete h.log[todayStr]; else h.log[todayStr] = true;
+  if (h.log[todayStr]) { delete h.log[todayStr]; buzz(HAPTIC.undo); } else { h.log[todayStr] = true; buzz(HAPTIC.check); }
   save(); renderHabits();
 }
 
@@ -590,7 +589,14 @@ const addDays = (d, n) => { const x = new Date(d); x.setDate(x.getDate() + n); r
 const isWeekend = d => d.getDay() === 0 || d.getDay() === 6;
 const CHECK_SVG = `<svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3.5 10l4.5 4.5 8.5-8.5" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
-let prefs = Object.assign({ autoWeekend: true }, load('ht5_prefs', {}));
+let prefs = Object.assign({ autoWeekend: true, haptics: true }, load('ht5_prefs', {}));
+
+// Haptics: tiny vibrations (10–20 ms) for taps, short patterns for wins/misses.
+// Works on Android (Chrome/Edge/Firefox); iOS Safari doesn't expose the Vibration API, so it's silently skipped there.
+const HAPTIC = { tick: 8, undo: 10, check: 15, warn: [12, 45, 12], success: [18, 40, 30] };
+function buzz(pattern = HAPTIC.check) {
+  try { if (prefs.haptics !== false && navigator.vibrate) navigator.vibrate(pattern); } catch (e) { }
+}
 const savePrefs = () => store('ht5_prefs', prefs);
 
 // Generic ⋯ popup menu (re-uses the .dropdown look)
@@ -713,9 +719,10 @@ function makeTimetable(cfg) {
     const nowDone = !s.log[todayStr];
     if (nowDone) s.log[todayStr] = true; else delete s.log[todayStr];
     persist(); T.render();
+    buzz(nowDone ? HAPTIC.check : HAPTIC.undo);
     if (nowDone) {
       root.querySelector(`.tl-item[data-id="${id}"] .tl-chk`)?.classList.add('pop');
-      if (T.slots.every(x => x.log && x.log[todayStr])) showToast('Every block done — great day!');
+      if (T.slots.every(x => x.log && x.log[todayStr])) { showToast('Every block done — great day!'); buzz(HAPTIC.success); }
     }
   };
 
@@ -886,17 +893,18 @@ document.getElementById('view-attendance').addEventListener('click', e => {
   const id = el.closest('.att-card')?.dataset.id, s = att.subjects.find(x => x.id === id);
   switch (el.dataset.act) {
     case 'add': openSubj(null); break;
-    case 'thr-': att.threshold = Math.max(50, att.threshold - 5); saveAtt(); renderAttendance(); break;
-    case 'thr+': att.threshold = Math.min(95, att.threshold + 5); saveAtt(); renderAttendance(); break;
+    case 'thr-': buzz(HAPTIC.tick); att.threshold = Math.max(50, att.threshold - 5); saveAtt(); renderAttendance(); break;
+    case 'thr+': buzz(HAPTIC.tick); att.threshold = Math.min(95, att.threshold + 5); saveAtt(); renderAttendance(); break;
     case 'p': case 'a':
       if (!s) break;
       s.t++; if (el.dataset.act === 'p') s.a++;
+      buzz(el.dataset.act === 'p' ? HAPTIC.check : HAPTIC.warn);
       s.h = ((s.h || '') + (el.dataset.act === 'p' ? 'P' : 'A')).slice(-50);
       saveAtt(); attBump = id; renderAttendance(); break;
     case 'u':
       if (!s || !s.h) break;
       if (s.h.slice(-1) === 'P') s.a--; s.t--; s.h = s.h.slice(0, -1);
-      saveAtt(); attBump = id; renderAttendance(); showToast('Last entry undone', 'info'); break;
+      saveAtt(); attBump = id; renderAttendance(); showToast('Last entry undone', 'info'); buzz(HAPTIC.undo); break;
     case 'menu':
       e.stopPropagation();
       popMenu(el, [
@@ -1108,8 +1116,9 @@ function submitGuess(raw) {
   saveGame(); renderGame();
 
   const card = document.querySelector('#view-games .game-card');
-  if (ok) showToast(`Correct! +${rec.p} points`);
+  if (ok) { showToast(`Correct! +${rec.p} points`); buzz(HAPTIC.success); }
   else {
+    buzz(HAPTIC.warn);
     card?.classList.add('shake'); setTimeout(() => card?.classList.remove('shake'), 450);
     if (!rec.o) document.getElementById('gIn')?.focus();
   }
@@ -1126,11 +1135,11 @@ document.getElementById('view-games').addEventListener('keydown', e => {
 // ══ ZIP — daily path puzzle + online leaderboard ═══════════════════════════════
 // Draw ONE line that starts at 1, visits the numbers in order, and fills every square.
 const ZIP_CONFIG = {
-  supabaseUrl: 'https://pitlhetodizqnvtucfsk.supabase.co', 
-  supabaseAnonKey: 'sb_publishable_KvhzU0SEhBEf8md0x_90gQ_NVmlhgGk',
-  size: 6,              
-  checkpoints: 7,       
-  tzOffsetMin: 330 
+  supabaseUrl: 'https://pitlhetodizqnvtucfsk.supabase.co',   // e.g. 'https://abcdxyz.supabase.co'   (leave empty = leaderboard off)
+  supabaseAnonKey: 'sb_publishable_KvhzU0SEhBEf8md0x_90gQ_NVmlhgGk',   // the PUBLIC anon / publishable key — safe to keep in this file
+  size: 6,               // 6 → 6×6 board
+  checkpoints: 7,        // how many numbers appear on the board
+  tzOffsetMin: 330       // clock that decides "today" for everyone: 330 = India (UTC+5:30)
 };
 const zipOnlineReady = () => !!(ZIP_CONFIG.supabaseUrl && ZIP_CONFIG.supabaseAnonKey);
 
@@ -1251,7 +1260,7 @@ function zFinish() {
     showToast(`Solved in ${zFmt(Z.ms)} · +30 points`);
   } else showToast(Z.practice ? `Practice run: ${zFmt(Z.ms)}` : `Solved in ${zFmt(Z.ms)}`, 'info');
   Z.last = { ms: Z.ms, practice: Z.practice, counted: first };
-  if (navigator.vibrate) navigator.vibrate(40);
+  buzz(HAPTIC.success);
   zDraw();
   Z.finishTimer = setTimeout(() => {                                  // brief pause so the finished line is visible
     zipClose(); renderZip();
@@ -1259,7 +1268,7 @@ function zFinish() {
   }, 800);
 }
 
-// ── online leaderboard (Supabase REST) the same may do for the other qns part also
+// ── online leaderboard (Supabase REST) ────────────────────────────────────────
 function zHeaders(extra) {
   const k = ZIP_CONFIG.supabaseAnonKey, h = { apikey: k, 'Content-Type': 'application/json' };
   if (k.startsWith('eyJ')) h.Authorization = 'Bearer ' + k;     // legacy JWT keys; new "publishable" keys go in apikey only
@@ -1387,6 +1396,7 @@ function renderZipPlay() {
   zDraw();
 }
 function zDraw() {
+  Z.nHit = Z.path.filter(c => Z.pz.nums[c]).length;
   const board = document.getElementById('zipBoard'); if (!board) return;
   const N = Z.pz.N, inPath = new Set(Z.path), h = zHead();
   board.querySelectorAll('.zc').forEach(el => {
@@ -1426,7 +1436,11 @@ function zCellAt(board, e) {
   if (!(x >= 0 && y >= 0 && x < 1 && y < 1)) return -1;
   return Math.floor(y * N) * N + Math.floor(x * N);
 }
-function zAfter() { zDraw(); if (!Z.finished && zWon()) zFinish(); }
+function zAfter() {
+  const k = Z.path.filter(c => Z.pz.nums[c]).length;
+  if (k > (Z.nHit || 0)) buzz(HAPTIC.tick);          // light tick each time you reach a number
+  zDraw(); if (!Z.finished && zWon()) zFinish();
+}
 
 // play screen: draw with finger / mouse (the screen can't scroll, so touches are never "stolen")
 function zipBindPlay() {
@@ -1501,28 +1515,100 @@ let curTab = 'habits';
 function renderTab(n) {
   ({ habits: renderHabits, routine: () => RT.render(), attendance: renderAttendance, planner: () => WK.render(), games: renderGames })[n]();
 }
-function showTab(name) {
+const TAB_ORDER = ['habits', 'routine', 'attendance', 'planner', 'games'];
+let tabTimer = null;
+const reducedMotion = () => !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+// Slide + fade between tabs: the old view slides out toward the side you're leaving to,
+// then the new one slides in from the side it lives on (direction follows the tab order).
+function showTab(name, opts) {
   if (!TAB_TITLES[name]) name = 'habits';
-  curTab = name;
-  closeMenu();
-  document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v.id === 'view-' + name));
+  const prevEl = document.querySelector('.view.active');
+  const prevName = prevEl ? prevEl.id.replace('view-', '') : null;
+  clearTimeout(tabTimer);
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('leaving', 'entering'));
+
+  curTab = name; closeMenu();
   document.querySelectorAll('.nav-item').forEach(b => {
     const on = b.dataset.tab === name; b.classList.toggle('active', on);
     if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current');
   });
   document.getElementById('hTitle').textContent = TAB_TITLES[name];
   try { localStorage.setItem('ht3_tab', name); } catch (e) { }
-  renderTab(name);
-  window.scrollTo({ top: 0 });
+
+  renderTab(name);                                   // fill the incoming view while it's still hidden
+  const nextEl = document.getElementById('view-' + name);
+
+  if (!prevEl || prevName === name || reducedMotion() || (opts && opts.instant)) {
+    document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v === nextEl));
+    window.scrollTo({ top: 0 });
+    return;
+  }
+  const dir = TAB_ORDER.indexOf(name) > TAB_ORDER.indexOf(prevName) ? 1 : -1;
+  prevEl.style.setProperty('--dir', dir);
+  prevEl.classList.add('leaving');
+  tabTimer = setTimeout(() => {
+    prevEl.classList.remove('leaving', 'active');
+    nextEl.style.setProperty('--dir', dir);
+    nextEl.classList.add('active', 'entering');
+    window.scrollTo({ top: 0 });
+    setTimeout(() => nextEl.classList.remove('entering'), 360);
+  }, 120);
 }
 document.getElementById('bottomNav').addEventListener('click', e => {
-  const b = e.target.closest('.nav-item'); if (b) showTab(b.dataset.tab);
+  const b = e.target.closest('.nav-item'); if (!b) return;
+  if (b.dataset.tab !== curTab) buzz(HAPTIC.tick);
+  showTab(b.dataset.tab);
 });
+
+// ── Swipe left / right to move between tabs ──────────────────────────────────
+(function () {
+  let sx = 0, sy = 0, st = 0, tracking = false;
+  const NO_SWIPE = 'input, textarea, select, [contenteditable], .dropdown, .drag-handle, .zip-overlay, .bottom-nav, .settings-panel, .modal-overlay, .confirm-overlay';
+  const scrollsX = el => {                          // don't hijack a horizontally scrollable area
+    for (; el && el !== document.body; el = el.parentElement) {
+      const ox = getComputedStyle(el).overflowX;
+      if ((ox === 'auto' || ox === 'scroll') && el.scrollWidth > el.clientWidth + 1) return true;
+    }
+    return false;
+  };
+  const overlayOpen = () => document.querySelector('.modal-overlay.open, .confirm-overlay.open, .settings-panel.open, .zip-overlay.open');
+
+  document.addEventListener('touchstart', e => {
+    tracking = false;
+    if (e.touches.length !== 1 || overlayOpen()) return;
+    const t = e.touches[0];
+    if (t.clientX < 24 || t.clientX > window.innerWidth - 24) return;     // leave the phone's edge-back gesture alone
+    if (e.target.closest && (e.target.closest(NO_SWIPE) || scrollsX(e.target))) return;
+    sx = t.clientX; sy = t.clientY; st = Date.now(); tracking = true;
+  }, { passive: true });
+  document.addEventListener('touchend', e => {
+    if (!tracking) return; tracking = false;
+    const t = e.changedTouches[0], dx = t.clientX - sx, dy = t.clientY - sy;
+    if (Date.now() - st < 650 && Math.abs(dx) >= 64 && Math.abs(dx) > Math.abs(dy) * 1.8) swipeTab(dx < 0 ? 1 : -1);
+  }, { passive: true });
+  document.addEventListener('touchcancel', () => { tracking = false; }, { passive: true });
+})();
+function swipeTab(step) {
+  const i = TAB_ORDER.indexOf(curTab) + step;
+  if (i < 0 || i >= TAB_ORDER.length) {                // first/last tab: a little rubber-band nudge instead
+    const v = document.getElementById('view-' + curTab);
+    if (v && v.animate && !reducedMotion()) v.animate([{ transform: 'none' }, { transform: `translateX(${step * -14}px)` }, { transform: 'none' }], { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    return;
+  }
+  buzz(HAPTIC.tick);
+  showTab(TAB_ORDER[i]);
+}
 
 // weekend auto-open toggle (Settings)
 const awT = document.getElementById('autoWkToggle');
 awT.classList.toggle('on', prefs.autoWeekend);
 awT.addEventListener('click', () => { prefs.autoWeekend = !prefs.autoWeekend; awT.classList.toggle('on', prefs.autoWeekend); savePrefs(); });
+
+// haptic feedback toggle (Settings)
+const hpT = document.getElementById('hapticToggle');
+hpT.classList.toggle('on', prefs.haptics !== false);
+hpT.addEventListener('click', () => { prefs.haptics = !(prefs.haptics !== false); hpT.classList.toggle('on', prefs.haptics); savePrefs(); if (prefs.haptics) buzz(HAPTIC.check); });
 
 // midnight rollover + live "now" marker
 function checkDay() {
@@ -1681,7 +1767,7 @@ if ('serviceWorker' in navigator) {
 window.addEventListener('offline', () => { document.getElementById('offlineBar').style.display = 'block'; });
 window.addEventListener('online', () => { document.getElementById('offlineBar').style.display = 'none'; });
 
-// ── BACK BUTTON CLOSES SHEETS / SETTINGS (instead of leaving the app)
+// ── BACK BUTTON CLOSES SHEETS / SETTINGS (instead of leaving the app) ───────────
 // Every open layer owns one history entry. The phone's back button/gesture pops that entry,
 // which closes the topmost layer. Closing a layer by hand (Cancel, tap outside) removes its entry.
 (function () {
@@ -1726,12 +1812,13 @@ window.addEventListener('online', () => { document.getElementById('offlineBar').
 renderEmojiPicker();
 renderColorPicker();
 
-// Land on the Weekend Planner the first time the app opens on a Saturday/Sunday, otherwise restore the last tab the person used.
+// Land on the Weekend Planner the first time the app opens on a Saturday/Sunday;
+// otherwise restore the last tab the person used.
 (function () {
   let start = localStorage.getItem('ht3_tab') || 'habits';
   if (prefs.autoWeekend && isWeekend(today) && localStorage.getItem('ht3_wkAuto') !== todayStr) {
     start = 'planner';
     localStorage.setItem('ht3_wkAuto', todayStr);
   }
-  showTab(start);
+  showTab(start, { instant: true });   // no slide animation on first paint
 })();
