@@ -1597,22 +1597,24 @@ function showTab(name, opts) {
   document.getElementById('hTitle').textContent = TAB_TITLES[name];
   try { localStorage.setItem('ht3_tab', name); } catch (e) { }
 
-  renderTab(name);                                   // fill the incoming view while it's still hidden
   const nextEl = document.getElementById('view-' + name);
 
   if (!prevEl || prevName === name || reducedMotion() || (opts && opts.instant)) {
+    renderTab(name);
     document.querySelectorAll('.view').forEach(v => v.classList.toggle('active', v === nextEl));
-    window.scrollTo({ top: 0 });
+    if (window.scrollY) window.scrollTo({ top: 0 });
     return;
   }
   const dir = TAB_ORDER.indexOf(name) > TAB_ORDER.indexOf(prevName) ? 1 : -1;
   prevEl.style.setProperty('--dir', dir);
   prevEl.classList.add('leaving');
+  // render AFTER the nav highlight has painted (the leave animation gives it time), so heavy tabs never delay the nav
   tabTimer = setTimeout(() => {
+    renderTab(name);
     prevEl.classList.remove('leaving', 'active');
     nextEl.style.setProperty('--dir', dir);
     nextEl.classList.add('active', 'entering');
-    window.scrollTo({ top: 0 });
+    if (window.scrollY) window.scrollTo({ top: 0 });
     // stagger: each block (and each card inside the lists) rises in a beat after the one before
     let i = 0;
     nextEl.querySelectorAll(':scope > *, .habits-wrap > *, .att-list > *, .timeline > *')

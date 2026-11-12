@@ -1355,7 +1355,6 @@ body {
     align-items: center;
     gap: 4px;
     cursor: pointer;
-    transition: color .2s;
 }
 
 .nav-ind {
@@ -1365,11 +1364,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: background .25s, color .25s, transform .2s;
-}
-
-.nav-item:active .nav-ind {
-    transform: scale(.9);
 }
 
 .nav-item.active {
@@ -4196,4 +4190,27 @@ em[data-count] {
 .cal-ring-txt span {
     letter-spacing: .03em;
     font-size: .52rem;
+}
+/* ═══ NAV STABILITY — nav bar must never move while tabs switch ═══════════════ */
+html {
+    min-height: 100%;
+    overflow-y: scroll;
+    overscroll-behavior-y: none;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.view {
+    min-height: calc(100vh - 112px);
+    min-height: calc(100dvh - 112px);
+}
+
+.bottom-nav {
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    contain: layout paint;
+    bottom: 0 !important;
 }
