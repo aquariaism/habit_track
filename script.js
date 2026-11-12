@@ -1,5 +1,20 @@
+// ── ICONS — Google Material Symbols (Rounded), inlined so they work offline ───────
+const MI = {"favorite":"<path d=\"M13.35 20.13c-.76.69-1.93.69-2.69-.01l-.11-.1C5.3 15.27 1.87 12.16 2 8.28c.06-1.7.93-3.33 2.34-4.29 2.64-1.8 5.9-.96 7.66 1.1 1.76-2.06 5.02-2.91 7.66-1.1 1.41.96 2.28 2.59 2.34 4.29.14 3.88-3.3 6.99-8.55 11.76l-.1.09z\"/>","directions_run":"<path d=\"M13.49 5.48c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-3.17 12 .57-2.5 2.1 2v5c0 .55.45 1 1 1s1-.45 1-1v-5.64c0-.55-.22-1.07-.62-1.45l-1.48-1.41.6-3a7.321 7.321 0 0 0 4.36 2.41c.6.09 1.14-.39 1.14-1 0-.49-.36-.9-.85-.98-1.52-.25-2.78-1.15-3.45-2.33l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L7.21 7.76a2.01 2.01 0 0 0-1.22 1.85v2.37c0 .55.45 1 1 1s1-.45 1-1v-2.4l1.8-.7-1.6 8.1-3.92-.8c-.54-.11-1.07.24-1.18.78V17c-.11.54.24 1.07.78 1.18l4.11.82a2 2 0 0 0 2.34-1.52z\"/>","menu_book":"<path d=\"M17.5 4.5c-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5-1.45 0-2.99.22-4.28.79C1.49 5.62 1 6.33 1 7.14v11.28c0 1.3 1.22 2.26 2.48 1.94.98-.25 2.02-.36 3.02-.36 1.56 0 3.22.26 4.56.92.6.3 1.28.3 1.87 0 1.34-.67 3-.92 4.56-.92 1 0 2.04.11 3.02.36 1.26.33 2.48-.63 2.48-1.94V7.14c0-.81-.49-1.52-1.22-1.85-1.28-.57-2.82-.79-4.27-.79zM21 17.23c0 .63-.58 1.09-1.2.98-.75-.14-1.53-.2-2.3-.2-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5.92 0 1.83.09 2.7.28.46.1.8.51.8.98v9.47z\"/><path d=\"M13.98 11.01c-.32 0-.61-.2-.71-.52-.13-.39.09-.82.48-.94 1.54-.5 3.53-.66 5.36-.45.41.05.71.42.66.83-.05.41-.42.71-.83.66-1.62-.19-3.39-.04-4.73.39-.08.01-.16.03-.23.03zm0 2.66c-.32 0-.61-.2-.71-.52-.13-.39.09-.82.48-.94 1.53-.5 3.53-.66 5.36-.45.41.05.71.42.66.83-.05.41-.42.71-.83.66-1.62-.19-3.39-.04-4.73.39a.97.97 0 0 1-.23.03zm0 2.66c-.32 0-.61-.2-.71-.52-.13-.39.09-.82.48-.94 1.53-.5 3.53-.66 5.36-.45.41.05.71.42.66.83-.05.41-.42.7-.83.66-1.62-.19-3.39-.04-4.73.39a.97.97 0 0 1-.23.03z\"/>","water_drop":"<path d=\"M12.66 2.58c-.38-.33-.95-.33-1.33 0C6.45 6.88 4 10.62 4 13.8c0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.18-2.45-6.92-7.34-11.22zM7.83 14c.37 0 .67.26.74.62.41 2.22 2.28 2.98 3.64 2.87.43-.02.79.32.79.75 0 .4-.32.73-.72.75-2.13.13-4.62-1.09-5.19-4.12a.75.75 0 0 1 .74-.87z\"/>","self_improvement":"<circle cx=\"12\" cy=\"6\" r=\"2\"/><path d=\"M21 14.94c0-.5-.36-.93-.85-.98-1.88-.21-3.49-1.13-4.75-2.63l-1.34-1.6c-.38-.47-.94-.73-1.53-.73h-1.05c-.59 0-1.15.26-1.53.72l-1.34 1.6c-1.25 1.5-2.87 2.42-4.75 2.63-.5.06-.86.49-.86.99 0 .6.53 1.07 1.13 1 2.3-.27 4.32-1.39 5.87-3.19V15l-3.76 1.5c-.65.26-1.16.83-1.23 1.53A1.79 1.79 0 0 0 6.79 20H9v-.5a2.5 2.5 0 0 1 2.5-2.5h3c.28 0 .5.22.5.5s-.22.5-.5.5h-3c-.83 0-1.5.67-1.5 1.5v.5h7.1c.85 0 1.65-.54 1.85-1.37.21-.89-.27-1.76-1.08-2.08L14 15v-2.25c1.56 1.8 3.57 2.91 5.87 3.19.6.06 1.13-.4 1.13-1z\"/>","draw":"<path d=\"m18.85 10.39 1.06-1.06c.78-.78.78-2.05 0-2.83L18.5 5.09c-.78-.78-2.05-.78-2.83 0l-1.06 1.06 4.24 4.24zm-5.66-2.83-9.05 9.05a.5.5 0 0 0-.14.35v3.54c0 .28.22.5.5.5h3.54c.13 0 .26-.05.35-.15l9.05-9.05-4.25-4.24zM19 17.5c0 2.19-2.54 3.5-5 3.5-.55 0-1-.45-1-1s.45-1 1-1c1.54 0 3-.73 3-1.5 0-.47-.48-.87-1.23-1.2l1.48-1.48c1.07.63 1.75 1.47 1.75 2.68zM4.58 13.35C3.61 12.79 3 12.06 3 11c0-1.8 1.89-2.63 3.56-3.36C7.59 7.18 9 6.56 9 6c0-.41-.78-1-2-1-1.26 0-1.8.61-1.83.64-.35.41-.98.46-1.4.12a.992.992 0 0 1-.15-1.38C3.73 4.24 4.76 3 7 3s4 1.32 4 3c0 1.87-1.93 2.72-3.64 3.47C6.42 9.88 5 10.5 5 11c0 .31.43.6 1.07.86l-1.49 1.49z\"/>","piano":"<path d=\"M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 11.5h.25V19h-4.5v-4.5H10c.55 0 1-.45 1-1V5h2v8.5c0 .55.45 1 1 1zM5 5h2v8.5c0 .55.45 1 1 1h.25V19H5V5zm14 14h-3.25v-4.5H16c.55 0 1-.45 1-1V5h2v14z\"/>","restaurant":"<path d=\"M16 6v6c0 1.1.9 2 2 2h1v7c0 .55.45 1 1 1s1-.45 1-1V3.13c0-.65-.61-1.13-1.24-.98C17.6 2.68 16 4.51 16 6zm-5 3H9V3c0-.55-.45-1-1-1s-1 .45-1 1v6H5V3c0-.55-.45-1-1-1s-1 .45-1 1v6c0 2.21 1.79 4 4 4v8c0 .55.45 1 1 1s1-.45 1-1v-8c2.21 0 4-1.79 4-4V3c0-.55-.45-1-1-1s-1 .45-1 1v6z\"/>","fitness_center":"<path d=\"m20.57 14.86.72-.72a.996.996 0 0 0 0-1.41l-.02-.02a.996.996 0 0 0-1.41 0L17 15.57 8.43 7l2.86-2.86a.996.996 0 0 0 0-1.41l-.02-.02a.996.996 0 0 0-1.41 0l-.72.72-.72-.72c-.39-.39-1.03-.39-1.42 0L5.57 4.14l-.72-.72a1.02 1.02 0 0 0-1.43 0 1.02 1.02 0 0 0 0 1.43l.72.72L2.71 7a.996.996 0 0 0 0 1.41l.72.72-.72.73a.996.996 0 0 0 0 1.41l.02.02c.39.39 1.02.39 1.41 0L7 8.43 15.57 17l-2.86 2.86a.996.996 0 0 0 0 1.41l.02.02c.39.39 1.02.39 1.41 0l.72-.72.72.72c.39.39 1.02.39 1.41 0l1.43-1.43.72.72c.39.39 1.04.39 1.43 0 .39-.39.39-1.04 0-1.43l-.72-.72L21.29 17a.996.996 0 0 0 0-1.41l-.72-.73z\"/>","grass":"<path d=\"M15.64 11.02a10.02 10.02 0 0 1 2.56-3.83c.38-.36.04-1-.46-.85-3.32.98-5.75 4.05-5.74 7.69.95-1.28 2.2-2.31 3.64-3.01zm-4.22-2.17a8.556 8.556 0 0 0-2.96-3.87c-.42-.3-.96.19-.72.65C8.54 7.15 9 8.88 9 10.71c0 .21-.03.41-.04.61.43.24.83.52 1.22.82a9.91 9.91 0 0 1 1.24-3.29zM12 20H3c-.55 0-1-.45-1-1s.45-1 1-1h4.75a8.027 8.027 0 0 0-4-5.06.486.486 0 0 1-.26-.44c0-.27.22-.49.49-.5H4c4.42 0 8 3.58 8 8zm8.26-7.06a7.995 7.995 0 0 0-4 5.06H21c.55 0 1 .45 1 1s-.45 1-1 1h-7c0-.68-.07-1.35-.2-2-.15-.72-.38-1.42-.67-2.07A7.97 7.97 0 0 1 20 12h.02a.5.5 0 0 1 .49.5c.01.19-.1.35-.25.44z\"/>","palette":"<path d=\"M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10a2.5 2.5 0 0 0 2.5-2.5c0-.61-.23-1.2-.64-1.67a.528.528 0 0 1-.13-.33c0-.28.22-.5.5-.5H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9zm5.5 11c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm-3-4c-.83 0-1.5-.67-1.5-1.5S13.67 6 14.5 6s1.5.67 1.5 1.5S15.33 9 14.5 9zM5 11.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5S7.33 13 6.5 13 5 12.33 5 11.5zm6-4c0 .83-.67 1.5-1.5 1.5S8 8.33 8 7.5 8.67 6 9.5 6s1.5.67 1.5 1.5z\"/>","cleaning_services":"<path d=\"M16 11h-1V4c0-1.66-1.34-3-3-3S9 2.34 9 4v7H8c-2.76 0-5 2.24-5 5v5c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-5c0-2.76-2.24-5-5-5zm3 10h-2v-3c0-.55-.45-1-1-1s-1 .45-1 1v3h-2v-3c0-.55-.45-1-1-1s-1 .45-1 1v3H9v-3c0-.55-.45-1-1-1s-1 .45-1 1v3H5v-5c0-1.65 1.35-3 3-3h8c1.65 0 3 1.35 3 3v5z\"/>","medication":"<path d=\"M17 3H7c-.55 0-1 .45-1 1s.45 1 1 1h10c.55 0 1-.45 1-1s-.45-1-1-1zm0 3H7c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-2.5 9h-1v1c0 .83-.67 1.5-1.5 1.5s-1.5-.67-1.5-1.5v-1h-1c-.83 0-1.5-.67-1.5-1.5S8.67 12 9.5 12h1v-1c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v1h1c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z\"/>","wb_sunny":"<path d=\"m6.05 4.14-.39-.39a.993.993 0 0 0-1.4 0l-.01.01a.984.984 0 0 0 0 1.4l.39.39c.39.39 1.01.39 1.4 0l.01-.01a.984.984 0 0 0 0-1.4zM3.01 10.5H1.99c-.55 0-.99.44-.99.99v.01c0 .55.44.99.99.99H3c.56.01 1-.43 1-.98v-.01c0-.56-.44-1-.99-1zm9-9.95H12c-.56 0-1 .44-1 .99v.96c0 .55.44.99.99.99H12c.56.01 1-.43 1-.98v-.97c0-.55-.44-.99-.99-.99zm7.74 3.21c-.39-.39-1.02-.39-1.41-.01l-.39.39a.984.984 0 0 0 0 1.4l.01.01c.39.39 1.02.39 1.4 0l.39-.39a.984.984 0 0 0 0-1.4zm-1.81 15.1.39.39a.996.996 0 1 0 1.41-1.41l-.39-.39a.993.993 0 0 0-1.4 0c-.4.4-.4 1.02-.01 1.41zM20 11.49v.01c0 .55.44.99.99.99H22c.55 0 .99-.44.99-.99v-.01c0-.55-.44-.99-.99-.99h-1.01c-.55 0-.99.44-.99.99zM12 5.5c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-.01 16.95H12c.55 0 .99-.44.99-.99v-.96c0-.55-.44-.99-.99-.99h-.01c-.55 0-.99.44-.99.99v.96c0 .55.44.99.99.99zm-7.74-3.21c.39.39 1.02.39 1.41 0l.39-.39a.993.993 0 0 0 0-1.4l-.01-.01a.996.996 0 0 0-1.41 0l-.39.39c-.38.4-.38 1.02.01 1.41z\"/>","ads_click":"<path d=\"M11.71 17.99A5.993 5.993 0 0 1 6 12c0-3.31 2.69-6 6-6 3.22 0 5.84 2.53 5.99 5.71l-2.1-.63a3.999 3.999 0 1 0-4.81 4.81l.63 2.1zM22 12c0 .3-.01.6-.04.9l-1.97-.59c.01-.1.01-.21.01-.31 0-4.42-3.58-8-8-8s-8 3.58-8 8 3.58 8 8 8c.1 0 .21 0 .31-.01l.59 1.97c-.3.03-.6.04-.9.04-5.52 0-10-4.48-10-10S6.48 2 12 2s10 4.48 10 10zm-3.77 4.26 2.27-.76c.46-.15.45-.81-.01-.95l-7.6-2.28c-.38-.11-.74.24-.62.62l2.28 7.6c.14.47.8.48.95.01l.76-2.27 3.91 3.91c.2.2.51.2.71 0l1.27-1.27c.2-.2.2-.51 0-.71l-3.92-3.9z\"/>","bedtime":"<path d=\"M11.65 3.46c.27-.71-.36-1.45-1.12-1.34-5.52.8-9.47 6.07-8.34 11.88.78 4.02 4.09 7.21 8.14 7.87 3.74.61 7.16-.87 9.32-3.44.48-.57.19-1.48-.55-1.62-6.02-1.15-9.68-7.54-7.45-13.35z\"/>","psychology":"<path d=\"M13 8.57a1.43 1.43 0 1 0 0 2.86 1.43 1.43 0 0 0 0-2.86z\"/><path d=\"M13.21 3c-3.84-.11-7 2.87-7.19 6.64L4.1 12.2a.5.5 0 0 0 .4.8H6v3c0 1.1.9 2 2 2h1v2c0 .55.45 1 1 1h5c.55 0 1-.45 1-1v-3.68a7.004 7.004 0 0 0 4-6.58c-.14-3.62-3.18-6.63-6.79-6.74zM16 10c0 .13-.01.26-.02.39l.83.66c.08.06.1.16.05.25l-.8 1.39c-.05.09-.16.12-.24.09l-.99-.4c-.21.16-.43.29-.67.39L14 13.83c-.01.1-.1.17-.2.17h-1.6c-.1 0-.18-.07-.2-.17l-.15-1.06c-.25-.1-.47-.23-.68-.39l-.99.4c-.09.03-.2 0-.25-.09l-.8-1.39a.19.19 0 0 1 .05-.25l.84-.66c-.01-.13-.02-.26-.02-.39s.02-.27.04-.39l-.85-.66c-.08-.06-.1-.16-.05-.26l.8-1.38c.05-.09.15-.12.24-.09l1 .4c.2-.15.43-.29.67-.39L12 6.17c.02-.1.1-.17.2-.17h1.6c.1 0 .18.07.2.17l.15 1.06c.24.1.46.23.67.39l1-.4c.09-.03.2 0 .24.09l.8 1.38a.2.2 0 0 1-.05.26l-.85.66c.03.12.04.25.04.39z\"/>","directions_bike":"<path d=\"M15.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM5 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5zm5.8-10 2.4-2.4.8.8c1.06 1.06 2.38 1.78 3.96 2.02.6.09 1.14-.39 1.14-1 0-.49-.37-.91-.85-.99-1.11-.18-2.02-.71-2.75-1.43l-1.9-1.9c-.5-.4-1-.6-1.6-.6s-1.1.2-1.4.6L7.8 8.4c-.4.4-.6.9-.6 1.4 0 .6.2 1.1.6 1.4L11 14v4c0 .55.45 1 1 1s1-.45 1-1v-4.4c0-.52-.2-1.01-.55-1.38L10.8 10.5zM19 12c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5zm0 8.5c-1.9 0-3.5-1.6-3.5-3.5s1.6-3.5 3.5-3.5 3.5 1.6 3.5 3.5-1.6 3.5-3.5 3.5z\"/>","headphones":"<path d=\"M3 12v7c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2v-4c0-1.1-.9-2-2-2H5v-1c0-3.87 3.13-7 7-7s7 3.13 7 7v1h-2c-1.1 0-2 .9-2 2v4c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2v-7a9 9 0 0 0-18 0z\"/>","sports_gymnastics":"<path d=\"M4 6c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2zm9 16c-.56 0-1.02-.44-1.05-1l-.45-9L8 11H2c-.55 0-1-.45-1-1s.45-1 1-1h5l6.26-4.47c.42-.3 1-.23 1.34.16.38.45.3 1.12-.18 1.46L11.14 8.5H14l7.09-4.09a.98.98 0 0 1 1.1 1.62L14.5 12l-.45 9c-.03.56-.49 1-1.05 1z\"/>","local_fire_department":"<path d=\"m12 12.9-2.03 2c-.46.46-.82 1.03-.93 1.67C8.74 18.41 10.18 20 12 20s3.26-1.59 2.96-3.42c-.11-.64-.46-1.22-.93-1.67L12 12.9z\"/><path d=\"M15.56 6.55C14.38 8.02 12 7.19 12 5.3V3.77c0-.8-.89-1.28-1.55-.84C8.12 4.49 4 7.97 4 13c0 2.92 1.56 5.47 3.89 6.86a4.86 4.86 0 0 1-.81-3.68c.19-1.04.75-1.98 1.51-2.72l2.71-2.67c.39-.38 1.01-.38 1.4 0l2.73 2.69c.74.73 1.3 1.65 1.48 2.68.25 1.36-.07 2.64-.77 3.66 1.89-1.15 3.29-3.06 3.71-5.3.61-3.27-.81-6.37-3.22-8.1-.33-.25-.8-.2-1.07.13z\"/>","calendar_month":"<path d=\"M17 2c-.55 0-1 .45-1 1v1H8V3c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-1V3c0-.55-.45-1-1-1zm2 18H5V10h14v10zm-8-7c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1zm-4 0c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1zm8 0c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1zm-4 4c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1zm-4 0c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1zm8 0c0-.55.45-1 1-1s1 .45 1 1-.45 1-1 1-1-.45-1-1z\"/>","edit":"<path d=\"M3 17.46v3.04c0 .28.22.5.5.5h3.04c.13 0 .26-.05.35-.15L17.81 9.94l-3.75-3.75L3.15 17.1c-.1.1-.15.22-.15.36zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z\"/>","delete":"<path d=\"M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V9c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v10zM18 4h-2.5l-.71-.71c-.18-.18-.44-.29-.7-.29H9.91c-.26 0-.52.11-.7.29L8.5 4H6c-.55 0-1 .45-1 1s.45 1 1 1h12c.55 0 1-.45 1-1s-.45-1-1-1z\"/>","check":"<path d=\"M9 16.17 5.53 12.7a.996.996 0 1 0-1.41 1.41l4.18 4.18c.39.39 1.02.39 1.41 0L20.29 7.71a.996.996 0 1 0-1.41-1.41L9 16.17z\"/>","check_circle":"<path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.29 16.29 5.7 12.7a.996.996 0 1 1 1.41-1.41L10 14.17l6.88-6.88a.996.996 0 1 1 1.41 1.41l-7.59 7.59a.996.996 0 0 1-1.41 0z\"/>","close":"<path d=\"M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z\"/>","info":"<path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 15c-.55 0-1-.45-1-1v-4c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1-8h-2V7h2v2z\"/>","warning":"<path d=\"M4.47 21h15.06c1.54 0 2.5-1.67 1.73-3L13.73 4.99c-.77-1.33-2.69-1.33-3.46 0L2.74 18c-.77 1.33.19 3 1.73 3zM12 14c-.55 0-1-.45-1-1v-2c0-.55.45-1 1-1s1 .45 1 1v2c0 .55-.45 1-1 1zm1 4h-2v-2h2v2z\"/>","error":"<path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 11c-.55 0-1-.45-1-1V8c0-.55.45-1 1-1s1 .45 1 1v4c0 .55-.45 1-1 1zm1 4h-2v-2h2v2z\"/>","emoji_events":"<path d=\"M19 5h-2V4c0-.55-.45-1-1-1H8c-.55 0-1 .45-1 1v1H5c-1.1 0-2 .9-2 2v1c0 2.55 1.92 4.63 4.39 4.94A5.01 5.01 0 0 0 11 15.9V19H8c-.55 0-1 .45-1 1s.45 1 1 1h8c.55 0 1-.45 1-1s-.45-1-1-1h-3v-3.1a5.01 5.01 0 0 0 3.61-2.96C19.08 12.63 21 10.55 21 8V7c0-1.1-.9-2-2-2zM5 8V7h2v3.82C5.84 10.4 5 9.3 5 8zm14 0c0 1.3-.84 2.4-2 2.82V7h2v1z\"/>","school":"<path d=\"M5 13.18v2.81c0 .73.4 1.41 1.04 1.76l5 2.73c.6.33 1.32.33 1.92 0l5-2.73c.64-.35 1.04-1.03 1.04-1.76v-2.81l-6.04 3.3c-.6.33-1.32.33-1.92 0L5 13.18zm6.04-9.66-8.43 4.6c-.69.38-.69 1.38 0 1.76l8.43 4.6c.6.33 1.32.33 1.92 0L21 10.09V16c0 .55.45 1 1 1s1-.45 1-1V9.59c0-.37-.2-.7-.52-.88l-9.52-5.19a2.04 2.04 0 0 0-1.92 0z\"/>","build":"<path d=\"M12.09 2.91C10.08.9 7.07.49 4.65 1.67L8.28 5.3c.39.39.39 1.02 0 1.41L6.69 8.3c-.39.4-1.02.4-1.41 0L1.65 4.67C.48 7.1.89 10.09 2.9 12.1a6.507 6.507 0 0 0 6.89 1.48l7.96 7.96a2.613 2.613 0 0 0 3.71 0 2.613 2.613 0 0 0 0-3.71L13.54 9.9c.92-2.34.44-5.1-1.45-6.99z\"/>","rocket_launch":"<path d=\"M9.19 6.35c-2.04 2.29-3.44 5.58-3.57 5.89l-2.26-.97c-.65-.28-.81-1.13-.31-1.63l3.01-3.01c.47-.47 1.15-.68 1.81-.55l1.32.27zm1.49 10.16c.3.3.74.38 1.12.2 1.16-.54 3.65-1.81 5.26-3.42 4.59-4.59 4.63-8.33 4.36-9.93a.979.979 0 0 0-.79-.79c-1.6-.27-5.34-.23-9.93 4.36-1.61 1.61-2.87 4.1-3.42 5.26-.18.38-.09.83.2 1.12l3.2 3.2zm6.97-1.7c-2.29 2.04-5.58 3.44-5.89 3.57l.97 2.26c.28.65 1.13.81 1.63.31l3.01-3.01c.47-.47.68-1.15.55-1.81l-.27-1.32zm-8.71 2.6a3 3 0 0 1-.82 2.71c-.77.77-3.16 1.34-4.71 1.64-.69.13-1.3-.48-1.17-1.17.3-1.55.86-3.94 1.64-4.71a3 3 0 0 1 2.71-.82c1.17.22 2.13 1.18 2.35 2.35zM13 9c0-1.1.9-2 2-2s2 .9 2 2-.9 2-2 2-2-.9-2-2z\"/>","coffee":"<path d=\"M18.5 3H6c-1.1 0-2 .9-2 2v5.71c0 3.83 2.95 7.18 6.78 7.29 3.96.12 7.22-3.06 7.22-7v-1h.5c1.93 0 3.5-1.57 3.5-3.5S20.43 3 18.5 3zM16 5v3H6V5h10zm2.5 3H18V5h.5c.83 0 1.5.67 1.5 1.5S19.33 8 18.5 8zM5 19h14c.55 0 1 .45 1 1s-.45 1-1 1H5c-.55 0-1-.45-1-1s.45-1 1-1z\"/>","dark_mode":"<path d=\"M11.01 3.05C6.51 3.54 3 7.36 3 12a9 9 0 0 0 9 9c4.63 0 8.45-3.5 8.95-8 .09-.79-.78-1.42-1.54-.95A5.403 5.403 0 0 1 11.1 7.5c0-1.06.31-2.06.84-2.89.45-.67-.04-1.63-.93-1.56z\"/>","star":"<path d=\"m12 17.27 4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z\"/>","lightbulb":"<path d=\"M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm-3-3h6c.55 0 1-.45 1-1s-.45-1-1-1H9c-.55 0-1 .45-1 1s.45 1 1 1zm3-17C7.86 2 4.5 5.36 4.5 9.5c0 3.82 2.66 5.86 3.77 6.5h7.46c1.11-.64 3.77-2.68 3.77-6.5C19.5 5.36 16.14 2 12 2z\"/>","auto_awesome":"<path d=\"m19.46 8 .79-1.75L22 5.46a.5.5 0 0 0 0-.91l-1.75-.79L19.46 2a.5.5 0 0 0-.91 0l-.79 1.75-1.76.79a.5.5 0 0 0 0 .91l1.75.79.79 1.76c.18.39.74.39.92 0zM11.5 9.5 9.91 6c-.35-.78-1.47-.78-1.82 0L6.5 9.5 3 11.09c-.78.36-.78 1.47 0 1.82l3.5 1.59L8.09 18c.36.78 1.47.78 1.82 0l1.59-3.5 3.5-1.59c.78-.36.78-1.47 0-1.82L11.5 9.5zm7.04 6.5-.79 1.75-1.75.79a.5.5 0 0 0 0 .91l1.75.79.79 1.76a.5.5 0 0 0 .91 0l.79-1.75 1.76-.79a.5.5 0 0 0 0-.91l-1.75-.79-.79-1.76a.508.508 0 0 0-.92 0z\"/>","hourglass_top":"<path d=\"M8 2c-1.1 0-2 .9-2 2l.01 3.18c0 .53.21 1.03.58 1.41L10 12l-3.41 3.43c-.37.37-.58.88-.58 1.41L6 20c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-3.16c0-.53-.21-1.04-.58-1.41L14 12l3.41-3.4c.38-.38.59-.89.59-1.42V4c0-1.1-.9-2-2-2H8zm8 14.91V19c0 .55-.45 1-1 1H9c-.55 0-1-.45-1-1v-2.09c0-.27.11-.52.29-.71L12 12.5l3.71 3.71c.18.18.29.44.29.7z\"/>","bolt":"<path d=\"M10.67 21c-.35 0-.62-.31-.57-.66L11 14H7.5c-.88 0-.33-.75-.31-.78 1.26-2.23 3.15-5.53 5.65-9.93a.577.577 0 0 1 1.07.37l-.9 6.34h3.51c.4 0 .62.19.4.66-3.29 5.74-5.2 9.09-5.75 10.05-.1.18-.29.29-.5.29z\"/>","workspace_premium":"<path d=\"m10.92 12.75 1.08-.82 1.07.81c.39.29.92-.08.78-.55l-.42-1.36 1.2-.95c.37-.28.16-.88-.32-.88h-1.4l-.43-1.34a.5.5 0 0 0-.95 0L11.09 9H9.68c-.47 0-.68.6-.31.89l1.19.95-.42 1.36c-.14.47.39.84.78.55zM6 21.61c0 .68.67 1.16 1.32.95L12 21l4.68 1.56a.998.998 0 0 0 1.32-.95v-6.33A7.96 7.96 0 0 0 20 10c0-4.42-3.58-8-8-8s-8 3.58-8 8c0 2.03.76 3.87 2 5.28v6.33zM12 4c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6 2.69-6 6-6z\"/>","extension":"<path d=\"M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5a2.5 2.5 0 0 0-5 0V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7s2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5a2.5 2.5 0 0 0 0-5z\"/>","calendar_today":"<path d=\"M20 3h-1V2c0-.55-.45-1-1-1s-1 .45-1 1v1H7V2c0-.55-.45-1-1-1s-1 .45-1 1v1H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-1 18H5c-.55 0-1-.45-1-1V8h16v12c0 .55-.45 1-1 1z\"/>","more_horiz":"<path d=\"M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z\"/>","chevron_left":"<path d=\"M14.71 6.71a.996.996 0 0 0-1.41 0L8.71 11.3a.996.996 0 0 0 0 1.41l4.59 4.59a.996.996 0 1 0 1.41-1.41L10.83 12l3.88-3.88c.39-.39.38-1.03 0-1.41z\"/>","chevron_right":"<path d=\"M9.29 6.71a.996.996 0 0 0 0 1.41L13.17 12l-3.88 3.88a.996.996 0 1 0 1.41 1.41l4.59-4.59a.996.996 0 0 0 0-1.41L10.7 6.7c-.38-.38-1.02-.38-1.41.01z\"/>","trending_up":"<path d=\"m16.85 6.85 1.44 1.44-4.88 4.88-3.29-3.29a.996.996 0 0 0-1.41 0l-6 6.01a.996.996 0 1 0 1.41 1.41L9.41 12l3.29 3.29c.39.39 1.02.39 1.41 0l5.59-5.58 1.44 1.44a.5.5 0 0 0 .85-.35V6.5a.48.48 0 0 0-.49-.5h-4.29a.5.5 0 0 0-.36.85z\"/>","trending_down":"<path d=\"m16.85 17.15 1.44-1.44-4.88-4.88-3.29 3.29a.996.996 0 0 1-1.41 0l-6-6.01A.996.996 0 1 1 4.12 6.7L9.41 12l3.29-3.29a.996.996 0 0 1 1.41 0l5.59 5.58 1.44-1.44a.5.5 0 0 1 .85.35v4.29c0 .28-.22.5-.5.5H17.2c-.44.01-.66-.53-.35-.84z\"/>","radio_button_unchecked":"<path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z\"/>","settings":"<path d=\"M19.5 12c0-.23-.01-.45-.03-.68l1.86-1.41c.4-.3.51-.86.26-1.3l-1.87-3.23a.987.987 0 0 0-1.25-.42l-2.15.91c-.37-.26-.76-.49-1.17-.68l-.29-2.31c-.06-.5-.49-.88-.99-.88h-3.73c-.51 0-.94.38-1 .88l-.29 2.31c-.41.19-.8.42-1.17.68l-2.15-.91c-.46-.2-1-.02-1.25.42L2.41 8.62c-.25.44-.14.99.26 1.3l1.86 1.41a7.343 7.343 0 0 0 0 1.35l-1.86 1.41c-.4.3-.51.86-.26 1.3l1.87 3.23c.25.44.79.62 1.25.42l2.15-.91c.37.26.76.49 1.17.68l.29 2.31c.06.5.49.88.99.88h3.73c.5 0 .93-.38.99-.88l.29-2.31c.41-.19.8-.42 1.17-.68l2.15.91c.46.2 1 .02 1.25-.42l1.87-3.23c.25-.44.14-.99-.26-1.3l-1.86-1.41c.03-.23.04-.45.04-.68zm-7.46 3.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z\"/>","celebration":"<path d=\"m3.99 21.29 9.04-3.23c1.38-.49 1.78-2.26.74-3.3l-4.53-4.53c-1.04-1.04-2.8-.64-3.3.74l-3.23 9.04c-.28.8.48 1.56 1.28 1.28zM15.06 12l5.06-5.06a1.25 1.25 0 0 1 1.77 0l.06.06c.29.29.77.29 1.06 0 .29-.29.29-.77 0-1.06l-.06-.06a2.758 2.758 0 0 0-3.89 0L14 10.94c-.29.29-.29.77 0 1.06.29.29.77.29 1.06 0zm-5-5.12-.06.06c-.29.29-.29.77 0 1.06.29.29.77.29 1.06 0l.06-.06a2.758 2.758 0 0 0 0-3.89L11.07 4c-.3-.3-.78-.3-1.07 0-.29.29-.29.77 0 1.06l.06.06c.48.48.48 1.28 0 1.76zm7 5L16 12.94c-.29.29-.29.77 0 1.06.29.29.77.29 1.06 0l1.06-1.06a1.25 1.25 0 0 1 1.77 0l1.08 1.08c.29.29.77.29 1.06 0 .29-.29.29-.77 0-1.06l-1.08-1.08a2.758 2.758 0 0 0-3.89 0zm-2-6L12 8.94c-.29.29-.29.77 0 1.06.29.29.77.29 1.06 0l3.06-3.06a2.758 2.758 0 0 0 0-3.89l-1.06-1.06a.754.754 0 0 0-1.06 0c-.29.29-.29.77 0 1.06l1.06 1.06c.48.49.48 1.29 0 1.77z\"/>","schedule":"<path d=\"M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-.22-13h-.06c-.4 0-.72.32-.72.72v4.72c0 .35.18.68.49.86l4.15 2.49c.34.2.78.1.98-.24a.71.71 0 0 0-.25-.99l-3.87-2.3V7.72c0-.4-.32-.72-.72-.72z\"/>","fact_check":"<path fill-rule=\"evenodd\" d=\"M20 3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H6c-.55 0-1-.45-1-1s.45-1 1-1h3c.55 0 1 .45 1 1s-.45 1-1 1zm0-4H6c-.55 0-1-.45-1-1s.45-1 1-1h3c.55 0 1 .45 1 1s-.45 1-1 1zm0-4H6c-.55 0-1-.45-1-1s.45-1 1-1h3c.55 0 1 .45 1 1s-.45 1-1 1zm9.7 2.12-3.17 3.17c-.39.39-1.03.39-1.42 0l-1.41-1.42a.996.996 0 1 1 1.41-1.41l.71.71 2.47-2.47a.996.996 0 0 1 1.41 0l.01.01c.38.39.38 1.03-.01 1.41z\"/>","sports_esports":"<path d=\"m21.58 16.09-1.09-7.66A3.996 3.996 0 0 0 16.53 5H7.47C5.48 5 3.79 6.46 3.51 8.43l-1.09 7.66a2.545 2.545 0 0 0 4.32 2.16L9 16h6l2.25 2.25c.48.48 1.13.75 1.8.75 1.56 0 2.75-1.37 2.53-2.91zM11 11H9v2H8v-2H6v-1h2V8h1v2h2v1zm4-1c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1zm2 3c-.55 0-1-.45-1-1s.45-1 1-1 1 .45 1 1-.45 1-1 1z\"/>"};
+MI.expand_more = '<path d="M15.88 9.29 12 13.17 8.12 9.29a.996.996 0 1 0-1.41 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59a.996.996 0 0 0 0-1.41c-.39-.38-1.03-.39-1.42 0z"/>';
+const MI_OUT = {"check_circle":"<path d=\"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm4.59-12.42L10 14.17l-2.59-2.58L6 13l4 4 8-8z\"/>","schedule":"<path d=\"M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z\"/>","fact_check":"<g fill-rule=\"evenodd\"><path d=\"M20 3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H4V5h16v14z\"/><path d=\"M19.41 10.42 17.99 9l-3.17 3.17-1.41-1.42L12 12.16 14.82 15zM5 7h5v2H5zm0 4h5v2H5zm0 4h5v2H5z\"/></g>","calendar_month":"<path d=\"M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z\"/>","sports_esports":"<path d=\"m21.58 16.09-1.09-7.66A3.996 3.996 0 0 0 16.53 5H7.47C5.48 5 3.79 6.46 3.51 8.43l-1.09 7.66a2.545 2.545 0 0 0 4.32 2.16L9 16h6l2.25 2.25c.48.48 1.13.75 1.8.75 1.56 0 2.75-1.37 2.53-2.91zm-2.1.72a.54.54 0 0 1-.42.19c-.15 0-.29-.06-.39-.16L15.83 14H8.17l-2.84 2.84c-.1.1-.24.16-.39.16a.54.54 0 0 1-.42-.19.52.52 0 0 1-.13-.44l1.09-7.66C5.63 7.74 6.48 7 7.47 7h9.06c.99 0 1.84.74 1.98 1.72l1.09 7.66c.03.2-.05.34-.12.43z\"/><path d=\"M9 8H8v2H6v1h2v2h1v-2h2v-1H9z\"/><circle cx=\"17\" cy=\"12\" r=\"1\"/><circle cx=\"15\" cy=\"9\" r=\"1\"/>"};   // outlined variants (bottom-nav inactive state)
+// Old emoji icons saved in existing habits → matching Material icon
+const EMOJI_ICON = { '❤️': 'favorite', '🏃': 'directions_run', '📚': 'menu_book', '💧': 'water_drop', '🧘': 'self_improvement', '✍️': 'draw', '🎸': 'piano', '🥗': 'restaurant', '💪': 'fitness_center', '🌿': 'grass', '🎨': 'palette', '🧹': 'cleaning_services', '💊': 'medication', '🌅': 'wb_sunny', '🎯': 'ads_click', '🛌': 'bedtime', '🧠': 'psychology', '🚴': 'directions_bike', '🏋️': 'sports_gymnastics', '🎵': 'headphones' };
+const iconKey = v => MI[v] ? v : (EMOJI_ICON[v] || null);
+// ic('edit') → inline <svg>. size optional (any CSS length).
+function ic(name, size, cls) {
+  const d = MI[name] || MI.favorite;
+  return `<svg class="mi${cls ? ' ' + cls : ''}" viewBox="0 0 24 24" aria-hidden="true"${size ? ` style="width:${size};height:${size}"` : ''}>${d}</svg>`;
+}
+// A habit's saved icon (new key, or an old emoji) → HTML
+function habitIconHTML(v) { const k = iconKey(v); return k ? ic(k) : esc(v || ''); }
+
 // ── CONSTANTS ──────────────────────────────────────────────────────────────────
-const EMOJIS = ['❤️', '🏃', '📚', '💧', '🧘', '✍️', '🎸', '🥗', '💪', '🌿', '🎨', '🧹', '💊', '🌅', '🎯', '🛌', '🧠', '🚴', '🏋️', '🎵'];
+const EMOJIS = ['favorite', 'directions_run', 'menu_book', 'water_drop', 'self_improvement', 'draw', 'piano', 'restaurant', 'fitness_center', 'grass', 'palette', 'cleaning_services', 'medication', 'wb_sunny', 'ads_click', 'bedtime', 'psychology', 'directions_bike', 'headphones', 'sports_gymnastics'];   // Material icon names
 const COLORS = ['#f43f5e', '#ef4444', '#f97316', '#f59e0b', '#eab308', '#84cc16', '#22c55e', '#14b8a6', '#06b6d4', '#3b82f6', '#6366f1', '#a855f7', '#8b5cf6', '#ec4899'];
 const CNAMES = ['Rose', 'Red', 'Orange', 'Amber', 'Yellow', 'Lime', 'Green', 'Teal', 'Cyan', 'Blue', 'Indigo', 'Purple', 'Violet', 'Pink'];
 const DAY_S = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -10,7 +25,7 @@ let habits = JSON.parse(localStorage.getItem('ht3_habits') || '[]');
 let editId = null;
 let deleteId = null;
 let openMenuId = null;
-let selEmoji = '❤️';
+let selEmoji = 'favorite';
 let selColor = '#f43f5e';
 
 // drag state
@@ -65,7 +80,8 @@ function updateBanner() {
   document.getElementById('tbCount').innerHTML = `${done} <span>/ ${total} habit${total !== 1 ? 's' : ''}</span>`;
   document.getElementById('tbBar').style.width = `${pct}%`;
   document.getElementById('tbBar').style.background = accent;
-  document.getElementById('tbPct').textContent = `${pct}%`;
+  const tp = document.getElementById('tbPct');
+  tp.textContent = `${pct}%`; tp.dataset.suf = '%'; tp.dataset.count = pct; tp.dataset.from = tp._v ?? 0; tp._v = pct; countUps(tp.parentElement, 600);
   document.getElementById('tbPct').style.color = pct === 100 ? '#34d399' : 'var(--text)';
 }
 
@@ -89,6 +105,8 @@ function renderWeek() {
     el.appendChild(pill);
   }
 }
+
+const streakHTML = n => `<span class="flame${n > 0 ? ' on' : ''}">${ic(n > 0 ? 'local_fire_department' : 'radio_button_unchecked')}</span>Streak: ${n}`;
 
 // ── STATS for one habit (gap #2) ───────────────────────────────────────────────
 function getStats(habit) {
@@ -252,6 +270,18 @@ function toggleDay(habitId, ds, cellEl, color) {
     }
   } else {
     h.log[ds] = true; buzz(HAPTIC.check);
+    if (ds === todayStr) {
+      const cb = cardEl?.querySelector('.habit-check-btn');
+      if (cb) { const r = cb.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, color); }
+      if (habits.length && habits.every(x => x.log?.[todayStr])) {
+        setTimeout(() => {
+          const b = document.getElementById('todayBanner'), r = b.getBoundingClientRect();
+          burst(r.left + r.width / 2, r.top + r.height / 2, color, true); buzz(HAPTIC.success);
+          b.classList.remove('celebrate'); void b.offsetWidth; b.classList.add('celebrate');
+          showToast('All habits done today — amazing!');
+        }, 260);
+      }
+    }
     cellEl.style.background = color;
     cellEl.style.boxShadow = `0 0 4px ${color}66`;
     cellEl.style.border = '';
@@ -267,7 +297,7 @@ function toggleDay(habitId, ds, cellEl, color) {
   if (card) {
     const { streak } = getStats(h);
     const sl = card.querySelector('.habit-streak');
-    if (sl) sl.textContent = `${streak > 0 ? '🔥' : '○'} Streak: ${streak}`;
+    if (sl) sl.innerHTML = streakHTML(streak);
     // today's check button + done class
     if (ds === todayStr) {
       const done = !!(h.log[todayStr]);
@@ -306,7 +336,7 @@ function renderHabits() {
   list.innerHTML = '';
 
   if (!habits.length) {
-    list.innerHTML = `<div class="empty"><div class="empty-icon">🌱</div><p>No habits yet.<br>Tap "Add New Habit" to begin!</p></div>`;
+    list.innerHTML = `<div class="empty"><div class="empty-icon">${ic('grass')}</div><p>No habits yet.<br>Tap "Add New Habit" to begin!</p></div>`;
     updateBanner(); renderWeek(); return;
   }
 
@@ -387,11 +417,11 @@ function renderHabits() {
     dh.innerHTML = '<div class="dh-line"></div><div class="dh-line"></div><div class="dh-line"></div>';
 
     const icon = document.createElement('div'); icon.className = 'habit-icon';
-    icon.style.background = hexA(color, .22); icon.textContent = habit.emoji || '❤️';
+    icon.style.background = hexA(color, .22); icon.style.color = color; icon.innerHTML = habitIconHTML(habit.emoji || 'favorite');
 
     const mid = document.createElement('div'); mid.className = 'habit-mid';
     mid.innerHTML = `<div class="habit-name"></div>
-      <div class="habit-streak">${streak > 0 ? '🔥' : '○'} Streak: ${streak}</div>`;
+      <div class="habit-streak">${streakHTML(streak)}</div>`;
     mid.querySelector('.habit-name').textContent = habit.name;
 
     const chk = document.createElement('div');
@@ -407,7 +437,7 @@ function renderHabits() {
     });
 
     const menu = document.createElement('div'); menu.className = 'habit-menu-btn';
-    menu.innerHTML = '···';
+    menu.innerHTML = ic('more_horiz');
     menu.addEventListener('click', e => { e.stopPropagation(); openMenu(habit.id, menu); });
 
     head.appendChild(dh); head.appendChild(icon); head.appendChild(mid); head.appendChild(chk); head.appendChild(menu);
@@ -454,9 +484,9 @@ function openMenu(id, btn) {
   if (openMenuId === id) { openMenuId = null; return; }
   openMenuId = id;
   const dd = document.createElement('div'); dd.className = 'dropdown'; dd.id = 'openDD';
-  dd.innerHTML = `<div class="dd-item" data-a="cal">📅 &nbsp;Calendar</div>
-    <div class="dd-item" data-a="edit">✏️ &nbsp;Edit</div>
-    <div class="dd-item danger" data-a="del">🗑️ &nbsp;Delete</div>`;
+  dd.innerHTML = `<div class="dd-item" data-a="cal">${ic('calendar_month')}Calendar</div>
+    <div class="dd-item" data-a="edit">${ic('edit')}Edit</div>
+    <div class="dd-item danger" data-a="del">${ic('delete')}Delete</div>`;
   dd.addEventListener('click', e => {
     e.stopPropagation();
     const a = e.target.closest('[data-a]')?.dataset.a; closeMenu();
@@ -481,7 +511,7 @@ function openModal(title) {
 }
 function closeModal() {
   overlay.classList.remove('open');
-  habitInput.value = ''; editId = null; selEmoji = '❤️'; selColor = '#f43f5e';
+  habitInput.value = ''; editId = null; selEmoji = 'favorite'; selColor = '#f43f5e';
 }
 
 document.getElementById('addBtn').addEventListener('click', () => { editId = null; openModal('New Habit'); });
@@ -503,7 +533,7 @@ habitInput.addEventListener('keydown', e => { if (e.key === 'Enter') document.ge
 
 function doEdit(id) {
   const h = habits.find(h => h.id === id); if (!h) return;
-  editId = id; habitInput.value = h.name; selEmoji = h.emoji || '❤️'; selColor = h.color || '#f43f5e';
+  editId = id; habitInput.value = h.name; selEmoji = iconKey(h.emoji) || 'favorite'; selColor = h.color || '#f43f5e';
   openModal('Edit Habit');
 }
 // ── CONFIRM DIALOG (generic) ──────────────────────────────────────────────────
@@ -537,7 +567,7 @@ function renderEmojiPicker() {
   document.documentElement.style.setProperty('--sel-color', selColor);
   EMOJIS.forEach(em => {
     const b = document.createElement('div');
-    b.className = 'emoji-opt' + (em === selEmoji ? ' sel' : ''); b.textContent = em;
+    b.className = 'emoji-opt' + (em === selEmoji ? ' sel' : ''); b.innerHTML = ic(em);
     b.addEventListener('click', () => { selEmoji = em; renderEmojiPicker(); });
     p.appendChild(b);
   });
@@ -573,7 +603,7 @@ document.getElementById('settingsOverlay').addEventListener('click', closeSettin
 // ── TOAST ─────────────────────────────────────────────────────────────────────
 function showToast(msg, type = 'success') {
   const t = document.getElementById('toast');
-  t.textContent = type === 'success' ? '✓  ' + msg : type === 'error' ? '✕  ' + msg : 'ℹ  ' + msg;
+  t.innerHTML = ic(type === 'success' ? 'check_circle' : type === 'error' ? 'error' : 'info') + `<span>${esc(msg)}</span>`;
   t.className = `toast ${type} show`;
   clearTimeout(t._timer);
   t._timer = setTimeout(() => t.classList.remove('show'), 3000);
@@ -617,16 +647,16 @@ function popMenu(btn, items) {
 
 // ══ TIMETABLES (Routine + Weekend Planner share one engine) ═══════════════════
 const SLOT_TYPES = {
-  class: { l: 'Class', e: '🎓', c: '#3b82f6' },
-  study: { l: 'Study', e: '📚', c: '#6366f1' },
-  deep: { l: 'Deep work', e: '🧠', c: '#a855f7' },
-  skill: { l: 'Skill', e: '🛠️', c: '#06b6d4' },
-  project: { l: 'Project', e: '🚀', c: '#ec4899' },
-  workout: { l: 'Workout', e: '💪', c: '#f97316' },
-  meal: { l: 'Meal', e: '🥗', c: '#22c55e' },
-  break: { l: 'Break', e: '☕', c: '#14b8a6' },
-  rest: { l: 'Wind down', e: '🌙', c: '#8b5cf6' },
-  other: { l: 'Other', e: '⭐', c: '#f59e0b' }
+  class: { l: 'Class', e: 'school', c: '#3b82f6' },
+  study: { l: 'Study', e: 'menu_book', c: '#6366f1' },
+  deep: { l: 'Deep work', e: 'psychology', c: '#a855f7' },
+  skill: { l: 'Skill', e: 'build', c: '#06b6d4' },
+  project: { l: 'Project', e: 'rocket_launch', c: '#ec4899' },
+  workout: { l: 'Workout', e: 'fitness_center', c: '#f97316' },
+  meal: { l: 'Meal', e: 'restaurant', c: '#22c55e' },
+  break: { l: 'Break', e: 'coffee', c: '#14b8a6' },
+  rest: { l: 'Wind down', e: 'dark_mode', c: '#8b5cf6' },
+  other: { l: 'Other', e: 'star', c: '#f59e0b' }
 };
 const toMin = t => { const [h, m] = t.split(':').map(Number); return h * 60 + m; };
 const minToT = m => `${p(Math.floor(m / 60))}:${p(m % 60)}`;
@@ -689,13 +719,13 @@ function makeTimetable(cfg) {
         <div class="tl-time"><b>${fmtTime(s.start)}</b><span>${fmtTime(s.end)}</span></div>
         <div class="tl-rail"><i class="tl-dot"></i></div>
         <div class="tl-card">
-          <div class="habit-icon tl-ico" style="background:${hexA(t.c, .22)}">${t.e}</div>
+          <div class="habit-icon tl-ico" style="background:${hexA(t.c, .22)};color:${t.c}">${ic(t.e)}</div>
           <div class="tl-mid">
             <div class="tl-name">${esc(s.title)}</div>
             <div class="tl-meta">${durText(s.start, s.end)} · ${t.l}${isNow ? '<em class="now-chip">Now</em>' : ''}</div>
           </div>
           <div class="habit-check-btn tl-chk${isDone ? ' checked' : ''}${canCheck ? '' : ' locked'}" data-act="chk" role="button" aria-label="Mark complete" style="${isDone ? `background:${hexA(t.c, .9)}` : ''}">${CHECK_SVG}</div>
-          <div class="habit-menu-btn" data-act="menu" role="button" aria-label="More">···</div>
+          <div class="habit-menu-btn" data-act="menu" role="button" aria-label="More">${ic('more_horiz')}</div>
         </div>
       </div>`;
     }).join('');
@@ -741,9 +771,9 @@ function makeTimetable(cfg) {
       case 'menu':
         e.stopPropagation();
         popMenu(el, [
-          { label: '✏️ &nbsp;Edit', fn: () => openSlot(T, id) },
+          { label: `${ic('edit')}Edit`, fn: () => openSlot(T, id) },
           {
-            label: '🗑️ &nbsp;Delete', danger: true, fn: () => askConfirm({
+            label: `${ic('delete')}Delete`, danger: true, fn: () => askConfirm({
               title: 'Delete time block?', text: 'This block will be removed from your timetable.',
               onYes: () => { T.slots = T.slots.filter(s => s.id !== id); persist(); T.render(); }
             })
@@ -758,21 +788,21 @@ function makeTimetable(cfg) {
 const RT = makeTimetable({
   key: 'ht5_routine', view: 'view-routine', firstStart: '06:00', defaultType: 'study', seed: WEEKDAY_SEED,
   bannerLabel: "Today's routine", bannerLabelIdle: 'Daily routine',
-  emptyIcon: '🗓️', emptyText: 'No time blocks yet.<br>Map out your day from 6 AM to 11 PM.',
+  emptyIcon: ic('calendar_month'), emptyText: 'No time blocks yet.<br>Map out your day from 6 AM to 11 PM.',
   canCheck: () => true, lockMsg: '',
   hint: () => isWeekend(today)
-    ? `<div class="hint-chip" data-go="planner" role="button"><span>🌿</span><div><b>It's the weekend</b><small>Classes are off — open your Weekend Planner</small></div></div>`
+    ? `<div class="hint-chip" data-go="planner" role="button"><span class="hc-ico">${ic('grass')}</span><div><b>It's the weekend</b><small>Classes are off — open your Weekend Planner</small></div></div>`
     : ''
 });
 const WK = makeTimetable({
   key: 'ht5_weekend', view: 'view-planner', firstStart: '07:00', defaultType: 'deep', seed: WEEKEND_SEED,
   bannerLabel: "Weekend plan", bannerLabelIdle: 'Weekend plan',
-  emptyIcon: '🌿', emptyText: 'Design your Saturday &amp; Sunday.<br>Deep work, skills and side projects.',
+  emptyIcon: ic('grass'), emptyText: 'Design your Saturday &amp; Sunday.<br>Deep work, skills and side projects.',
   canCheck: () => isWeekend(today), lockMsg: 'Check-offs unlock on Saturday & Sunday',
   hint: () => {
-    if (isWeekend(today)) return `<div class="hint-chip on"><span>✨</span><div><b>Weekend mode is on</b><small>One plan, tracked separately for Saturday and Sunday</small></div></div>`;
+    if (isWeekend(today)) return `<div class="hint-chip on"><span class="hc-ico">${ic('auto_awesome')}</span><div><b>Weekend mode is on</b><small>One plan, tracked separately for Saturday and Sunday</small></div></div>`;
     const d = (6 - today.getDay() + 7) % 7;
-    return `<div class="hint-chip"><span>⏳</span><div><b>Weekend starts in ${d} day${d !== 1 ? 's' : ''}</b><small>Edit your plan now — check-offs unlock on Saturday</small></div></div>`;
+    return `<div class="hint-chip"><span class="hc-ico">${ic('hourglass_top')}</span><div><b>Weekend starts in ${d} day${d !== 1 ? 's' : ''}</b><small>Edit your plan now — check-offs unlock on Saturday</small></div></div>`;
   }
 });
 
@@ -784,7 +814,7 @@ let slotCtx = null, slotType = 'other';
 
 function renderSlotTypes() {
   document.getElementById('slotTypes').innerHTML = Object.entries(SLOT_TYPES).map(([k, t]) =>
-    `<button type="button" class="type-chip${k === slotType ? ' sel' : ''}" data-k="${k}" style="--tc:${t.c}">${t.e} ${t.l}</button>`).join('');
+    `<button type="button" class="type-chip${k === slotType ? ' sel' : ''}" data-k="${k}" style="--tc:${t.c}">${ic(t.e)}${t.l}</button>`).join('');
 }
 document.getElementById('slotTypes').addEventListener('click', e => {
   const b = e.target.closest('[data-k]'); if (!b) return; slotType = b.dataset.k; renderSlotTypes();
@@ -860,7 +890,7 @@ function renderAttendance() {
         <div class="habit-icon att-ico" style="background:${hexA(col, .22)};color:${col}">${esc(s.name.trim().charAt(0).toUpperCase())}</div>
         <div class="att-mid"><div class="att-name">${esc(s.name)}</div><div class="att-count">${s.a} / ${s.t} classes attended</div></div>
         <span class="att-badge ${!has ? 'na' : ok ? 'ok' : 'bad'}${s.id === attBump ? ' bump' : ''}">${has ? pctTxt(v) : '—'}</span>
-        <div class="habit-menu-btn" data-act="menu" role="button" aria-label="More">···</div>
+        <div class="habit-menu-btn" data-act="menu" role="button" aria-label="More">${ic('more_horiz')}</div>
       </div>
       <div class="att-bar"><div class="att-fill" style="width:${Math.min(100, v)}%"></div><i class="att-mark" style="left:${T}%"></i></div>
       <div class="att-tip">${attTip(s, T)}</div>
@@ -884,9 +914,9 @@ function renderAttendance() {
         <div class="thr-ctl"><button data-act="thr-" aria-label="Lower safe level">−</button><b>${T}%</b><button data-act="thr+" aria-label="Raise safe level">+</button></div>
       </div>
     </div>
-    ${att.subjects.length ? `<div class="stat-chips"><span class="s-chip ok">✓ ${safe} on track</span><span class="s-chip ${risk ? 'bad' : ''}">⚠ ${risk} below ${T}%</span></div>` : ''}
+    ${att.subjects.length ? `<div class="stat-chips"><span class="s-chip ok">${ic('check')}${safe} on track</span><span class="s-chip ${risk ? 'bad' : ''}">${ic('warning')}${risk} below ${T}%</span></div>` : ''}
     <div class="add-wrap"><button class="add-btn" data-act="add"><span class="add-plus">+</span> Add Subject</button></div>
-    <div class="att-list">${cards || `<div class="empty"><div class="empty-icon">🎓</div><p>No subjects yet.<br>Add your courses to track attendance.</p></div>`}</div>`;
+    <div class="att-list">${cards || `<div class="empty"><div class="empty-icon">${ic('school')}</div><p>No subjects yet.<br>Add your courses to track attendance.</p></div>`}</div>`;
   attJustAdded = null; attBump = null;
 }
 
@@ -910,9 +940,9 @@ document.getElementById('view-attendance').addEventListener('click', e => {
     case 'menu':
       e.stopPropagation();
       popMenu(el, [
-        { label: '✏️ &nbsp;Edit', fn: () => openSubj(id) },
+        { label: `${ic('edit')}Edit`, fn: () => openSubj(id) },
         {
-          label: '🗑️ &nbsp;Delete', danger: true, fn: () => askConfirm({
+          label: `${ic('delete')}Delete`, danger: true, fn: () => askConfirm({
             title: 'Delete subject?', text: `“${s.name}” and its attendance record will be removed.`,
             onYes: () => { att.subjects = att.subjects.filter(x => x.id !== id); saveAtt(); renderAttendance(); }
           })
@@ -1062,7 +1092,7 @@ function renderGame() {
       : `<div class="gc-result lose"><b>Out of tries</b><span>The answer was ${esc(ansTxt)}</span></div>`;
     result += `<p class="gc-why">${esc(pz.why)}</p><div class="gc-next">Next puzzle in <b id="gcCount">--:--:--</b></div>`;
   } else if (miss) {
-    result = `<div class="gc-hint">💡 ${esc(pz.hint)}</div>`;
+    result = `<div class="gc-hint">${ic('lightbulb')}${esc(pz.hint)}</div>`;
   }
 
   const hist = Array.from({ length: 14 }, (_, i) => {
@@ -1072,11 +1102,11 @@ function renderGame() {
 
   root.innerHTML = `
     <div class="game-hero">
-      <div class="gh-stat"><b>🔥 ${st}</b><span>Day streak</span></div>
-      <div class="gh-stat"><b>⭐ ${game.points}</b><span>Discipline points</span></div>
-      <div class="gh-stat"><b>🏆 ${game.best}</b><span>Best streak</span></div>
+      ${ghStat('local_fire_department', 'fire', st, 'Day streak')}
+      ${ghStat('star', 'gold', game.points, 'Discipline points')}
+      ${ghStat('emoji_events', 'amber', game.best, 'Best streak')}
     </div>
-    ${st > 0 && !rec.s ? `<div class="hint-chip"><span>🔥</span><div><b>Keep your ${st}-day streak alive</b><small>Solve today’s puzzle before midnight</small></div></div>` : ''}
+    ${st > 0 && !rec.s ? `<div class="hint-chip"><span class="hc-ico">${ic('local_fire_department', null, 'fire')}</span><div><b>Keep your ${st}-day streak alive</b><small>Solve today’s puzzle before midnight</small></div></div>` : ''}
     <div class="game-card${rec.s ? ' solved' : ''}">
       <div class="gc-top"><span class="gc-chip">${pz.label}</span>
         <div class="gc-tries" aria-label="${pz.max - rec.t} tries left">${Array.from({ length: pz.max }, (_, i) => `<i class="${i < rec.t ? (rec.s && i === rec.t - 1 ? 'win' : 'used') : ''}"></i>`).join('')}</div></div>
@@ -1084,6 +1114,7 @@ function renderGame() {
     </div>
     <div class="sec-lbl hist-lbl">Last 14 days</div>
     <div class="game-hist">${hist}</div>`;
+  countUps(root);
   tickCountdown();
 }
 
@@ -1320,9 +1351,10 @@ function renderZipHero() {
   const mine = zip.days[Z.day], rk = zipRank();
   const st = (zip.lastWon === Z.day || zip.lastWon === dayShift(Z.day, -1)) ? zip.streak : 0;
   el.innerHTML = `
-    <div class="gh-stat"><b>⚡ ${mine ? zFmt(mine.ms) : '—'}</b><span>Today</span></div>
-    <div class="gh-stat"><b>🔥 ${st}</b><span>Zip streak</span></div>
-    <div class="gh-stat"><b>🏅 ${rk ? '#' + rk : '—'}</b><span>Rank</span></div>`;
+    ${ghStat('bolt', 'gold', mine ? zFmt(mine.ms) : '—', 'Today')}
+    ${ghStat('local_fire_department', 'fire', st, 'Zip streak')}
+    ${ghStat('workspace_premium', 'amber', rk ? '#' + rk : '—', 'Rank')}`;
+  countUps(el);
 }
 
 // Zip tab: stats, Play button, leaderboard
@@ -1332,7 +1364,7 @@ function renderZip() {
   root.innerHTML = `
     <div class="game-hero" id="zipHero"></div>
     <div class="game-card zip-card${mine ? ' solved' : ''}">
-      <div class="gc-top"><span class="gc-chip">Zip · ${N}×${N}</span><span class="gc-chip">${mine ? '✓ Solved today' : 'Daily puzzle'}</span></div>
+      <div class="gc-top"><span class="gc-chip">Zip · ${N}×${N}</span><span class="gc-chip">${mine ? ic('check') + 'Solved today' : 'Daily puzzle'}</span></div>
       <p class="gc-q">${mine ? 'Nice work today!' : 'Connect the numbers in order'}</p>
       <p class="gc-sub">Draw one line from 1 through every number, filling every square. The timer starts when you press Play and stops the moment you finish.</p>
       <div class="zip-actions"><button class="btn-save zip-play" data-z="${mine ? 'practice' : 'play'}">${mine ? 'Practice (not scored)' : '▶  Play'}</button></div>
@@ -1374,7 +1406,7 @@ function renderZipLb() {
   else if (!Z.lb.rows.length) h = `<div class="zip-lb-msg">No scores yet today — be the first!</div>`;
   else h = Z.lb.rows.map((r, i) => {
     const me = mine && r.name === zip.name && r.ms === mine.ms;
-    return `<div class="lb-row${me ? ' me' : ''}"><span class="lb-rk">${['🥇', '🥈', '🥉'][i] || i + 1}</span><span class="lb-nm"><span class="lb-name">${esc(r.name)}</span>${me ? '<em>you</em>' : ''}</span><span class="lb-ms">${zFmt(r.ms)}</span></div>`;
+    return `<div class="lb-row${me ? ' me' : ''}"><span class="lb-rk">${(i < 3 ? ic('workspace_premium', null, 'medal m' + (i + 1)) : '') || i + 1}</span><span class="lb-nm"><span class="lb-name">${esc(r.name)}</span>${me ? '<em>you</em>' : ''}</span><span class="lb-ms">${zFmt(r.ms)}</span></div>`;
   }).join('') + `<div class="zip-lb-foot"><button class="chip-btn" data-z="refresh">Refresh</button></div>`;
   el.innerHTML = h;
 }
@@ -1496,7 +1528,7 @@ let gameSub = localStorage.getItem('ht5_gsub') === 'zip' ? 'zip' : 'mind';
 function renderGames() {
   const root = document.getElementById('view-games');
   if (!document.getElementById('gMind')) {
-    root.innerHTML = `<div class="sub-seg" id="gSeg"><button data-sub="mind">🧩 Mind puzzle</button><button data-sub="zip">⚡ Zip</button></div><div id="gMind"></div><div id="gZip"></div>`;
+    root.innerHTML = `<div class="sub-seg" id="gSeg"><button data-sub="mind">${ic('extension')}Mind puzzle</button><button data-sub="zip">${ic('bolt')}Zip</button></div><div id="gMind"></div><div id="gZip"></div>`;
     document.getElementById('gSeg').addEventListener('click', e => {
       const b = e.target.closest('[data-sub]'); if (!b) return;
       gameSub = b.dataset.sub; try { localStorage.setItem('ht5_gsub', gameSub); } catch (err) { }
@@ -1554,8 +1586,12 @@ function showTab(name, opts) {
     nextEl.style.setProperty('--dir', dir);
     nextEl.classList.add('active', 'entering');
     window.scrollTo({ top: 0 });
-    setTimeout(() => nextEl.classList.remove('entering'), 360);
-  }, 120);
+    // stagger: each block (and each card inside the lists) rises in a beat after the one before
+    let i = 0;
+    nextEl.querySelectorAll(':scope > *, .habits-wrap > *, .att-list > *, .timeline > *')
+      .forEach(el => el.style.setProperty('--i', Math.min(i++, 9)));
+    setTimeout(() => nextEl.classList.remove('entering'), 900);
+  }, 130);
 }
 document.getElementById('bottomNav').addEventListener('click', e => {
   const b = e.target.closest('.nav-item'); if (!b) return;
@@ -1811,6 +1847,48 @@ window.addEventListener('online', () => { document.getElementById('offlineBar').
   });
 })();
 
+// One stat tile for the Games banners: tonal icon badge, big number (counts up if numeric), label.
+const ghLast = {};   // last shown value per stat, so a re-render only animates real changes
+function ghStat(icon, tone, val, label) {
+  const num = typeof val === 'number', from = num ? (ghLast[label] ?? 0) : 0;
+  if (num) ghLast[label] = val;
+  return `<div class="gh-stat">${''}<b>${ic(icon)} <em${num ? ` data-count="${val}" data-from="${from}"` : ''}>${val}</em></b><span>${label}</span></div>`;
+}
+
+// ── MOTION HELPERS ────────────────────────────────────────────────────────────
+// Animate every [data-count] inside root from data-from → data-count (final text is already in the DOM).
+function countUps(root, ms = 750) {
+  if (reducedMotion()) return;
+  root.querySelectorAll('[data-count]').forEach(el => {
+    const to = +el.dataset.count, from = +(el.dataset.from || 0);
+    if (!isFinite(to) || from === to) return;
+    const t0 = performance.now();
+    const step = t => {
+      const k = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - k, 4);
+      const node = el.firstChild && el.firstChild.nodeType === 3 ? el.firstChild : null;
+      const txt = String(Math.round(from + (to - from) * e)) + (el.dataset.suf || '');
+      if (node) node.nodeValue = txt; else el.textContent = txt;
+      if (k < 1 && el.isConnected) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  });
+}
+// Little celebration: coloured specks fly out of (x, y). `big` = fuller burst.
+function burst(x, y, color, big) {
+  if (reducedMotion()) return;
+  const n = big ? 26 : 12, wrap = document.createElement('div');
+  wrap.className = 'burst'; wrap.style.cssText = `left:${x}px;top:${y}px`;
+  const cols = [color, '#fbbf24', '#f472b6', '#60a5fa', '#34d399'];
+  for (let i = 0; i < n; i++) {
+    const p = document.createElement('i'), a = (i / n) * Math.PI * 2 + Math.random() * .5, d = (big ? 70 : 38) + Math.random() * (big ? 90 : 34);
+    p.style.cssText = `--x:${Math.cos(a) * d}px;--y:${Math.sin(a) * d - (big ? 30 : 8)}px;--r:${Math.random() * 360}deg;background:${big ? cols[i % cols.length] : color};animation-delay:${Math.random() * 60}ms`;
+    if (i % 3 === 0) p.className = 'sq';
+    wrap.appendChild(p);
+  }
+  document.body.appendChild(wrap);
+  setTimeout(() => wrap.remove(), 1100);
+}
+
 // ══════════════════════════════════════════════════════════════════════════════
 //  HABIT CALENDAR — month view for a single habit (opened from the habit's ··· menu)
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1895,7 +1973,7 @@ function calGo(delta, dir) {
   renderHabitCal(dir ?? (delta > 0 ? 'next' : 'prev'));
 }
 
-function renderHabitCal(anim) {
+function renderHabitCal(anim, soft) {   // soft = a day was just toggled: no cascade, ring/numbers glide from the old values
   const h = calHabit(); if (!h) return;
   const color = h.color || '#a855f7';
   const D = calMonthData(h, CAL.y, CAL.m);
@@ -1903,6 +1981,8 @@ function renderHabitCal(anim) {
   const atNow = ymKey(CAL.y, CAL.m) === nowKey();
   const prevRate = calMonthRate(h, CAL.m === 0 ? CAL.y - 1 : CAL.y, CAL.m === 0 ? 11 : CAL.m - 1);
   const pm = (CAL.m + 11) % 12;
+  const key = ymKey(CAL.y, CAL.m), prev = (soft && CAL.last && CAL.last.key === key) ? CAL.last : null;
+  CAL.last = { key, rate: D.rate, done: D.done, longest: D.longest, missed: D.elapsed - D.done };
   const sheet = calSheet();
   sheet.style.setProperty('--hc', color);
   sheet.style.setProperty('--hc-soft', hexA(color, .16));
@@ -1913,7 +1993,7 @@ function renderHabitCal(anim) {
   const R = 30, C = 2 * Math.PI * R;
   const ring = `<svg class="cal-ring" viewBox="0 0 72 72" aria-hidden="true">
       <circle cx="36" cy="36" r="${R}" class="cal-ring-bg"/>
-      <circle cx="36" cy="36" r="${R}" class="cal-ring-fg" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C * (1 - D.rate / 100)).toFixed(1)}" transform="rotate(-90 36 36)"/>
+      <circle cx="36" cy="36" r="${R}" class="cal-ring-fg" stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${(C * (1 - D.rate / 100)).toFixed(1)}" style="--from:${(prev ? C * (1 - prev.rate / 100) : C).toFixed(1)}" transform="rotate(-90 36 36)"/>
     </svg>`;
 
   // delta vs previous month
@@ -1921,8 +2001,8 @@ function renderHabitCal(anim) {
   if (prevRate !== null && D.elapsed) {
     const diff = D.rate - prevRate;
     delta = diff === 0
-      ? `<span class="cal-delta flat">Same as ${MON_S[pm]}</span>`
-      : `<span class="cal-delta ${diff > 0 ? 'up' : 'down'}">${diff > 0 ? '▲' : '▼'} ${Math.abs(diff)}% vs ${MON_S[pm]}</span>`;
+      ? `<span class="cal-delta flat">${ic('check')}Same as ${MON_S[pm]}</span>`
+      : `<span class="cal-delta ${diff > 0 ? 'up' : 'down'}">${ic(diff > 0 ? 'trending_up' : 'trending_down')}${Math.abs(diff)}% vs ${MON_S[pm]}</span>`;
   }
 
   // grid
@@ -1931,28 +2011,28 @@ function renderHabitCal(anim) {
   D.days.forEach(c => {
     const cls = ['cal-cell', c.on ? 'on' : '', c.linkL ? 'lk-l' : '', c.linkR ? 'lk-r' : '', c.today ? 'today' : '', c.future ? 'future' : ''].filter(Boolean).join(' ');
     const label = `${DOW_L[c.col]}, ${MON_L[CAL.m]} ${c.d}${c.today ? ' (today)' : ''}: ${c.on ? 'done' : c.future ? 'upcoming' : 'not done'}`;
-    cells += `<button type="button" class="${cls}" data-ds="${c.ds}" ${c.future ? 'aria-disabled="true"' : ''} aria-pressed="${c.on}" aria-label="${label}"><span class="cal-day">${c.d}</span></button>`;
+    cells += `<button type="button" class="${cls}" style="--i:${c.d}" data-ds="${c.ds}" ${c.future ? 'aria-disabled="true"' : ''} aria-pressed="${c.on}" aria-label="${label}"><span class="cal-day">${c.d}</span></button>`;
   });
 
   // weekday bars
   const maxN = Math.max(1, ...D.perDow);
   const bars = D.perDow.map((n, i) => `
       <div class="cal-bar${i === D.bestCol ? ' best' : ''}" title="${DOW_L[i]}: ${n} done">
-        <div class="cal-bar-track"><div class="cal-bar-fill" style="height:${n ? Math.max(10, Math.round(n / maxN * 100)) : 0}%"></div></div>
+        <div class="cal-bar-track"><div class="cal-bar-fill" style="--d:${i * 45}ms;height:${n ? Math.max(10, Math.round(n / maxN * 100)) : 0}%"></div></div>
         <span>${DOW_M[i][0]}</span>
       </div>`).join('');
   const insight = D.done === 0
     ? (D.elapsed ? 'No check-ins this month yet.' : 'This month hasn’t started yet.')
-    : D.rate === 100 && D.elapsed > 1 ? `Perfect so far — ${D.done} for ${D.done}! 🏆`
+    : D.rate === 100 && D.elapsed > 1 ? `Perfect so far — ${D.done} for ${D.done}!`
       : `You’re strongest on <b>${DOW_L[D.bestCol]}s</b>${D.perDow[D.bestCol] > 1 ? ` (${D.perDow[D.bestCol]}× this month)` : ''}.`;
 
   // month picker
   const picker = CAL.picking ? `
     <div class="cal-picker" role="group" aria-label="Choose month">
       <div class="cal-pick-head">
-        <button type="button" class="cal-nav" data-act="py-" aria-label="Previous year">‹</button>
+        <button type="button" class="cal-nav" data-act="py-" aria-label="Previous year">${ic('chevron_left')}</button>
         <b>${CAL.pickY}</b>
-        <button type="button" class="cal-nav" data-act="py+" aria-label="Next year" ${CAL.pickY >= today.getFullYear() ? 'disabled' : ''}>›</button>
+        <button type="button" class="cal-nav" data-act="py+" aria-label="Next year" ${CAL.pickY >= today.getFullYear() ? 'disabled' : ''}>${ic('chevron_right')}</button>
       </div>
       <div class="cal-pick-grid">
         ${MON_S.map((n, i) => {
@@ -1965,44 +2045,45 @@ function renderHabitCal(anim) {
   sheet.innerHTML = `
     <div class="cal-grab" aria-hidden="true"><i></i></div>
     <div class="cal-top">
-      <div class="cal-ico">${esc(h.emoji || '❤️')}</div>
-      <div class="cal-ttl"><b>${esc(h.name)}</b><span>🔥 ${st.streak} day streak · Best ${st.best}</span></div>
-      <button type="button" class="cal-close" data-act="close" aria-label="Close calendar">✕</button>
+      <div class="cal-ico">${habitIconHTML(h.emoji || 'favorite')}</div>
+      <div class="cal-ttl"><b>${esc(h.name)}</b><span>${ic('local_fire_department', null, 'fire')}${st.streak} day streak · Best ${st.best}</span></div>
+      <button type="button" class="cal-close" data-act="close" aria-label="Close calendar">${ic('close')}</button>
     </div>
     <div class="cal-scroll">
       <div class="cal-nav-row">
-        <button type="button" class="cal-nav" data-act="prev" aria-label="Previous month">‹</button>
+        <button type="button" class="cal-nav" data-act="prev" aria-label="Previous month">${ic('chevron_left')}</button>
         <button type="button" class="cal-month" data-act="pick" aria-expanded="${CAL.picking}" aria-label="Pick month and year">
-          <b>${MON_L[CAL.m]}</b> <span>${CAL.y}</span> <i>▾</i>
+          <b>${MON_L[CAL.m]}</b> <span>${CAL.y}</span> <i>${ic('expand_more')}</i>
         </button>
-        <button type="button" class="cal-nav" data-act="next" aria-label="Next month" ${atNow ? 'disabled' : ''}>›</button>
+        <button type="button" class="cal-nav" data-act="next" aria-label="Next month" ${atNow ? 'disabled' : ''}>${ic('chevron_right')}</button>
       </div>
       <div class="cal-stage">
         ${picker}
-        <div class="cal-body ${anim ? 'slide-' + anim : ''}">
+        <div class="cal-body ${anim ? 'slide-' + anim : ''}${soft ? '' : ' cascade'}">
           <div class="cal-dow">${DOW_M.map((d, i) => `<span class="${i > 4 ? 'we' : ''}">${d}</span>`).join('')}</div>
           <div class="cal-grid" id="calGrid">${cells}</div>
           <div class="cal-hint">Tap a day to mark or unmark it</div>
         </div>
       </div>
       <div class="cal-summary">
-        <div class="cal-ring-wrap">${ring}<div class="cal-ring-txt"><b>${D.rate}%</b><span>done</span></div></div>
+        <div class="cal-ring-wrap">${ring}<div class="cal-ring-txt"><b><em data-count="${D.rate}" data-from="${prev ? prev.rate : 0}">${D.rate}</em>%</b><span>done</span></div></div>
         <div class="cal-kpis">
-          <div class="cal-kpi"><b>${D.done}<small>/${D.elapsed}</small></b><span>Days done</span></div>
-          <div class="cal-kpi"><b>${D.longest}</b><span>Longest run</span></div>
-          <div class="cal-kpi"><b>${D.elapsed - D.done}</b><span>Missed</span></div>
+          <div class="cal-kpi"><b><em data-count="${D.done}" data-from="${prev ? prev.done : 0}">${D.done}</em><small>/${D.elapsed}</small></b><span>Days done</span></div>
+          <div class="cal-kpi"><b data-count="${D.longest}" data-from="${prev ? prev.longest : 0}">${D.longest}</b><span>Longest run</span></div>
+          <div class="cal-kpi"><b data-count="${D.elapsed - D.done}" data-from="${prev ? prev.missed : 0}">${D.elapsed - D.done}</b><span>Missed</span></div>
         </div>
         ${delta ? `<div class="cal-delta-row">${delta}</div>` : ''}
       </div>
       <div class="cal-card">
         <div class="cal-card-h">By weekday</div>
-        <div class="cal-bars">${bars}</div>
+        <div class="cal-bars${soft ? '' : ' grow'}">${bars}</div>
         <div class="cal-insight">${insight}</div>
       </div>
       <div class="cal-foot">
         ${atNow ? '' : '<button type="button" class="cal-today" data-act="today">Jump to today</button>'}
       </div>
     </div>`;
+  countUps(sheet);
 }
 
 // ── interactions (one delegated listener) ─────────────────────────────────────
@@ -2018,7 +2099,7 @@ function renderHabitCal(anim) {
       const ds = cell.dataset.ds, wasOn = !!h.log?.[ds];
       toggleDay(h.id, ds, null, h.color || '#a855f7');                // updates the card behind, banner, week strip, saves
       const scroller = sheet.querySelector('.cal-scroll'), top = scroller ? scroller.scrollTop : 0;
-      renderHabitCal();
+      renderHabitCal(undefined, true);
       if (scroller) sheet.querySelector('.cal-scroll').scrollTop = top;
       const again = sheet.querySelector(`.cal-cell[data-ds="${ds}"]`);
       if (again) { again.classList.add(wasOn ? 'unpop' : 'pop'); again.focus({ preventScroll: true }); }
