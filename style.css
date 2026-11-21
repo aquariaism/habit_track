@@ -4191,6 +4191,7 @@ em[data-count] {
     letter-spacing: .03em;
     font-size: .52rem;
 }
+
 /* ═══ NAV STABILITY — nav bar must never move while tabs switch ═══════════════ */
 html {
     min-height: 100%;
@@ -4213,4 +4214,933 @@ body {
     will-change: transform;
     contain: layout paint;
     bottom: 0 !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ROUTINE MERGED TABS & WORKOUT / EXERCISE PLANNER STYLES
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── ROUTINE MERGED TABS ── */
+.routine-switch-wrap {
+    max-width: 520px;
+    margin: 12px auto 6px;
+    padding: 0 16px;
+}
+
+.routine-seg {
+    margin-bottom: 6px;
+}
+
+.routine-pane {
+    width: 100%;
+}
+
+/* ── WORKOUT / EXERCISE PLANNER ── */
+.workout-wrap {
+    max-width: 540px;
+    margin: 0 auto;
+    padding: 0 16px 28px;
+}
+
+/* Day Strip */
+.workout-day-strip {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px 16px 6px;
+    margin: 0 -16px 12px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+
+.workout-day-strip::-webkit-scrollbar {
+    display: none;
+}
+
+.w-day-btn {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 58px;
+    padding: 10px 8px;
+    border-radius: 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    cursor: pointer;
+    transition: all .2s cubic-bezier(.16, 1, .3, 1);
+    position: relative;
+}
+
+.w-day-btn:active {
+    transform: scale(.94);
+}
+
+.w-day-btn.sel {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .14);
+}
+
+.w-day-btn .w-day-name {
+    font-size: .8rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+}
+
+.w-day-btn .w-day-sub {
+    font-size: .65rem;
+    color: var(--sub);
+    margin-top: 2px;
+}
+
+.w-day-btn.sel .w-day-sub {
+    color: var(--on-primary-container);
+    opacity: .85;
+}
+
+.w-day-btn.is-today::before {
+    content: 'Today';
+    position: absolute;
+    top: -7px;
+    font-size: .52rem;
+    font-weight: 800;
+    padding: 1px 5px;
+    border-radius: 6px;
+    background: var(--primary);
+    color: var(--on-primary);
+    letter-spacing: .03em;
+    text-transform: uppercase;
+}
+
+.w-day-btn .w-day-dot {
+    position: absolute;
+    bottom: 3px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--success);
+}
+
+/* Day Banner */
+.workout-banner {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.wb-left {
+    flex: 1;
+    min-width: 0;
+}
+
+.wb-focus-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wb-focus-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -.01em;
+}
+
+.wb-edit-btn {
+    background: none;
+    border: none;
+    color: var(--sub);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color .2s, background .2s;
+}
+
+.wb-edit-btn:hover {
+    color: var(--primary);
+    background: var(--card2);
+}
+
+.wb-stats {
+    font-size: .74rem;
+    color: var(--sub);
+    margin: 4px 0 10px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.wb-bar-wrap {
+    height: 6px;
+    border-radius: 999px;
+    background: var(--cell-empty);
+    overflow: hidden;
+}
+
+.wb-bar {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--primary);
+    transition: width .35s ease;
+}
+
+.wb-pct {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* Timer / Stopwatch Card */
+.workout-timer-card {
+    background: var(--card);
+    border-radius: 28px;
+    padding: 18px 20px 20px;
+    margin-bottom: 18px;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
+}
+
+.wt-mode-seg {
+    display: flex;
+    background: var(--card2);
+    border-radius: 999px;
+    padding: 3px;
+    margin-bottom: 14px;
+}
+
+.wt-mode-btn {
+    flex: 1;
+    border: none;
+    background: none;
+    color: var(--sub);
+    padding: 8px 12px;
+    border-radius: 999px;
+    font-size: .8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.wt-mode-btn.sel {
+    background: var(--primary);
+    color: var(--on-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .18);
+}
+
+.wt-ex-info {
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.wt-ex-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.wt-ex-set {
+    font-size: .78rem;
+    color: var(--sub);
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.wt-status-chip {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: .65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+}
+
+.wt-status-chip.work {
+    background: rgba(249, 115, 22, .2);
+    color: #f97316;
+}
+
+.wt-status-chip.rest {
+    background: rgba(20, 184, 166, .2);
+    color: #14b8a6;
+}
+
+.wt-status-chip.ready {
+    background: rgba(99, 102, 241, .2);
+    color: #818cf8;
+}
+
+.wt-display-wrap {
+    text-align: center;
+    padding: 8px 0;
+    position: relative;
+}
+
+.wt-digits {
+    font-size: 3.8rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.02em;
+    line-height: 1;
+    color: var(--text);
+    transition: color .2s;
+    display: inline-block;
+}
+
+.wt-digits.pulse-warn {
+    animation: timerPulse 0.45s ease infinite alternate;
+    color: #ef4444;
+}
+
+@keyframes timerPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.08);
+    }
+}
+
+.wt-presets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 8px 0 14px;
+}
+
+.wt-preset-chip {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: .75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s;
+}
+
+.wt-preset-chip:active {
+    transform: scale(.95);
+}
+
+.wt-preset-chip.sel {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+    border-color: var(--primary);
+}
+
+.wt-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.wt-btn-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s;
+}
+
+.wt-btn-circle:active {
+    transform: scale(.9);
+}
+
+.wt-btn-main {
+    flex: 1;
+    max-width: 170px;
+    height: 50px;
+    border-radius: 999px;
+    background: var(--primary);
+    color: var(--on-primary);
+    border: none;
+    font-size: .95rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .2);
+    transition: all .2s;
+}
+
+.wt-btn-main:active {
+    transform: scale(.96);
+}
+
+.wt-btn-main.running {
+    background: #f97316;
+    color: #fff;
+}
+
+.wt-btn-circle.active-sound {
+    color: var(--primary);
+    background: var(--primary-container);
+}
+
+/* Stopwatch laps */
+.wt-laps-wrap {
+    max-height: 120px;
+    overflow-y: auto;
+    margin-top: 14px;
+    border-top: 1px solid var(--border);
+    padding-top: 8px;
+}
+
+.wt-lap-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: .75rem;
+    padding: 4px 8px;
+    color: var(--sub);
+    font-variant-numeric: tabular-nums;
+}
+
+.wt-lap-row b {
+    color: var(--text);
+}
+
+/* Exercises Section */
+.ex-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 18px 4px 10px;
+}
+
+.ex-sec-title {
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -.01em;
+}
+
+.ex-top-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.ex-pill-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--primary);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: .72rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all .2s;
+}
+
+.ex-pill-btn:active {
+    transform: scale(.95);
+}
+
+.ex-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ex-card {
+    background: var(--card);
+    border-radius: 22px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid transparent;
+    transition: all .2s cubic-bezier(.16, 1, .3, 1);
+}
+
+.ex-card.done {
+    opacity: .75;
+    background: color-mix(in srgb, var(--card) 92%, var(--success) 8%);
+    border-color: color-mix(in srgb, var(--success) 35%, transparent);
+}
+
+.ex-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ex-icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.ex-mid {
+    flex: 1;
+    min-width: 0;
+}
+
+.ex-name-text {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ex-card.done .ex-name-text {
+    text-decoration: line-through;
+    color: var(--sub);
+}
+
+.ex-sub-meta {
+    font-size: .72rem;
+    color: var(--sub);
+    margin-top: 2px;
+}
+
+.ex-right-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ex-timer-launch {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--card2);
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s;
+}
+
+.ex-timer-launch:active {
+    transform: scale(.9);
+}
+
+/* Individual set bubbles */
+.ex-sets-tracker {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border);
+}
+
+.ex-sets-ctrl {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ex-sets-lbl {
+    font-size: .68rem;
+    font-weight: 700;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.ex-stepper {
+    display: inline-flex;
+    align-items: center;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 4px;
+    gap: 4px;
+}
+
+.ex-step-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
+    background: var(--card);
+    color: var(--text);
+    font-size: .85rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s;
+}
+
+.ex-step-btn:active {
+    transform: scale(.85);
+    background: var(--primary);
+    color: var(--on-primary);
+}
+
+.ex-step-val {
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--primary);
+    min-width: 16px;
+    text-align: center;
+}
+
+.ex-bubbles-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.ex-set-bubble {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--card2);
+    border: 1.5px solid var(--border);
+    color: var(--sub);
+    font-size: .72rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s cubic-bezier(.16, 1, .3, 1);
+}
+
+.ex-set-bubble:active {
+    transform: scale(.88);
+}
+
+.ex-set-bubble.done {
+    background: var(--success);
+    color: #fff;
+    border-color: var(--success);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+}
+
+/* ── ALTERNATING 2 EXERCISES (SUPERSET) & SETS CONTROLS ── */
+.wt-sub-seg {
+    display: flex;
+    background: var(--card2);
+    border-radius: 12px;
+    padding: 3px;
+    margin: 4px 0 12px;
+    gap: 4px;
+}
+
+.wt-sub-btn {
+    flex: 1;
+    border: none;
+    background: none;
+    color: var(--sub);
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: .72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.wt-sub-btn.sel {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .12);
+}
+
+.wt-alt-picker-box {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wt-alt-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.wt-alt-label {
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.wt-pill-tag {
+    font-size: .62rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+
+.wt-pill-tag.tag-a {
+    background: rgba(249, 115, 22, .25);
+    color: #f97316;
+}
+
+.wt-pill-tag.tag-b {
+    background: rgba(59, 130, 246, .25);
+    color: #3b82f6;
+}
+
+.wt-select {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 12px;
+    padding: 7px 10px;
+    font-size: .8rem;
+    font-weight: 600;
+    font-family: inherit;
+    outline: none;
+    cursor: pointer;
+    max-width: 220px;
+}
+
+.wt-select:focus {
+    border-color: var(--primary);
+}
+
+.wt-alt-swap-row {
+    text-align: center;
+    margin: -4px 0;
+}
+
+.wt-swap-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: .7rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 999px;
+    transition: background .15s;
+}
+
+.wt-swap-btn:hover {
+    background: color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.wt-alt-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 6px;
+}
+
+.wt-alt-active-tag {
+    font-size: .85rem;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.wt-alt-next-tag {
+    font-size: .72rem;
+    color: var(--sub);
+    font-weight: 500;
+}
+
+/* Timer Sets Stepper & Quick Chips */
+.wt-sets-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 6px 0 10px;
+    flex-wrap: wrap;
+}
+
+.wt-sets-lbl {
+    font-size: .74rem;
+    font-weight: 700;
+    color: var(--sub);
+    text-transform: uppercase;
+}
+
+.wt-stepper {
+    padding: 3px 6px;
+    gap: 6px;
+}
+
+.wt-stepper .ex-step-btn {
+    width: 24px;
+    height: 24px;
+}
+
+.wt-stepper .ex-step-val {
+    font-size: .85rem;
+    min-width: 18px;
+}
+
+.wt-quick-sets {
+    display: flex;
+    gap: 4px;
+}
+
+.wt-qset-btn {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    color: var(--sub);
+    border-radius: 8px;
+    padding: 3px 8px;
+    font-size: .72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .15s;
+}
+
+.wt-qset-btn.sel {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+    border-color: var(--primary);
+}
+
+
+/* ── WORKOUT: mobile alignment fixes ── */
+.workout-timer-card,
+.workout-banner,
+.wt-alt-picker-box,
+.wt-alt-row {
+    min-width: 0;
+}
+
+.workout-timer-card {
+    padding: 16px 16px 18px;
+}
+
+.wt-select {
+    min-width: 0;
+    max-width: none;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.wt-sub-btn {
+    min-width: 0;
+    white-space: nowrap;
+}
+
+.w-day-btn {
+    flex: 1 1 0;
+    min-width: 52px;
+}
+
+@media (max-width: 520px) {
+
+    /* all 7 days fit on screen, no sideways scroll needed */
+    .workout-day-strip {
+        gap: 6px;
+    }
+
+    .w-day-btn {
+        min-width: 0;
+        padding: 10px 2px;
+        border-radius: 14px;
+    }
+
+    .w-day-btn .w-day-name {
+        font-size: .72rem;
+        letter-spacing: 0;
+    }
+
+    .w-day-btn .w-day-sub {
+        font-size: .6rem;
+    }
+
+    .w-day-btn.is-today::before {
+        font-size: .5rem;
+        padding: 1px 4px;
+    }
+
+    /* exercise pickers: label on top, dropdown full width */
+    .wt-alt-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+    }
+
+    .wt-alt-label {
+        justify-content: flex-start;
+    }
+
+    .wt-select {
+        width: 100%;
+        flex: none;
+    }
+
+    .wt-sub-btn {
+        font-size: .7rem;
+        padding: 8px 6px;
+        gap: 4px;
+    }
 }
