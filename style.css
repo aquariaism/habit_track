@@ -3753,7 +3753,6 @@ body.cal-lock {
     font-variant-numeric: tabular-nums;
 }
 
-.day-pill.today {}
 
 @keyframes pulseToday {
 
@@ -5142,5 +5141,45 @@ body {
         font-size: .7rem;
         padding: 8px 6px;
         gap: 4px;
+    }
+}
+
+
+/* ── RESPONSIVE TOAST FIX ── */
+
+.toast {
+    left: 50%;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    box-sizing: border-box;
+
+    /* Allow long messages to wrap */
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: normal;
+
+    /* Keep content properly aligned */
+    justify-content: center;
+    text-align: center;
+    padding: 12px 16px;
+    gap: 8px;
+}
+
+.toast span {
+    min-width: 0;
+    flex: 0 1 auto;
+}
+
+.toast .mi {
+    flex-shrink: 0;
+}
+
+/* Smaller mobile screens */
+@media (max-width: 480px) {
+    .toast {
+        max-width: calc(100vw - 28px);
+        font-size: 0.8rem;
+        padding: 11px 14px;
+        border-radius: 18px;
     }
 }
