@@ -1722,71 +1722,43 @@ const DEFAULT_WORKOUT_DATA = {
     mon: {
       focus: 'Chest & Triceps',
       exercises: [
-        { id: 'ex_m1', name: 'Standard Push-ups', sets: 3, duration: 40, reps: '12-15 reps', rest: 20, category: 'chest' },
-        { id: 'ex_m2', name: 'Incline / Elevated Push-ups', sets: 3, duration: 40, reps: '10-12 reps', rest: 20, category: 'chest' },
-        { id: 'ex_m3', name: 'Chair Dips / Tricep Dips', sets: 3, duration: 40, reps: '12 reps', rest: 20, category: 'arms' },
-        { id: 'ex_m4', name: 'Dumbbell / Floor Press', sets: 3, duration: 40, reps: '12 reps', rest: 20, category: 'chest' },
-        { id: 'ex_m5', name: 'Plank to Push-up', sets: 3, duration: 40, reps: '10 reps', rest: 20, category: 'core' }
+        { id: 'ex_m1', name: 'Standard Push-ups', sets: 3, duration: 40, reps: '12-15 reps', rest: 20, category: 'chest' }
       ]
     },
     tue: {
       focus: 'Back & Biceps',
       exercises: [
-        { id: 'ex_t1', name: 'Pull-ups / Inverted Rows', sets: 3, duration: 40, reps: '8-10 reps', rest: 20, category: 'back' },
-        { id: 'ex_t2', name: 'Dumbbell Bent-over Rows', sets: 3, duration: 40, reps: '12 reps', rest: 20, category: 'back' },
-        { id: 'ex_t3', name: 'Bicep Curls', sets: 3, duration: 40, reps: '12-15 reps', rest: 20, category: 'arms' },
-        { id: 'ex_t4', name: 'Hammer Curls', sets: 3, duration: 40, reps: '12 reps', rest: 20, category: 'arms' },
-        { id: 'ex_t5', name: 'Superman Hold', sets: 3, duration: 40, reps: 'Hold 40s', rest: 20, category: 'back' }
+        { id: 'ex_t1', name: 'Pull-ups / Inverted Rows', sets: 3, duration: 40, reps: '8-10 reps', rest: 20, category: 'back' }
       ]
     },
     wed: {
       focus: 'Legs & Calves',
       exercises: [
-        { id: 'ex_w1', name: 'Bodyweight Squats', sets: 3, duration: 40, reps: '15-20 reps', rest: 20, category: 'legs' },
-        { id: 'ex_w2', name: 'Walking Lunges', sets: 3, duration: 40, reps: '12 each side', rest: 20, category: 'legs' },
-        { id: 'ex_w3', name: 'Glute Bridges', sets: 3, duration: 40, reps: '15 reps', rest: 20, category: 'legs' },
-        { id: 'ex_w4', name: 'Wall Sit Hold', sets: 3, duration: 40, reps: 'Hold 40s', rest: 20, category: 'legs' },
-        { id: 'ex_w5', name: 'Calf Raises', sets: 3, duration: 40, reps: '20 reps', rest: 20, category: 'legs' }
+        { id: 'ex_w1', name: 'Bodyweight Squats', sets: 3, duration: 40, reps: '15-20 reps', rest: 20, category: 'legs' }
       ]
     },
     thu: {
       focus: 'Shoulders & Core',
       exercises: [
-        { id: 'ex_th1', name: 'Pike Push-ups / Overhead Press', sets: 3, duration: 40, reps: '10-12 reps', rest: 20, category: 'shoulders' },
-        { id: 'ex_th2', name: 'Lateral Raises', sets: 3, duration: 40, reps: '12-15 reps', rest: 20, category: 'shoulders' },
-        { id: 'ex_th3', name: 'Russian Twists', sets: 3, duration: 40, reps: '20 reps', rest: 20, category: 'core' },
-        { id: 'ex_th4', name: 'Mountain Climbers', sets: 3, duration: 40, reps: 'Fast pace', rest: 20, category: 'core' },
-        { id: 'ex_th5', name: 'Forearm Plank', sets: 3, duration: 40, reps: 'Hold 40s', rest: 20, category: 'core' }
+        { id: 'ex_th1', name: 'Pike Push-ups / Overhead Press', sets: 3, duration: 40, reps: '10-12 reps', rest: 20, category: 'shoulders' }
       ]
     },
     fri: {
       focus: 'Full Body HIIT',
       exercises: [
-        { id: 'ex_f1', name: 'Jumping Jacks', sets: 3, duration: 40, reps: 'Fast pace', rest: 20, category: 'cardio' },
-        { id: 'ex_f2', name: 'Burpees', sets: 3, duration: 40, reps: '10-12 reps', rest: 20, category: 'cardio' },
-        { id: 'ex_f3', name: 'High Knees', sets: 3, duration: 40, reps: '30s sprint', rest: 20, category: 'cardio' },
-        { id: 'ex_f4', name: 'Jump Squats', sets: 3, duration: 40, reps: '12 reps', rest: 20, category: 'legs' },
-        { id: 'ex_f5', name: 'Bicycle Crunches', sets: 3, duration: 40, reps: '20 reps', rest: 20, category: 'core' }
+        { id: 'ex_f1', name: 'Jumping Jacks', sets: 3, duration: 40, reps: 'Fast pace', rest: 20, category: 'cardio' }
       ]
     },
     sat: {
       focus: 'Mobility & Recovery',
       exercises: [
-        { id: 'ex_s1', name: 'Dynamic Arm & Leg Swings', sets: 3, duration: 40, reps: 'Smooth', rest: 15, category: 'recovery' },
-        { id: 'ex_s2', name: 'Cat-Cow & Child’s Pose', sets: 3, duration: 40, reps: 'Deep breath', rest: 15, category: 'recovery' },
-        { id: 'ex_s3', name: 'Downward Dog to Cobra', sets: 3, duration: 40, reps: 'Gentle flow', rest: 15, category: 'recovery' },
-        { id: 'ex_s4', name: 'Hamstring & Hip Openers', sets: 3, duration: 40, reps: 'Hold stretch', rest: 15, category: 'recovery' },
-        { id: 'ex_s5', name: 'Deep Breathing & Relaxation', sets: 3, duration: 40, reps: 'Mindful', rest: 15, category: 'recovery' }
+        { id: 'ex_s1', name: 'Dynamic Arm & Leg Swings', sets: 3, duration: 40, reps: 'Smooth', rest: 15, category: 'recovery' }
       ]
     },
     sun: {
       focus: 'Rest & Core Tune-up',
       exercises: [
-        { id: 'ex_su1', name: 'Bird Dog', sets: 3, duration: 40, reps: '10 each side', rest: 20, category: 'core' },
-        { id: 'ex_su2', name: 'Dead Bug', sets: 3, duration: 40, reps: '12 reps', rest: 20, category: 'core' },
-        { id: 'ex_su3', name: 'Side Plank (Left)', sets: 3, duration: 40, reps: 'Hold 40s', rest: 20, category: 'core' },
-        { id: 'ex_su4', name: 'Side Plank (Right)', sets: 3, duration: 40, reps: 'Hold 40s', rest: 20, category: 'core' },
-        { id: 'ex_su5', name: 'Light Walk / Stretch', sets: 1, duration: 40, reps: 'Relax', rest: 20, category: 'recovery' }
+        { id: 'ex_su1', name: 'Bird Dog', sets: 3, duration: 40, reps: '10 each side', rest: 20, category: 'core' }
       ]
     }
   },
@@ -1821,6 +1793,8 @@ function cleanWorkoutData(raw) {
 let workoutData = cleanWorkoutData(load('ht5_workout', null));
 const saveWorkout = () => store('ht5_workout', workoutData);
 let selectedWorkoutDay = getTodayDayKey();
+// Routine list open/closed (remembered between visits)
+let exListOpen = (() => { try { return localStorage.getItem('ht_ex_list_open') !== '0'; } catch (e) { return true; } })();
 
 // ── Workout Timer & Stopwatch State ────────────────────────────────────────────
 let workoutTimer = {
@@ -2777,6 +2751,7 @@ function renderWorkout() {
   `;
 
   // 4. Exercise List
+  const doneEx = exercises.filter(x => isExerciseDone(x.id)).length;
   const exercisesHTML = exercises.map(ex => {
     const cat = EX_CATEGORIES[ex.category] || EX_CATEGORIES.chest;
     const isDone = isExerciseDone(ex.id);
@@ -2800,23 +2775,15 @@ function renderWorkout() {
               ${ex.sets} sets × ${ex.duration}s · ${ex.rest || 20}s rest${ex.reps ? ` · ${esc(ex.reps)}` : ''}
             </div>
           </div>
-          <div class="ex-right-actions">
-            <button type="button" class="ex-timer-launch" data-act="load-timer" data-id="${ex.id}" title="Load in Timer">${ic('play_arrow')}</button>
-            <div class="habit-check-btn ex-chk${isDone ? ' checked' : ''}" data-act="toggle-ex" data-id="${ex.id}" role="button" aria-label="Mark exercise complete">${CHECK_SVG}</div>
-            <div class="habit-menu-btn" data-act="ex-menu" data-id="${ex.id}" role="button" aria-label="More">${ic('more_horiz')}</div>
-          </div>
+          <div class="habit-menu-btn ex-menu-btn" data-act="ex-menu" data-id="${ex.id}" role="button" aria-label="More">${ic('more_horiz')}</div>
         </div>
         <div class="ex-sets-tracker">
-          <div class="ex-sets-ctrl">
-            <span class="ex-sets-lbl">Sets:</span>
-            <div class="ex-stepper">
-              <button type="button" class="ex-step-btn" data-act="step-sets" data-step="-1" data-id="${ex.id}" title="Decrease sets">−</button>
-              <span class="ex-step-val">${ex.sets}</span>
-              <button type="button" class="ex-step-btn" data-act="step-sets" data-step="1" data-id="${ex.id}" title="Increase sets">+</button>
-            </div>
-          </div>
           <div class="ex-bubbles-row">
             ${setBubbles}
+          </div>
+          <div class="ex-right-actions">
+            <button type="button" class="ex-timer-launch" data-act="load-timer" data-id="${ex.id}" title="Load in Timer" aria-label="Load in Timer">${ic('play_arrow')}</button>
+            <div class="habit-check-btn ex-chk${isDone ? ' checked' : ''}" data-act="toggle-ex" data-id="${ex.id}" role="button" aria-label="Mark exercise complete">${CHECK_SVG}</div>
           </div>
         </div>
       </div>
@@ -2828,16 +2795,20 @@ function renderWorkout() {
       ${dayStripHTML}
       ${bannerHTML}
       ${timerCardHTML}
-      <div class="ex-header-row">
-        <div class="ex-sec-title">Today's Routine (${totalEx})</div>
-        <div class="ex-top-actions">
+      <button type="button" class="ex-collapse-head" data-act="toggle-exlist" aria-expanded="${exListOpen}">
+        <span class="ex-sec-title">Today's Routine</span>
+        <span class="ex-count-chip">${doneEx}/${totalEx} done</span>
+        <span class="ex-chev">${ic('expand_more', '20px')}</span>
+      </button>
+      ${exListOpen ? `
+        <div class="ex-actions-row">
           <button type="button" class="ex-pill-btn" data-act="templates">${ic('auto_awesome')} Presets</button>
           <button type="button" class="ex-pill-btn" data-act="add-ex">${ic('add')} Add Exercise</button>
         </div>
-      </div>
-      <div class="ex-list">
-        ${exercisesHTML || `<div class="empty"><div class="empty-icon">${ic('fitness_center')}</div><p>No exercises planned for this day yet.</p><button type="button" class="chip-btn" data-act="load-starter">Load Starter Plan</button></div>`}
-      </div>
+        <div class="ex-list">
+          ${exercisesHTML || `<div class="empty"><div class="empty-icon">${ic('fitness_center')}</div><p>No exercises planned for this day yet.</p><button type="button" class="chip-btn" data-act="load-starter">Load Starter Plan</button></div>`}
+        </div>
+      ` : ''}
     </div>
   `;
 }
@@ -2978,11 +2949,12 @@ document.getElementById('view-workout')?.addEventListener('click', e => {
   const id = actBtn.dataset.id || actBtn.closest('.ex-card')?.dataset.id;
 
   switch (act) {
-    case 'step-sets': {
-      const delta = parseInt(actBtn.dataset.step, 10);
-      adjustExerciseSets(id, delta);
+    case 'toggle-exlist':
+      exListOpen = !exListOpen;
+      try { localStorage.setItem('ht_ex_list_open', exListOpen ? '1' : '0'); } catch (e) { }
+      buzz(HAPTIC.tick);
+      renderWorkout();
       break;
-    }
     case 'edit-focus':
       openDfModal(selectedWorkoutDay);
       break;
@@ -2996,12 +2968,13 @@ document.getElementById('view-workout')?.addEventListener('click', e => {
       showToast('Starter workout plan loaded');
       break;
     case 'templates':
+      e.stopPropagation();   // otherwise the page-level click handler closes the menu instantly
       popMenu(actBtn, [
         {
-          label: `${ic('fitness_center')}Push / Pull / Legs Split`,
+          label: `${ic('fitness_center')}Starter Plan (1 per day)`,
           fn: () => {
             workoutData.plans = JSON.parse(JSON.stringify(DEFAULT_WORKOUT_DATA.plans));
-            saveWorkout(); renderWorkout(); showToast('Push / Pull / Legs split loaded');
+            saveWorkout(); renderWorkout(); showToast('Starter plan loaded');
           }
         },
         {
@@ -3051,40 +3024,7 @@ document.getElementById('view-workout')?.addEventListener('click', e => {
       const ex = plan?.exercises?.find(x => x.id === id);
       popMenu(actBtn, [
         { label: `${ic('play_arrow')}Start in Timer`, fn: () => { if (ex) loadExerciseIntoTimer(ex, true); } },
-        {
-          label: `${ic('sync_alt')}Alternate with another...`,
-          fn: () => {
-            const otherEx = plan?.exercises?.find(x => x.id !== id);
-            setupAlternatingMode(id, otherEx ? otherEx.id : id);
-            renderWorkout();
-            document.getElementById('workoutTimerCard')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        },
         { label: `${ic('edit')}Edit Exercise`, fn: () => openExModal(selectedWorkoutDay, id) },
-        {
-          label: `${ic('chevron_left')}Move Up`, fn: () => {
-            if (!plan) return;
-            const idx = plan.exercises.findIndex(x => x.id === id);
-            if (idx > 0) {
-              const temp = plan.exercises[idx - 1];
-              plan.exercises[idx - 1] = plan.exercises[idx];
-              plan.exercises[idx] = temp;
-              saveWorkout(); renderWorkout();
-            }
-          }
-        },
-        {
-          label: `${ic('chevron_right')}Move Down`, fn: () => {
-            if (!plan) return;
-            const idx = plan.exercises.findIndex(x => x.id === id);
-            if (idx >= 0 && idx < plan.exercises.length - 1) {
-              const temp = plan.exercises[idx + 1];
-              plan.exercises[idx + 1] = plan.exercises[idx];
-              plan.exercises[idx] = temp;
-              saveWorkout(); renderWorkout();
-            }
-          }
-        },
         {
           label: `${ic('delete')}Delete`, danger: true, fn: () => askConfirm({
             title: 'Delete Exercise?',
