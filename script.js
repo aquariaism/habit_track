@@ -2802,11 +2802,10 @@ function renderWorkout() {
       </button>
       ${exListOpen ? `
         <div class="ex-actions-row">
-          <button type="button" class="ex-pill-btn" data-act="templates">${ic('auto_awesome')} Presets</button>
           <button type="button" class="ex-pill-btn" data-act="add-ex">${ic('add')} Add Exercise</button>
         </div>
         <div class="ex-list">
-          ${exercisesHTML || `<div class="empty"><div class="empty-icon">${ic('fitness_center')}</div><p>No exercises planned for this day yet.</p><button type="button" class="chip-btn" data-act="load-starter">Load Starter Plan</button></div>`}
+          ${exercisesHTML || `<div class="empty"><div class="empty-icon">${ic('fitness_center')}</div><p>No exercises planned for this day yet.<br>Tap “Add Exercise” to get started.</p></div>`}
         </div>
       ` : ''}
     </div>
@@ -2960,49 +2959,6 @@ document.getElementById('view-workout')?.addEventListener('click', e => {
       break;
     case 'add-ex':
       openExModal(selectedWorkoutDay, null);
-      break;
-    case 'load-starter':
-      workoutData.plans = JSON.parse(JSON.stringify(DEFAULT_WORKOUT_DATA.plans));
-      saveWorkout();
-      renderWorkout();
-      showToast('Starter workout plan loaded');
-      break;
-    case 'templates':
-      e.stopPropagation();   // otherwise the page-level click handler closes the menu instantly
-      popMenu(actBtn, [
-        {
-          label: `${ic('fitness_center')}Starter Plan (1 per day)`,
-          fn: () => {
-            workoutData.plans = JSON.parse(JSON.stringify(DEFAULT_WORKOUT_DATA.plans));
-            saveWorkout(); renderWorkout(); showToast('Starter plan loaded');
-          }
-        },
-        {
-          label: `${ic('directions_run')}Full Body Circuit`,
-          fn: () => {
-            WEEK_DAYS.forEach(d => {
-              workoutData.plans[d.key] = {
-                focus: d.key === 'sat' || d.key === 'sun' ? 'Active Recovery' : 'Full Body Circuit',
-                exercises: [
-                  { id: uid(), name: 'Bodyweight Squats', sets: 3, duration: 40, reps: '15 reps', rest: 20, category: 'legs' },
-                  { id: uid(), name: 'Push-ups', sets: 3, duration: 40, reps: '12 reps', rest: 20, category: 'chest' },
-                  { id: uid(), name: 'Dumbbell Bent-over Rows', sets: 3, duration: 40, reps: '12 reps', rest: 20, category: 'back' },
-                  { id: uid(), name: 'Mountain Climbers', sets: 3, duration: 40, reps: 'Fast pace', rest: 20, category: 'cardio' },
-                  { id: uid(), name: 'Plank Hold', sets: 3, duration: 40, reps: 'Hold 40s', rest: 20, category: 'core' }
-                ]
-              };
-            });
-            saveWorkout(); renderWorkout(); showToast('Full Body template loaded');
-          }
-        },
-        {
-          label: `${ic('replay')}Reset Current Day to Default`,
-          fn: () => {
-            workoutData.plans[selectedWorkoutDay] = JSON.parse(JSON.stringify(DEFAULT_WORKOUT_DATA.plans[selectedWorkoutDay]));
-            saveWorkout(); renderWorkout(); showToast('Day reset to default');
-          }
-        }
-      ]);
       break;
     case 'load-timer': {
       const plan = workoutData.plans[selectedWorkoutDay];
