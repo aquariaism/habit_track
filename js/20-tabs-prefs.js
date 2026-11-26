@@ -119,3 +119,18 @@ setInterval(checkDay, 20000);
 setInterval(() => { if (curTab === 'routine' && !document.getElementById('openDD') && !document.querySelector('.modal-overlay.open')) renderTab(curTab); }, 60000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) checkDay(); });
 
+
+// collapsing header: squeeze the title bar once the page is scrolled, restore at the top
+(function () {
+  const hd = document.querySelector('.header'); if (!hd) return;
+  let compact = false, queued = false;
+  function update() {
+    queued = false;
+    const y = window.scrollY || document.documentElement.scrollTop || 0;
+    const room = document.documentElement.scrollHeight - window.innerHeight;   // short pages never collapse (no flicker)
+    if (!compact && y > 60 && room > 160) { compact = true; hd.classList.add('compact'); }
+    else if (compact && y < 12) { compact = false; hd.classList.remove('compact'); }
+  }
+  window.addEventListener('scroll', () => { if (!queued) { queued = true; requestAnimationFrame(update); } }, { passive: true });
+  update();
+})();

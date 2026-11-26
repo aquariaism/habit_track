@@ -51,3 +51,6 @@ Numbered in the same spirit: `01-theme` (tokens) → components → feature area
 
 ## Notes
 `extra` holds Supabase credentials for the Zip leaderboard.
+
+### Header behaviour
+The title bar collapses on scroll (`js/20-tabs-prefs.js` toggles `.compact` on `.header`; styles in `css/24-v6-fixes.css`). The wavy bottom edge is a filled SVG (`--wave` in `css/22-v6-tokens.css`) so scrolled content is hidden behind it.

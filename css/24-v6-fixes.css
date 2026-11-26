@@ -147,3 +147,55 @@
     background: rgba(255, 255, 255, .55);
     color: var(--ink);
 }
+
+
+/* ══ v6.3 ═════════════════════════════════════════════════════════════════════ */
+
+/* header is solid; its wavy bottom edge (filled) hides whatever scrolls underneath */
+.header {
+    background: var(--bg);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: padding .22s ease;
+}
+
+html,
+body {
+    overflow-anchor: none;      /* header resizing must not nudge the scroll position */
+}
+
+/* collapsing header: squeezed once the page is scrolled (class toggled in js/20-tabs-prefs.js) */
+.header-left h1 {
+    transition: font-size .22s ease, line-height .22s ease, padding .22s ease;
+}
+
+.header-left .hdate {
+    max-height: 28px;
+    overflow: hidden;
+    transition: max-height .22s ease, opacity .18s ease;
+}
+
+.icon-btn {
+    transition: width .22s ease, height .22s ease, background .15s, transform .15s;
+}
+
+.header.compact {
+    padding-top: max(8px, calc(4px + env(safe-area-inset-top)));
+    padding-bottom: 8px;
+}
+
+.header.compact .header-left h1 {
+    font-size: 1.2rem;
+    line-height: 1.45;
+    padding: 0;
+}
+
+.header.compact .header-left .hdate {
+    max-height: 0;
+    opacity: 0;
+}
+
+.header.compact .icon-btn {
+    width: 36px;
+    height: 36px;
+}

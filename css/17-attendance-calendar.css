@@ -23,7 +23,7 @@
     content: '';
     position: absolute;
     left: 50%;
-    bottom: 5px;
+    bottom: 3px;
     width: 6px;
     height: 6px;
     margin-left: -3px;
@@ -63,17 +63,24 @@
 
 .cal-n {
     position: absolute;
-    top: -2px;
-    right: 2px;
-    min-width: 16px;
-    height: 16px;
+    top: -4px;
+    right: -2px;
+    min-width: 17px;
+    height: 17px;
     padding: 0 4px;
-    border-radius: 8px;
+    border-radius: 9px;
     background: var(--text);
     color: var(--card);
-    font: 700 .6rem/16px inherit;
+    border: 2px solid var(--card);
+    box-sizing: content-box;
+    font-family: inherit;
+    font-size: .58rem;
+    font-weight: 700;
+    line-height: 17px;
     font-style: normal;
     text-align: center;
+    pointer-events: none;
+    z-index: 2;
 }
 
 .cal-legend {
