@@ -1,0 +1,83 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   Habit Tracker — Pixel (Material You) × Samsung One UI
+   Tonal surfaces, big rounded cards, pill buttons, large title, light + dark.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* ── THEME TOKENS ── */
+:root,
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #141218;
+    --card: #211f26;
+    --card2: #2b2930;
+    --border: #3a3741;
+    --text: #e6e0e9;
+    --sub: #a9a3b3;
+    --cell-empty: #302d38;
+
+    --primary: #d0bcff;
+    --on-primary: #381e72;
+    --primary-container: #4f378b;
+    --on-primary-container: #eaddff;
+
+    --danger: #f2b8b5;
+    --danger-bg: rgba(242, 184, 181, .12);
+    --success: #8fd9a8;
+    --success-bg: rgba(143, 217, 168, .14);
+    --nav-bg: rgba(33, 31, 38, .94);
+
+    --shadow: 0 8px 28px rgba(0, 0, 0, .45);
+    --scrim: rgba(0, 0, 0, .55);
+    --header-bg: rgba(20, 18, 24, .86);
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #fef7ff;
+    --card: #f3edf7;
+    --card2: #ebe5f0;
+    --border: #dcd5e3;
+    --text: #1d1b20;
+    --sub: #6b6573;
+    --cell-empty: #ddd6e6;
+
+    --primary: #6750a4;
+    --on-primary: #ffffff;
+    --primary-container: #eaddff;
+    --on-primary-container: #21005d;
+
+    --danger: #b3261e;
+    --danger-bg: rgba(179, 38, 30, .09);
+    --success: #1b7a44;
+    --success-bg: rgba(27, 122, 68, .12);
+    --nav-bg: rgba(243, 237, 247, .94);
+
+    --shadow: 0 8px 28px rgba(60, 40, 100, .18);
+    --scrim: rgba(30, 20, 50, .35);
+    --header-bg: rgba(254, 247, 255, .86);
+}
+
+html {
+    background: var(--bg);
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Roboto Flex', 'Google Sans', 'Roboto', system-ui, sans-serif;
+    min-height: 100vh;
+    padding-bottom: calc(112px + env(safe-area-inset-bottom));
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+    transition: background .25s, color .25s;
+}
+

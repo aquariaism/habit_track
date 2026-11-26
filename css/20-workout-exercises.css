@@ -1,0 +1,425 @@
+/* Exercises Section */
+.ex-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 18px 4px 10px;
+}
+
+.ex-sec-title {
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -.01em;
+}
+
+.ex-top-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.ex-pill-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--primary);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: .72rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: all .2s;
+}
+
+.ex-pill-btn:active {
+    transform: scale(.95);
+}
+
+.ex-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ex-card {
+    background: var(--card);
+    border-radius: 22px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid transparent;
+    transition: all .2s cubic-bezier(.16, 1, .3, 1);
+}
+
+.ex-card.done {
+    opacity: .75;
+    background: color-mix(in srgb, var(--card) 92%, var(--success) 8%);
+    border-color: color-mix(in srgb, var(--success) 35%, transparent);
+}
+
+.ex-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ex-icon-box {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.ex-mid {
+    flex: 1;
+    min-width: 0;
+}
+
+.ex-name-text {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ex-card.done .ex-name-text {
+    text-decoration: line-through;
+    color: var(--sub);
+}
+
+.ex-sub-meta {
+    font-size: .72rem;
+    color: var(--sub);
+    margin-top: 2px;
+}
+
+.ex-right-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ex-timer-launch {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--card2);
+    border: none;
+    color: var(--primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s;
+}
+
+.ex-timer-launch:active {
+    transform: scale(.9);
+}
+
+/* Individual set bubbles */
+.ex-sets-tracker {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--border);
+}
+
+.ex-sets-ctrl {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ex-sets-lbl {
+    font-size: .68rem;
+    font-weight: 700;
+    color: var(--sub);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.ex-stepper {
+    display: inline-flex;
+    align-items: center;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 2px 4px;
+    gap: 4px;
+}
+
+.ex-step-btn {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
+    background: var(--card);
+    color: var(--text);
+    font-size: .85rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .15s;
+}
+
+.ex-step-btn:active {
+    transform: scale(.85);
+    background: var(--primary);
+    color: var(--on-primary);
+}
+
+.ex-step-val {
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--primary);
+    min-width: 16px;
+    text-align: center;
+}
+
+.ex-bubbles-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.ex-set-bubble {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--card2);
+    border: 1.5px solid var(--border);
+    color: var(--sub);
+    font-size: .72rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s cubic-bezier(.16, 1, .3, 1);
+}
+
+.ex-set-bubble:active {
+    transform: scale(.88);
+}
+
+.ex-set-bubble.done {
+    background: var(--success);
+    color: #fff;
+    border-color: var(--success);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .15);
+}
+
+/* ── ALTERNATING 2 EXERCISES (SUPERSET) & SETS CONTROLS ── */
+.wt-sub-seg {
+    display: flex;
+    background: var(--card2);
+    border-radius: 12px;
+    padding: 3px;
+    margin: 4px 0 12px;
+    gap: 4px;
+}
+
+.wt-sub-btn {
+    flex: 1;
+    border: none;
+    background: none;
+    color: var(--sub);
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: .72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.wt-sub-btn.sel {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .12);
+}
+
+.wt-alt-picker-box {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.wt-alt-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.wt-alt-label {
+    font-size: .75rem;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.wt-pill-tag {
+    font-size: .62rem;
+    font-weight: 800;
+    padding: 2px 7px;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+
+.wt-pill-tag.tag-a {
+    background: rgba(249, 115, 22, .25);
+    color: #f97316;
+}
+
+.wt-pill-tag.tag-b {
+    background: rgba(59, 130, 246, .25);
+    color: #5b84b1;
+}
+
+.wt-select {
+    flex: 1;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 12px;
+    padding: 7px 10px;
+    font-size: .8rem;
+    font-weight: 600;
+    font-family: inherit;
+    outline: none;
+    cursor: pointer;
+    max-width: 220px;
+}
+
+.wt-select:focus {
+    border-color: var(--primary);
+}
+
+.wt-alt-swap-row {
+    text-align: center;
+    margin: -4px 0;
+}
+
+.wt-swap-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: .7rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 999px;
+    transition: background .15s;
+}
+
+.wt-swap-btn:hover {
+    background: color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.wt-alt-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 6px;
+}
+
+.wt-alt-active-tag {
+    font-size: .85rem;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.wt-alt-next-tag {
+    font-size: .72rem;
+    color: var(--sub);
+    font-weight: 500;
+}
+
+/* Timer Sets Stepper & Quick Chips */
+.wt-sets-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 6px 0 10px;
+    flex-wrap: wrap;
+}
+
+.wt-sets-lbl {
+    font-size: .74rem;
+    font-weight: 700;
+    color: var(--sub);
+    text-transform: uppercase;
+}
+
+.wt-stepper {
+    padding: 3px 6px;
+    gap: 6px;
+}
+
+.wt-stepper .ex-step-btn {
+    width: 24px;
+    height: 24px;
+}
+
+.wt-stepper .ex-step-val {
+    font-size: .85rem;
+    min-width: 18px;
+}
+
+.wt-quick-sets {
+    display: flex;
+    gap: 4px;
+}
+
+.wt-qset-btn {
+    background: var(--card2);
+    border: 1px solid var(--border);
+    color: var(--sub);
+    border-radius: 8px;
+    padding: 3px 8px;
+    font-size: .72rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .15s;
+}
+
+.wt-qset-btn.sel {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+    border-color: var(--primary);
+}
+
+

@@ -1,0 +1,43 @@
+/* ═══ NAV STABILITY — nav bar must never move while tabs switch ═══════════════ */
+html {
+    min-height: 100%;
+    overflow-y: scroll;
+    overscroll-behavior-y: none;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.view {
+    min-height: calc(100vh - 112px);
+    min-height: calc(100dvh - 112px);
+}
+
+.bottom-nav {
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    contain: layout paint;
+    bottom: 0 !important;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════════
+   ROUTINE MERGED TABS & WORKOUT / EXERCISE PLANNER STYLES
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── ROUTINE MERGED TABS ── */
+.routine-switch-wrap {
+    max-width: 520px;
+    margin: 12px auto 6px;
+    padding: 0 16px;
+}
+
+.routine-seg {
+    margin-bottom: 6px;
+}
+
+.routine-pane {
+    width: 100%;
+}
+

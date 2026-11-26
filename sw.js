@@ -1,10 +1,59 @@
-const CACHE_NAME = 'habit-tracker-v9';
-const RUNTIME_CACHE = 'habit-tracker-runtime-v9';
+const CACHE_NAME = 'habit-tracker-v11';
+const RUNTIME_CACHE = 'habit-tracker-runtime-v11';
 
 const PRECACHE_URLS = [
   './index.html',
-  './style.css',
-  './script.js',
+  './css/01-theme.css',
+  './css/02-header.css',
+  './css/03-banner-week.css',
+  './css/04-habits.css',
+  './css/05-dropdown-modal.css',
+  './css/06-settings-confirm.css',
+  './css/07-feedback-toast.css',
+  './css/08-views-nav.css',
+  './css/09-shared-timeline.css',
+  './css/10-attendance.css',
+  './css/11-mind-game.css',
+  './css/12-zip-games.css',
+  './css/13-habit-calendar.css',
+  './css/14-material-icons.css',
+  './css/15-motion.css',
+  './css/16-icon-colours.css',
+  './css/17-attendance-calendar.css',
+  './css/18-nav-routine-tabs.css',
+  './css/19-workout-timer.css',
+  './css/20-workout-exercises.css',
+  './css/21-workout-mobile.css',
+  './css/22-v6-tokens.css',
+  './css/23-v6-components.css',
+  './css/24-v6-fixes.css',
+  './js/01-icons.js',
+  './js/02-constants-state.js',
+  './js/03-theme.js',
+  './js/04-habits-overview.js',
+  './js/05-habit-tracker-grid.js',
+  './js/06-habit-list.js',
+  './js/07-habit-modal-pickers.js',
+  './js/08-settings-toast.js',
+  './js/09-shared-helpers.js',
+  './js/10-routine-timetables.js',
+  './js/11-attendance.js',
+  './js/12-mind-game.js',
+  './js/13-zip-game.js',
+  './js/14-games-tab.js',
+  './js/15-workout-audio.js',
+  './js/16-workout-data.js',
+  './js/17-workout-timer.js',
+  './js/18-workout-log-modals.js',
+  './js/19-workout-view.js',
+  './js/20-tabs-prefs.js',
+  './js/21-data-safety.js',
+  './js/22-pwa-back-button.js',
+  './js/23-motion-helpers.js',
+  './js/24-habit-calendar.js',
+  './js/25-attendance-calendar.js',
+  './js/26-calendar-events.js',
+  './js/27-init.js',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
@@ -45,7 +94,7 @@ self.addEventListener('fetch', event => {
   const isShell =
     url.origin === self.location.origin &&
     (request.mode === 'navigate' ||
-      /\/(index\.html|style\.css|script\.js)$/.test(url.pathname) ||
+      /\/(index\.html|css\/[^/]+\.css|js\/[^/]+\.js)$/.test(url.pathname) ||
       url.pathname.endsWith('/'));
 
   event.respondWith(isShell ? networkFirst(request) : cacheFirst(request));

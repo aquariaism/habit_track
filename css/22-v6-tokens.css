@@ -1,0 +1,87 @@
+/* ══════════════════════════════════════════════════════════════════════════════
+   LOOP THEME  ×  MY-TASKS LAYOUT                                    (v6 re-skin)
+   ─ Theme  : cream paper, slate-blue ink, sky-blue accents, wavy line, black pill
+              nav, Poppins + Pacifico.  Dark mode = deep maroon backdrop.
+   ─ Layout : centred title + month, tall date pills on a curved band, status-
+              notched pastel cards with progress, time-rail timeline with dashed
+              dividers.
+   Everything below overrides earlier rules; keep it last.
+   ══════════════════════════════════════════════════════════════════════════════ */
+
+/* ── TOKENS ── */
+:root,
+:root[data-theme="dark"] {
+    --bg: #121b2d;
+    --card: #1d2940;
+    --card2: #27364f;
+    --border: #364764;
+    --text: #f4f0de;
+    --sub: #9fb1ca;
+    --cell-empty: #2a3a56;
+
+    --primary: #a6cbee;
+    --on-primary: #10243b;
+    --primary-container: #3b5d84;
+    --on-primary-container: #f4f0de;
+
+    --danger: #f5b5ab;
+    --danger-bg: rgba(245, 181, 171, .14);
+    --success: #b9e3a3;
+    --success-bg: rgba(185, 227, 163, .15);
+    --nav-bg: #0a101c;
+
+    --shadow: 0 10px 30px rgba(0, 0, 0, .55);
+    --scrim: rgba(4, 9, 18, .62);
+    --header-bg: rgba(18, 27, 45, .92);
+    --band: #1d2940;
+
+    --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='12' viewBox='0 0 120 12'%3E%3Cpath d='M0 6 Q15 -1 30 6 T60 6 T90 6 T120 6' fill='none' stroke='%23a6cbee' stroke-width='1.4'/%3E%3C/svg%3E");
+}
+
+:root[data-theme="light"] {
+    --bg: #fefbe8;
+    --card: #e1ecf7;
+    --card2: #d2e2f3;
+    --border: #b4c9de;
+    --text: #1d2b3a;
+    --sub: #5b7189;
+    --cell-empty: #d5e3f1;
+
+    --primary: #4f6f8f;
+    --on-primary: #fffbe6;
+    --primary-container: #a6cbee;
+    --on-primary-container: #17304a;
+
+    --danger: #b3473f;
+    --danger-bg: rgba(179, 71, 63, .1);
+    --success: #3d8a5f;
+    --success-bg: rgba(61, 138, 95, .13);
+    --nav-bg: #15181d;
+
+    --shadow: 0 10px 28px rgba(29, 43, 58, .2);
+    --scrim: rgba(29, 43, 58, .38);
+    --header-bg: rgba(254, 251, 232, .94);
+    --band: #e1ecf7;
+
+    --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='12' viewBox='0 0 120 12'%3E%3Cpath d='M0 6 Q15 -1 30 6 T60 6 T90 6 T120 6' fill='none' stroke='%234f6f8f' stroke-width='1.4'/%3E%3C/svg%3E");
+}
+
+:root {
+    /* status colours for cards (same in both themes; text on them is always dark ink) */
+    --st-done: #cde9bb;
+    --st-todo: #bcd9f2;
+    --st-run: #d9d2f0;
+    --ink: #1d2b3a;
+}
+
+body {
+    font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+

@@ -1,0 +1,266 @@
+/* ── SHARED BITS ── */
+.hint-chip {
+    margin: 12px 16px 0;
+    padding: 12px 16px;
+    background: var(--card);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: default;
+}
+
+.hint-chip[data-go] {
+    cursor: pointer;
+}
+
+.hint-chip[data-go]:active {
+    background: var(--card2);
+}
+
+.hint-chip.on {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+}
+
+.hint-chip>span {
+    font-size: 1.3rem;
+}
+
+.hint-chip b {
+    display: block;
+    font-size: .88rem;
+    font-weight: 600;
+}
+
+.hint-chip small {
+    display: block;
+    font-size: .74rem;
+    opacity: .75;
+    margin-top: 1px;
+}
+
+.chip-btn {
+    margin-top: 16px;
+    padding: 11px 20px;
+    border: none;
+    border-radius: 20px;
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+    font-family: inherit;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.chip-btn:active {
+    transform: scale(.96);
+}
+
+.modal-err {
+    min-height: 18px;
+    margin: -8px 4px 12px;
+    font-size: .78rem;
+    color: var(--danger);
+}
+
+.time-row {
+    display: flex;
+    gap: 10px;
+}
+
+.time-field {
+    flex: 1;
+    min-width: 0;
+    display: block;
+}
+
+.time-field .sec-lbl {
+    display: block;
+}
+
+.time-field .modal-input {
+    margin-bottom: 18px;
+}
+
+.type-picker {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.type-chip {
+    padding: 9px 14px;
+    border-radius: 18px;
+    border: 2px solid transparent;
+    background: var(--card2);
+    color: var(--text);
+    font-family: inherit;
+    font-size: .82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .15s;
+}
+
+.type-chip.sel {
+    border-color: var(--tc);
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+}
+
+/* ── TIMELINE ── */
+.timeline {
+    padding: 14px 16px 6px;
+}
+
+.tl-item {
+    display: grid;
+    grid-template-columns: 64px 20px 1fr;
+    gap: 0 6px;
+    margin-bottom: 10px;
+}
+
+.tl-time {
+    padding-top: 14px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.tl-time b {
+    font-size: .74rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tl-time span {
+    font-size: .64rem;
+    color: var(--sub);
+    white-space: nowrap;
+}
+
+.tl-rail {
+    position: relative;
+}
+
+.tl-rail::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: -10px;
+    width: 2px;
+    background: var(--border);
+    transform: translateX(-50%);
+}
+
+.tl-item:first-child .tl-rail::before {
+    top: 22px;
+}
+
+.tl-item:last-child .tl-rail::before {
+    bottom: calc(100% - 22px);
+}
+
+.tl-dot {
+    position: absolute;
+    left: 50%;
+    top: 17px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 3px solid var(--tc);
+    transform: translateX(-50%);
+    transition: background .2s, transform .2s;
+}
+
+.tl-item.done .tl-dot {
+    background: var(--tc);
+}
+
+.tl-item.now .tl-dot {
+    transform: translateX(-50%) scale(1.35);
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--tc) 25%, transparent);
+}
+
+.tl-card {
+    background: var(--card);
+    border-radius: 24px;
+    padding: 12px 8px 12px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    transition: background .25s, opacity .25s;
+}
+
+.tl-item.now .tl-card {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+}
+
+.tl-ico {
+    width: 42px;
+    height: 42px;
+    font-size: 1.15rem;
+}
+
+.tl-mid {
+    flex: 1;
+    min-width: 0;
+}
+
+.tl-name {
+    font-size: .95rem;
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color .2s;
+}
+
+.tl-item.done .tl-name {
+    text-decoration: line-through;
+    color: var(--sub);
+}
+
+.tl-item.done .tl-card {
+    opacity: .8;
+}
+
+.tl-meta {
+    font-size: .72rem;
+    color: var(--sub);
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tl-item.now .tl-meta {
+    color: inherit;
+    opacity: .8;
+}
+
+.now-chip {
+    font-style: normal;
+    font-size: .62rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: var(--primary);
+    color: var(--on-primary);
+}
+
+.tl-chk {
+    width: 36px;
+    height: 36px;
+}
+
+.tl-chk.locked {
+    opacity: .4;
+}
+

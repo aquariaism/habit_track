@@ -1,0 +1,253 @@
+/* ═══ ATTENDANCE CALENDAR ════════════════════════════════════════════════════ */
+.cal-ico.att-letter {
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: var(--hc);
+}
+
+.cal-cell.ap .cal-day {
+    background: var(--hc);
+    color: var(--hc-ink);
+    font-weight: 700;
+    box-shadow: 0 3px 10px -2px var(--hc-glow);
+}
+
+.cal-cell.am .cal-day {
+    background: var(--hc);
+    color: var(--hc-ink);
+    font-weight: 700;
+    box-shadow: 0 3px 10px -2px var(--hc-glow);
+}
+
+.cal-cell.am::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    width: 6px;
+    height: 6px;
+    margin-left: -3px;
+    border-radius: 50%;
+    background: var(--danger);
+    box-shadow: 0 0 0 1.5px var(--card);
+}
+
+.cal-cell.aa .cal-day {
+    background: var(--danger-bg);
+    color: var(--danger);
+    font-weight: 700;
+    box-shadow: inset 0 0 0 2px var(--danger);
+}
+
+.cal-cell.today.ap .cal-day,
+.cal-cell.today.am .cal-day {
+    color: var(--hc-ink);
+}
+
+.cal-cell.today.aa .cal-day {
+    color: var(--danger);
+}
+
+.cal-cell.ap:not(.future):hover .cal-day,
+.cal-cell.am:not(.future):hover .cal-day {
+    background: var(--hc);
+}
+
+.cal-cell.aa:not(.future):hover .cal-day {
+    background: var(--danger-bg);
+}
+
+.cal-cell.sel .cal-day {
+    box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--text);
+}
+
+.cal-n {
+    position: absolute;
+    top: -2px;
+    right: 2px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 8px;
+    background: var(--text);
+    color: var(--card);
+    font: 700 .6rem/16px inherit;
+    font-style: normal;
+    text-align: center;
+}
+
+.cal-legend {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 10px;
+    font-size: .68rem;
+    color: var(--sub);
+}
+
+.cal-legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.cal-legend .lg {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.cal-legend .lg.ap,
+.cal-legend .lg.am {
+    background: var(--hc);
+}
+
+.cal-legend .lg.aa {
+    background: var(--danger-bg);
+    box-shadow: inset 0 0 0 2px var(--danger);
+}
+
+.cal-legend .lg.am::after {
+    content: '';
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--danger);
+}
+
+.att-day {
+    margin-top: 14px;
+    background: var(--card2);
+    border-radius: 24px;
+    padding: 14px 16px;
+    display: grid;
+    gap: 10px;
+    animation: rise .35s cubic-bezier(.16, 1, .3, 1) both;
+    --dir: 0;
+}
+
+.att-day.hint {
+    grid-auto-flow: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-size: .78rem;
+    color: var(--sub);
+    padding: 14px;
+}
+
+.att-day-h {
+    font-size: .78rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    color: var(--sub);
+}
+
+.att-step {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.att-step>span {
+    font-size: .95rem;
+    font-weight: 600;
+}
+
+.att-step.ok>span {
+    color: var(--success);
+}
+
+.att-step.bad>span {
+    color: var(--danger);
+}
+
+.att-step>div {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.att-step b {
+    min-width: 22px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.att-step button {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--card);
+    color: var(--text);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: transform .12s, background .15s;
+}
+
+.att-step button:active:not(:disabled) {
+    transform: scale(.9);
+}
+
+.att-step button:disabled {
+    opacity: .3;
+    cursor: default;
+}
+
+.att-step.ok button:last-child {
+    background: var(--success-bg);
+    color: var(--success);
+}
+
+.att-step.bad button:last-child {
+    background: var(--danger-bg);
+    color: var(--danger);
+}
+
+.att-step button .mi {
+    width: 22px;
+    height: 22px;
+    vertical-align: 0;
+}
+
+.cal-ring-wrap.bad .cal-ring-fg {
+    stroke: var(--danger);
+    filter: none;
+}
+
+.cal-bar.miss .cal-bar-fill {
+    opacity: .9;
+}
+
+.cal-note {
+    margin-top: 12px;
+    font-size: .7rem;
+    line-height: 1.5;
+    color: var(--sub);
+    text-align: center;
+    padding: 0 8px;
+}
+
+.cal-delta {
+    max-width: 100%;
+    text-align: left;
+}
+
+.cal-delta .mi {
+    vertical-align: -.2em;
+}
+
+.cal-ring-txt span {
+    letter-spacing: .03em;
+    font-size: .52rem;
+}
+

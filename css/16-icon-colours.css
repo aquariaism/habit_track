@@ -1,0 +1,41 @@
+/* ═══ ICON COLOURS — follow the app theme (no orange/yellow) ═══════════════════ */
+.mi.fire,
+.mi.gold,
+.mi.m1,
+.mi.m2,
+.mi.m3 {
+    color: var(--primary);
+}
+
+.mi.m2 {
+    opacity: .75;
+}
+
+.mi.m3 {
+    opacity: .55;
+}
+
+.game-hero .mi {
+    color: var(--on-primary-container);
+}
+
+.gc-hint .mi {
+    color: var(--primary);
+}
+
+.flame.on {
+    color: var(--primary);
+}
+
+.flame.on .mi {
+    filter: none;
+}
+
+.cal-ttl .mi.fire {
+    color: var(--hc);
+}
+
+.hint-chip.on .mi {
+    color: var(--on-primary-container);
+}
+

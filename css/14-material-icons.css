@@ -1,0 +1,251 @@
+/* ═══ MATERIAL ICONS ═════════════════════════════════════════════════════════ */
+.mi {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+    flex: none;
+    vertical-align: -.17em;
+}
+
+.mi.fire {
+    color: #ff7a1a;
+}
+
+.mi.gold {
+    color: #f5b301;
+}
+
+.mi.medal {
+    width: 1.25em;
+    height: 1.25em;
+}
+
+.mi.m1 {
+    color: #f5b301;
+}
+
+.mi.m2 {
+    color: #aab4c0;
+}
+
+.mi.m3 {
+    color: #c9803f;
+}
+
+.dd-item .mi {
+    width: 19px;
+    height: 19px;
+    color: var(--sub);
+    vertical-align: 0;
+}
+
+.dd-item.danger .mi {
+    color: inherit;
+}
+
+.dd-item {
+    gap: 12px;
+}
+
+.habit-menu-btn .mi {
+    width: 22px;
+    height: 22px;
+    vertical-align: 0;
+}
+
+.habit-icon .mi {
+    width: 26px;
+    height: 26px;
+    vertical-align: 0;
+}
+
+.tl-ico .mi {
+    width: 22px;
+    height: 22px;
+}
+
+.emoji-opt .mi {
+    width: 22px;
+    height: 22px;
+    vertical-align: 0;
+    color: var(--text);
+}
+
+.emoji-opt.sel .mi {
+    color: var(--sel-color, var(--primary));
+}
+
+.type-chip .mi,
+.sub-seg button .mi,
+.gc-chip .mi,
+.s-chip .mi {
+    width: 1.15em;
+    height: 1.15em;
+    margin-right: 6px;
+    vertical-align: -.22em;
+}
+
+.s-chip .mi {
+    margin-right: 4px;
+}
+
+.gh-stat b .mi {
+    width: 1.05em;
+    height: 1.05em;
+    vertical-align: -.16em;
+}
+
+.gc-hint .mi {
+    margin-right: 6px;
+    color: #f5b301;
+}
+
+.hint-chip>.hc-ico {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 14px;
+    background: var(--card2);
+    font-size: 1.4rem;
+    flex: none;
+}
+
+.hint-chip.on>.hc-ico {
+    background: rgba(255, 255, 255, .22);
+}
+
+.empty-icon {
+    display: grid;
+    place-items: center;
+    font-size: 3.4rem;
+}
+
+.empty-icon .mi {
+    opacity: .9;
+}
+
+.lb-rk .mi {
+    vertical-align: -.3em;
+}
+
+.flame {
+    display: inline-grid;
+    place-items: center;
+    margin-right: 4px;
+    vertical-align: -.2em;
+    color: var(--sub);
+}
+
+.flame .mi {
+    width: 1.25em;
+    height: 1.25em;
+    vertical-align: 0;
+}
+
+.flame.on {
+    color: #ff7a1a;
+}
+
+.flame.on .mi {
+    transform-origin: 50% 90%;
+}
+
+@keyframes flicker {
+
+    0%,
+    100% {
+        transform: scale(1) rotate(0);
+    }
+
+    25% {
+        transform: scale(1.08) rotate(-3deg);
+    }
+
+    55% {
+        transform: scale(.97) rotate(2deg);
+    }
+
+    80% {
+        transform: scale(1.05) rotate(-1deg);
+    }
+}
+
+.cal-ttl span {
+    display: flex;
+    align-items: center;
+}
+
+.cal-ttl .mi {
+    width: 15px;
+    height: 15px;
+    margin-right: 3px;
+    vertical-align: 0;
+}
+
+.cal-ico .mi {
+    width: 26px;
+    height: 26px;
+    vertical-align: 0;
+    color: var(--hc);
+}
+
+.cal-close .mi {
+    width: 20px;
+    height: 20px;
+    vertical-align: 0;
+}
+
+.cal-nav .mi {
+    width: 24px;
+    height: 24px;
+    vertical-align: 0;
+}
+
+.cal-month i {
+    display: inline-grid;
+}
+
+.cal-month i .mi {
+    width: 18px;
+    height: 18px;
+    vertical-align: 0;
+}
+
+.cal-delta .mi {
+    width: 15px;
+    height: 15px;
+    margin-right: 4px;
+}
+
+.settings-close .mi {
+    width: 20px;
+    height: 20px;
+    vertical-align: 0;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+}
+
+.toast .mi {
+    width: 20px;
+    height: 20px;
+    vertical-align: 0;
+}
+
+.toast.success .mi {
+    color: #2fae6b;
+}
+
+.toast.error .mi {
+    color: #e5484d;
+}
+
+.toast.info .mi {
+    color: #5b84b1;
+}
+

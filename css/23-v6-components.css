@@ -1,0 +1,462 @@
+/* ── HEADER: [spacer] [title + month] [settings] ── */
+.header {
+    display: grid;
+    grid-template-columns: 44px 1fr 44px;
+    align-items: center;
+    padding: max(14px, calc(8px + env(safe-area-inset-top))) 16px 16px;
+}
+
+.header::before {
+    content: '';
+    grid-column: 1;
+}
+
+.header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 12px;
+    background: var(--wave) repeat-x center / 120px 12px;
+    pointer-events: none;
+}
+
+.header-left {
+    grid-column: 2;
+    text-align: center;
+    min-width: 0;
+}
+
+.header-left h1 {
+    font-family: 'Pacifico', 'Poppins', cursive;
+    font-weight: 400;
+    font-size: 1.7rem;
+    line-height: 1.5;
+    letter-spacing: 0;
+    color: var(--primary);
+    white-space: nowrap;
+    overflow: visible;          /* script font has tall swashes + descenders: never clip them */
+    padding: 2px 0 6px;
+}
+
+.header-left .hdate {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-top: 0;
+}
+
+.icon-btn {
+    grid-column: 3;
+    justify-self: end;
+    width: 42px;
+    height: 42px;
+    background: var(--card);
+    border: 1.5px solid var(--border);
+}
+
+/* ── SUMMARY BANNER + ADD BUTTON ── */
+.today-banner {
+    border-radius: 26px;
+}
+
+.add-btn {
+    height: 52px;
+    border-radius: 20px;
+    background: var(--primary);
+    color: var(--on-primary);
+}
+
+/* ── STATUS-NOTCHED CARD (habits + timeline blocks) ── */
+.hc-tab {
+    position: absolute;
+    left: 0;
+    top: -30px;
+    height: 30px;
+    padding: 0 18px;
+    display: flex;
+    align-items: center;
+    background: var(--st);
+    border-radius: 18px 18px 0 0;
+    font-size: .72rem;
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+}
+
+/* concave fillet where the tab meets the card */
+.hc-tab::after {
+    content: '';
+    position: absolute;
+    right: -18px;
+    bottom: 0;
+    width: 18px;
+    height: 18px;
+    background: radial-gradient(circle at 100% 0, transparent 17.5px, var(--st) 18px);
+}
+
+.hc-prog {
+    position: absolute;
+    right: 8px;
+    top: -23px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: .72rem;
+    font-weight: 600;
+    color: var(--sub);
+}
+
+.hc-prog i {
+    display: block;
+    width: 78px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border);
+    overflow: hidden;
+}
+
+.hc-prog u {
+    display: block;
+    height: 100%;
+    border-radius: 2px;
+    background: var(--primary);
+    text-decoration: none;
+    transition: width .4s cubic-bezier(.16, 1, .3, 1);
+}
+
+.hc-prog b {
+    min-width: 2.5em;
+    text-align: right;
+    font-weight: 600;
+}
+
+/* shared pastel-card ink */
+.habit-card,
+.tl-card {
+    color: var(--ink);
+}
+
+.habit-card .habit-name,
+.tl-card .tl-name {
+    color: var(--ink);
+}
+
+.habit-card .habit-streak,
+.tl-card .tl-meta {
+    color: rgba(29, 43, 58, .68);
+}
+
+.habit-card .habit-check-btn,
+.tl-card .habit-check-btn {
+    border-color: rgba(29, 43, 58, .5);
+}
+
+.habit-card .habit-check-btn.checked,
+.tl-card .habit-check-btn.checked {
+    border-color: transparent;
+}
+
+.habit-card .habit-menu-btn,
+.tl-card .habit-menu-btn {
+    color: rgba(29, 43, 58, .7);
+}
+
+.habit-card .habit-menu-btn:hover,
+.tl-card .habit-menu-btn:hover {
+    background: rgba(255, 255, 255, .5);
+    color: var(--ink);
+}
+
+.habit-card .flame.on,
+.tl-card .flame.on {
+    color: #4f6f8f;
+}
+
+/* diamond icon tile */
+.habit-card .habit-icon,
+.tl-card .habit-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 11px;
+    margin: 0 9px 0 6px;
+    transform: rotate(45deg);
+    background: var(--ink) !important;
+    flex-shrink: 0;
+}
+
+.habit-card .habit-icon .mi,
+.tl-card .habit-icon .mi {
+    width: 19px;
+    height: 19px;
+    transform: rotate(-45deg);
+}
+
+/* ── HABIT CARDS ── */
+.habits-wrap {
+    padding: 44px 16px 12px;
+    gap: 46px;
+}
+
+.habit-card {
+    --st: var(--st-todo);
+    position: relative;
+    overflow: visible;
+    background: var(--st);
+    border-radius: 0 26px 26px 26px;
+}
+
+.habit-card.done {
+    --st: var(--st-done);
+}
+
+.habit-card .hc-tab::before {
+    content: 'To do';
+}
+
+.habit-card.done .hc-tab::before {
+    content: 'Completed';
+}
+
+.habit-card.done .habit-name {
+    color: rgba(29, 43, 58, .55);
+}
+
+.habit-head {
+    padding: 18px 12px 10px 8px;
+}
+
+.drag-handle .dh-line {
+    background: var(--ink);
+}
+
+.habit-card .stat-box {
+    background: rgba(255, 255, 255, .55);
+}
+
+.habit-card .stat-val {
+    color: var(--ink);
+}
+
+.habit-card .stat-lbl,
+.habit-card .day-label-txt,
+.habit-card .month-lbl {
+    color: rgba(29, 43, 58, .62);
+}
+
+.habit-card .stat-bar-wrap {
+    background: rgba(29, 43, 58, .14);
+}
+
+.habit-card .t-cell {
+    background: rgba(29, 43, 58, .13);
+}
+
+/* ── TIMELINE → time rail + dashed dividers (Routine & Weekend planner) ── */
+.timeline {
+    padding: 10px 16px 6px;
+}
+
+.tl-item {
+    --st: var(--st-todo);
+    grid-template-columns: 50px 1fr;
+    gap: 0 12px;
+    margin: 0;
+    padding: 42px 0 22px;
+    border-bottom: 1.5px dashed var(--border);
+}
+
+.tl-item:last-child {
+    border-bottom: 0;
+}
+
+.tl-item.done {
+    --st: var(--st-done);
+}
+
+.tl-item.now {
+    --st: var(--st-run);
+}
+
+.tl-rail {
+    display: none;
+}
+
+.tl-time {
+    position: relative;
+    margin-top: -30px;
+    padding: 2px 0;
+    align-items: flex-start;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.tl-time::before {
+    content: '';
+    position: absolute;
+    left: 9px;
+    top: 26px;
+    bottom: 26px;
+    border-left: 1.5px dashed var(--sub);
+    opacity: .6;
+}
+
+.tl-time b,
+.tl-time span {
+    font-size: .76rem;
+    font-weight: 600;
+    color: var(--sub);
+}
+
+.tl-item.now .tl-time b {
+    color: var(--text);
+}
+
+.tl-card {
+    position: relative;
+    overflow: visible;
+    min-height: 84px;
+    padding: 18px 8px 18px 10px;
+    background: var(--st);
+    border-radius: 0 24px 24px 24px;
+}
+
+.tl-item.now .tl-card {
+    background: var(--st);
+    color: var(--ink);
+}
+
+.tl-item.done .tl-card {
+    opacity: 1;
+}
+
+.tl-item.done .tl-name {
+    color: rgba(29, 43, 58, .55);
+}
+
+.tl-item.now .tl-meta {
+    color: rgba(29, 43, 58, .75);
+    opacity: 1;
+}
+
+.tl-item .hc-tab::before {
+    content: 'Upcoming';
+}
+
+.tl-item.done .hc-tab::before {
+    content: 'Completed';
+}
+
+.tl-item.now .hc-tab::before {
+    content: 'Running';
+}
+
+/* ── BOTTOM NAV → floating black pill ── */
+.bottom-nav {
+    left: 14px;
+    right: 14px;
+    margin: 0 auto;
+    max-width: 520px;
+    bottom: calc(12px + env(safe-area-inset-bottom)) !important;
+    border-radius: 32px;
+    background: var(--nav-bg);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .35);
+    padding: 8px 6px;
+}
+
+.nav-item {
+    color: rgba(255, 248, 220, .62);
+}
+
+.nav-item.active {
+    color: #fffbe6;
+}
+
+.nav-item.active .nav-ind {
+    background: var(--primary-container);
+    color: var(--on-primary-container);
+}
+
+.nav-lbl {
+    font-size: .62rem;
+    font-weight: 500;
+}
+
+.toast {
+    bottom: calc(100px + env(safe-area-inset-bottom));
+}
+
+.update-banner {
+    bottom: calc(96px + env(safe-area-inset-bottom));
+}
+
+/* ── SHEETS, DIALOGS, FIELDS ── */
+.modal {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-bottom: 0;
+    border-radius: 30px 30px 0 0;
+}
+
+.modal h2,
+.settings-head h2,
+.confirm-box h3 {
+    font-family: 'Pacifico', 'Poppins', cursive;
+    font-weight: 400;
+    color: var(--primary);
+}
+
+.confirm-box {
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+}
+
+.modal-input {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+}
+
+.modal-input:focus {
+    border-color: var(--primary);
+}
+
+.btn-save {
+    border-radius: 20px;
+}
+
+.btn-cancel {
+    border-radius: 20px;
+    border: 1.5px solid var(--border);
+}
+
+.seg,
+.sub-seg {
+    border: 1.5px solid var(--border);
+}
+
+.att-card,
+.game-card,
+.s-item,
+.hint-chip,
+.zip-lb {
+    border: 1.5px solid var(--border);
+}
+
+.settings-panel {
+    border-left: 1.5px solid var(--border);
+}
+
+/* desktop: keep the curved band edge-to-edge of the column only */
+@media (min-width: 700px) {
+    .week-wrap {
+        border-radius: 0 0 28px 28px;
+    }
+}
+
+/* dark: lift the nav off the navy backdrop */
+:root[data-theme="dark"] .bottom-nav {
+    box-shadow: 0 0 0 1px rgba(166, 203, 238, .18), 0 10px 28px rgba(0, 0, 0, .5);
+}
+
